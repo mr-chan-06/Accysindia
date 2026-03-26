@@ -8,6 +8,7 @@ export default function ProductsManagement() {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const [formData, setFormData] = useState({
     name: "", category: "Grocery", price: "", stock: "", pv: "", description: ""
@@ -63,6 +64,8 @@ export default function ProductsManagement() {
         setFormData({ name: "", category: "Grocery", price: "", stock: "", pv: "", description: "" });
         setImageFile(null);
         fetchProducts();
+        setSuccessMessage("Product successfully added to the catalog!");
+        setTimeout(() => setSuccessMessage(""), 3500);
       }
     } catch (e) {
       console.error(e);
@@ -85,6 +88,15 @@ export default function ProductsManagement() {
           <Plus className="w-5 h-5" /> Add Product
         </button>
       </div>
+
+      {successMessage && (
+        <div className="mb-8 px-6 py-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-2xl flex items-center gap-3 text-emerald-700 dark:text-emerald-400 font-bold animate-in fade-in slide-in-from-top-4">
+          <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+          </div>
+          {successMessage}
+        </div>
+      )}
 
       <div className="bg-white dark:bg-gray-900 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden min-h-[400px]">
         {loading ? (

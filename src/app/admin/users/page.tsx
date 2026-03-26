@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search, ChevronRight, ChevronDown, User, X, Loader2 } from "lucide-react";
+import { Search, ChevronRight, ChevronDown, User, X, Loader2, Trash2 } from "lucide-react";
 
-function TreeNode({ node, level = 0 }: { node: any, level?: number }) {
+function TreeNode({ node, level = 0, onDelete }: { node: any, level?: number, onDelete: (id: string, name: string) => void }) {
   const [expanded, setExpanded] = useState(false);
   const hasChildren = node.children && node.children.length > 0;
 
@@ -36,6 +36,13 @@ function TreeNode({ node, level = 0 }: { node: any, level?: number }) {
             <span className="px-3 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400">
               Active
             </span>
+            <button 
+              onClick={() => onDelete(node._id, node.name)} 
+              className="ml-4 w-8 h-8 rounded-lg bg-red-100 hover:bg-red-500 text-red-600 hover:text-white dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500 dark:hover:text-white inline-flex items-center justify-center transition-colors align-middle"
+              title="Delete User"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </div>
@@ -43,7 +50,7 @@ function TreeNode({ node, level = 0 }: { node: any, level?: number }) {
       {expanded && hasChildren && (
         <div className="border-l-2 border-gray-200 dark:border-gray-800 ml-8 pl-4 mb-3">
           {node.children.map((child: any) => (
-            <TreeNode key={child._id} node={child} level={level + 1} />
+            <TreeNode key={child._id} node={child} level={level + 1} onDelete={onDelete} />
           ))}
         </div>
       )}
@@ -115,6 +122,22 @@ export default function UserManagement() {
     }
   };
 
+  const handleDeleteUser = async (id: string, name: string) => {
+    if (!confirm(`Are you sure you want to delete ${name}?`)) return;
+    try {
+      const res = await fetch(`/api/admin/users/${id}`, { method: "DELETE" });
+      if (res.ok) {
+        fetchUsers();
+      } else {
+        const data = await res.json();
+        alert(data.message || "Failed to delete user");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Error deleting user");
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 gap-4">
@@ -157,7 +180,7 @@ export default function UserManagement() {
              <div className="text-center p-10 text-gray-500 font-medium">No users found in Database. Click 'Add New User' to populate the tree.</div>
           ) : (
             users.map((user) => (
-              <TreeNode key={user._id} node={user} />
+              <TreeNode key={user._id} node={user} onDelete={handleDeleteUser} />
             ))
           )}
         </div>

@@ -16,12 +16,20 @@ export async function GET(req: Request) {
     // Query active members count
     const totalUsers = await User.countDocuments({ role: "user" });
 
+    // Calculate sum of PV values from all users
+    const pvAggregation = await User.aggregate([
+      { $match: { role: "user" } },
+      { $group: { _id: null, totalPV: { $sum: "$walletBalance" } } }
+    ]);
+    const totalPV = pvAggregation.length > 0 ? pvAggregation[0].totalPV : 0;
+
     // In a production scenario, you would calculate real revenue from Sales schema
     const revenue = "₹45,23,100";
     
     return NextResponse.json({
       revenue,
       activeMembers: totalUsers,
+      totalPV,
       productsSold: "8,340",
       monthlyGrowth: "+24.5%",
       chartData: [40, 60, 45, 80, 65, 90, 100],

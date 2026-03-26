@@ -10,20 +10,24 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const { data: session, status } = useSession();
   const pathname = usePathname();
 
-  const isLoginPage = pathname === "/admin/login";
-
-  if (isLoginPage) {
-    return <>{children}</>;
-  }
+  const isLoginPage = pathname === "/admin";
 
   if (status === "loading") {
-    return <div className="min-h-[80vh] flex items-center justify-center"><div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div></div>;
+    return <div className="min-h-[80vh] flex items-center justify-center"><div className="w-10 h-10 border-4 border-primary border-t-transparent flex items-center justify-center rounded-full animate-spin"></div></div>;
   }
 
-  // Allow viewing for dev purposes
-  // if (!session || session.user.role !== "admin") {
-  //   redirect("/admin/login");
-  // }
+  // Strict Super Admin Enforcement
+  if (!isLoginPage && (!session || session.user.role !== "admin")) {
+    redirect("/admin");
+  }
+
+  // If already logged in as admin, visiting /admin should go to dashboard
+  if (isLoginPage) {
+    if (session && session.user.role === "admin") {
+      redirect("/admin/dashboard");
+    }
+    return <>{children}</>;
+  }
 
   const navItems = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
@@ -52,7 +56,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
 
         <div className="p-4 border-t border-gray-200 dark:border-gray-800">
-          <button onClick={() => signOut({ callbackUrl: "/admin/login" })} className="flex items-center gap-3 px-4 py-3 w-full text-left text-red-600 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors">
+          <button onClick={() => signOut({ callbackUrl: "/admin" })} className="flex items-center gap-3 px-4 py-3 w-full text-left text-red-600 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors">
              <LogOut className="w-5 h-5" />
              <span className="font-medium">Logout</span>
           </button>

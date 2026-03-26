@@ -29,10 +29,10 @@ export default function AdminDashboard() {
   if (!data) return <div className="text-red-500 font-medium">Failed to load dashboard data. Ensure MongoDB is running and you are an admin.</div>;
 
   const stats = [
+    { title: "Users Submitted", value: data.activeMembers, icon: Users, color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-900/20" },
+    { title: "Total PV Values", value: `${data.totalPV || 0} PV`, icon: Activity, color: "text-emerald-500", bg: "bg-emerald-50 dark:bg-emerald-900/20" },
     { title: "Total Revenue", value: data.revenue, icon: DollarSign, color: "text-green-500", bg: "bg-green-50 dark:bg-green-900/20" },
-    { title: "Active Members", value: data.activeMembers, icon: Users, color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-900/20" },
     { title: "Products Sold", value: data.productsSold, icon: ShoppingBag, color: "text-purple-500", bg: "bg-purple-50 dark:bg-purple-900/20" },
-    { title: "Monthly Growth", value: data.monthlyGrowth, icon: TrendingUp, color: "text-emerald-500", bg: "bg-emerald-50 dark:bg-emerald-900/20" },
   ];
 
   return (

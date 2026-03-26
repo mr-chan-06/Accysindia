@@ -19,11 +19,11 @@ export const authOptions: NextAuthOptions = {
         }
 
         // Hardcoded admin check
-        if (credentials.username === "admin" && credentials.password === "admin123") {
+        if (credentials.username === "accsysindia@gmail.com" && credentials.password === "Admin@123") {
           return {
             id: "admin-1",
-            name: "System Admin",
-            email: "admin@accsysindia.com",
+            name: "Super Admin",
+            email: "accsysindia@gmail.com",
             role: "admin",
           };
         }
