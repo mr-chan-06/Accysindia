@@ -1,30 +1,45 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { redirect, usePathname } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { LayoutDashboard, Users, ShoppingBag, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, Users, ShoppingBag, Settings, LogOut, Award, Package } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { useEffect } from "react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
   const pathname = usePathname();
+  const router = useRouter();
 
   const isLoginPage = pathname === "/admin";
+
+  useEffect(() => {
+    if (status === "loading") return;
+
+    // Strict Super Admin Enforcement
+    if (!isLoginPage && (!session || session?.user?.role !== "admin")) {
+      router.push("/admin");
+    }
+
+    // If already logged in as admin, visiting /admin should go to dashboard
+    if (isLoginPage && session && session.user.role === "admin") {
+      router.push("/admin/dashboard");
+    }
+  }, [status, session, isLoginPage, router]);
 
   if (status === "loading") {
     return <div className="min-h-[80vh] flex items-center justify-center"><div className="w-10 h-10 border-4 border-primary border-t-transparent flex items-center justify-center rounded-full animate-spin"></div></div>;
   }
 
-  // Strict Super Admin Enforcement
-  if (!isLoginPage && (!session || session.user.role !== "admin")) {
-    redirect("/admin");
+  // If redirecting, we can return null to avoid flash of content
+  if (!isLoginPage && (!session || session?.user?.role !== "admin")) {
+    return null;
   }
-
-  // If already logged in as admin, visiting /admin should go to dashboard
+  
   if (isLoginPage) {
     if (session && session.user.role === "admin") {
-      redirect("/admin/dashboard");
+      return null;
     }
     return <>{children}</>;
   }
@@ -32,8 +47,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const navItems = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { name: "User Management", href: "/admin/users", icon: Users },
+    { name: "Membership Plans", href: "/admin/plans", icon: Package },
     { name: "Products", href: "/admin/products", icon: ShoppingBag },
-    { name: "Settings", href: "/admin/settings", icon: Settings },
+    { name: "Leadership", href: "/admin/leaders", icon: Award },
   ];
 
   return (

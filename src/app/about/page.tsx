@@ -1,9 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, Target, History } from "lucide-react";
+import { CheckCircle2, Target, History, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function About() {
+  const [leaders, setLeaders] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLeaders = async () => {
+      try {
+        const res = await fetch("/api/leaders");
+        if (res.ok) {
+          const data = await res.json();
+          setLeaders(data);
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLeaders();
+  }, []);
+
   return (
     <div className="pt-20 bg-white dark:bg-black min-h-screen">
       {/* Hero */}
@@ -81,33 +102,43 @@ export default function About() {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Leadership Team</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">The visionaries and driving force behind ACCSYSINDIA.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-12">
-            {[
-              { id: 1, name: "Arjun Kumar", role: "Founder & Chairman", img: "1560250097-0b93528c311a" },
-              { id: 2, name: "Priya Sharma", role: "Chief Executive Officer", img: "1573496359142-b8d87734a5a2" },
-              { id: 3, name: "Rahul Verma", role: "Vice President - Sales", img: "1519085360753-af0119f7cbe7" }
-            ].map((leader, index) => (
-              <motion.div 
-                key={leader.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-                className="group"
-              >
-                <div className="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/5] bg-gray-200 dark:bg-gray-800 shadow-xl">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
-                    <p className="text-white text-base font-medium leading-relaxed">"Empowering the next generation of digital leaders."</p>
+          {loading ? (
+            <div className="flex justify-center items-center py-20">
+              <Loader2 className="w-10 h-10 text-primary animate-spin" />
+            </div>
+          ) : leaders.length > 0 ? (
+            <div className="grid md:grid-cols-3 gap-12">
+              {leaders.map((leader, index) => (
+                <motion.div 
+                  key={leader._id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.15 }}
+                  className="group"
+                >
+                  <div className="relative overflow-hidden rounded-[2rem] mb-6 aspect-[4/5] bg-gray-200 dark:bg-gray-800 shadow-xl">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                      <p className="text-white text-base font-medium leading-relaxed">{leader.description || `"Empowering the next generation of digital leaders."`}</p>
+                    </div>
+                    {leader.image && leader.image.startsWith('15') ? (
+                      <img src={`https://images.unsplash.com/photo-${leader.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80`} alt={leader.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    ) : (
+                      <img src={leader.image} alt={leader.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    )}
                   </div>
-                  <img src={`https://images.unsplash.com/photo-${leader.img}?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80`} alt={leader.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                </div>
-                <div className="text-center">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{leader.name}</h3>
-                  <p className="text-primary font-semibold text-lg">{leader.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                  <div className="text-center">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{leader.name}</h3>
+                    <p className="text-primary font-semibold text-lg">{leader.role}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-500 py-10 text-lg">
+              Leadership profiles are currently being updated.
+            </div>
+          )}
         </div>
       </section>
     </div>

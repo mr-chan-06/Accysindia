@@ -4,21 +4,23 @@ import { User } from "@/models/User";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
     if (!session || session.user.role !== "admin") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
+    const { id } = await params;
+
     await dbConnect();
     
     // Check if the user trying to be deleted is the currently logged-in admin
-    if (session.user.id === params.id) {
+    if (session.user.id === id) {
        return NextResponse.json({ message: "Cannot delete yourself" }, { status: 400 });
     }
 
-    const deletedUser = await User.findByIdAndDelete(params.id);
+    const deletedUser = await User.findByIdAndDelete(id);
     
     if (!deletedUser) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });

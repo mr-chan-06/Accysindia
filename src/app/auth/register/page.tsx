@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { UserPlus } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Register() {
@@ -12,14 +12,42 @@ export default function Register() {
     lastName: "",
     email: "",
     sponsorId: "",
-    password: ""
+    password: "",
+    planId: ""
   });
+  const [plans, setPlans] = useState<any[]>([]);
+  const [plansLoading, setPlansLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    // Check URL for planId
+    const searchParams = new URLSearchParams(window.location.search);
+    const urlPlanId = searchParams.get("planId");
+    if (urlPlanId) {
+      setFormData(prev => ({ ...prev, planId: urlPlanId }));
+    }
+
+    // Fetch plans
+    const fetchPlans = async () => {
+      try {
+        const res = await fetch("/api/plans");
+        if (res.ok) {
+          const data = await res.json();
+          setPlans(data);
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setPlansLoading(false);
+      }
+    };
+    fetchPlans();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,6 +112,18 @@ export default function Register() {
           <div>
             <label className="block text-xs font-bold text-gray-700 dark:text-gray-400 uppercase tracking-widest mb-2">Password</label>
             <input type="password" name="password" value={formData.password} onChange={handleChange} className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none transition-all dark:text-white font-medium" required />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-gray-700 dark:text-gray-400 uppercase tracking-widest mb-2">Membership Plan</label>
+            <select name="planId" value={formData.planId} onChange={handleChange} className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none transition-all dark:text-white font-medium appearance-none" required>
+              <option value="" disabled>{plansLoading ? "Loading plans..." : "Select a Plan"}</option>
+              {plans.map(plan => (
+                <option key={plan._id} value={plan._id}>
+                  {plan.name} - ₹{plan.price} ({plan.pv} PV)
+                </option>
+              ))}
+            </select>
           </div>
           
           <button disabled={loading} type="submit" className="w-full py-5 bg-gradient-to-r from-secondary to-yellow-500 text-white rounded-xl font-bold text-xl hover:shadow-xl hover:shadow-secondary/30 hover:-translate-y-1 transition-all flex items-center justify-center gap-2 mt-4 disabled:opacity-70 disabled:hover:translate-y-0">

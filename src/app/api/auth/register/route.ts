@@ -1,14 +1,15 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import { User } from "@/models/User";
+import { Plan } from "@/models/Plan";
 import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
   try {
-    const { firstName, lastName, email, password, sponsorId } = await req.json();
+    const { firstName, lastName, email, password, sponsorId, planId } = await req.json();
 
-    if (!firstName || !lastName || !email || !password) {
-      return NextResponse.json({ message: "Missing required fields" }, { status: 400 });
+    if (!firstName || !lastName || !email || !password || !planId) {
+      return NextResponse.json({ message: "Missing required fields or plan" }, { status: 400 });
     }
 
     await dbConnect();
@@ -32,18 +33,34 @@ export async function POST(req: Request) {
       }
     }
 
+    // Fetch the selected plan
+    const selectedPlan = await Plan.findById(planId);
+    if (!selectedPlan) {
+      return NextResponse.json({ message: "Invalid plan selected" }, { status: 400 });
+    }
+
     const newUser = await User.create({
       name: `${firstName} ${lastName}`,
       email,
       password: hashedPassword,
       referrer: referrerId,
+      activePlan: selectedPlan._id,
+      walletBalance: selectedPlan.pv, // Setup initial PV
     });
 
-    // If there is a referrer, push this user to their downline
+    // If there is a referrer, push this user to their downline and add 10 PV
     if (referrerId) {
-      await User.findByIdAndUpdate(referrerId, {
-        $push: { referredUsers: newUser._id }
+      const sponsorNode = await User.findByIdAndUpdate(referrerId, {
+        $push: { referredUsers: newUser._id },
+        $inc: { walletBalance: 10 }
       });
+
+      // If the sponsor also has a referrer (2nd level), award them 10 PV too
+      if (sponsorNode && sponsorNode.referrer) {
+        await User.findByIdAndUpdate(sponsorNode.referrer, {
+          $inc: { walletBalance: 10 }
+        });
+      }
     }
 
     return NextResponse.json({ message: "User created successfully", userId: newUser._id }, { status: 201 });

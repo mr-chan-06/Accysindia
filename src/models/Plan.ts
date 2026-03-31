@@ -7,6 +7,7 @@ export interface IPlan extends Document {
   benefits: string[];
   pv: number; // Point value given on purchase
   image?: string;
+  popular: boolean;
 }
 
 const PlanSchema = new Schema(
@@ -17,6 +18,7 @@ const PlanSchema = new Schema(
     benefits: [{ type: String }],
     pv: { type: Number, required: true },
     image: { type: String },
+    popular: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
