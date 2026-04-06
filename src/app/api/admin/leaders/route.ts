@@ -44,19 +44,9 @@ export async function POST(req: Request) {
       const bytes = await imageFile.arrayBuffer();
       const buffer = Buffer.from(bytes);
 
-      const uploadDir = path.join(process.cwd(), "public/uploads/leaders");
-      try {
-        await mkdir(uploadDir, { recursive: true });
-      } catch (err) {
-        // Directory already exists or cannot be created
-      }
-
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      const filename = uniqueSuffix + '-' + imageFile.name.replace(/[^a-zA-Z0-9.]/g, "_");
-      const filepath = path.join(uploadDir, filename);
-
-      await writeFile(filepath, buffer);
-      imageUrl = `/uploads/leaders/${filename}`;
+      const base64Data = buffer.toString('base64');
+      const mimeType = imageFile.type || 'image/jpeg';
+      imageUrl = `data:${mimeType};base64,${base64Data}`;
     }
 
     await dbConnect();
