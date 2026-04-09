@@ -36,7 +36,7 @@ export default function Plans() {
   }, []);
 
   return (
-    <div className="pt-20 min-h-screen bg-gray-50 dark:bg-black">
+    <div className="min-h-screen bg-gray-50 dark:bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
         <motion.div
            initial={{ opacity: 0, y: -20 }}

@@ -26,7 +26,7 @@ export default function About() {
   }, []);
 
   return (
-    <div className="pt-20 bg-white dark:bg-black min-h-screen">
+    <div className="bg-white dark:bg-black min-h-screen">
       {/* Hero */}
       <section className="py-24 bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

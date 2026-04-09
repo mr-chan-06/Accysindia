@@ -32,8 +32,8 @@ export default function Products() {
     : products.filter(p => p.category === activeCategory);
 
   return (
-    <div className="pt-20 bg-gray-50 dark:bg-black min-h-screen border-t dark:border-gray-800">
-      <div className="bg-gradient-to-r from-primary to-accent-foreground py-20 relative overflow-hidden">
+    <div className="bg-gray-50 dark:bg-black min-h-screen border-t dark:border-gray-800">
+      <div className="bg-gradient-to-r from-primary to-accent-foreground pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center mix-blend-overlay opacity-20"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 shadow-sm tracking-tight drop-shadow-lg">Premium Products</h1>

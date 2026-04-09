@@ -26,8 +26,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/80 backdrop-blur-md shadow-sm dark:bg-black/80 dark:shadow-white/10 py-3" : "bg-transparent py-5"
+      className={`fixed top-0 w-full z-50 transition-all duration-300 bg-white/60 dark:bg-black/60 backdrop-blur-xl border-b border-white/20 dark:border-gray-800/50 shadow-sm ${
+        scrolled ? "py-3 shadow-md" : "py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -70,8 +70,8 @@ export default function Navbar() {
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-white dark:bg-black w-full border-t dark:border-gray-800 absolute top-full left-0">
-          <div className="px-4 pt-2 pb-4 space-y-1 shadow-xl">
+        <div className="md:hidden bg-white/80 dark:bg-black/80 backdrop-blur-xl w-full flex flex-col border-t border-gray-200/50 dark:border-gray-800/50 absolute top-full left-0">
+          <div className="px-4 pt-2 pb-4 space-y-1 shadow-2xl">
             {navLinks.map((link) => (
               <Link
                 key={link.name}

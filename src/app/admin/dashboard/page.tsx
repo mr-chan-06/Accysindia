@@ -29,8 +29,9 @@ export default function AdminDashboard() {
   if (!data) return <div className="text-red-500 font-medium">Failed to load dashboard data. Ensure MongoDB is running and you are an admin.</div>;
 
   const stats = [
-    { title: "Total Revenue", value: data.revenue, icon: DollarSign, color: "text-green-500", bg: "bg-green-50 dark:bg-green-900/20" },
-    { title: "Products Sold", value: data.productsSold, icon: ShoppingBag, color: "text-purple-500", bg: "bg-purple-50 dark:bg-purple-900/20" },
+    { title: "Membership Plans", value: data.plansCount, icon: Activity, color: "text-green-500", bg: "bg-green-50 dark:bg-green-900/20" },
+    { title: "Store Products", value: data.productsCount, icon: ShoppingBag, color: "text-purple-500", bg: "bg-purple-50 dark:bg-purple-900/20" },
+    { title: "Leadership Team", value: data.leadersCount, icon: Users, color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-900/20" },
   ];
 
   return (
@@ -49,7 +50,7 @@ export default function AdminDashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="bg-white dark:bg-gray-900 p-8 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-lg transition-shadow"
+            className="bg-white dark:bg-gray-900 p-6 md:p-10 rounded-[2rem] shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-lg transition-shadow"
           >
             <div className="flex justify-between items-start mb-6">
               <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${stat.bg}`}>
@@ -62,7 +63,7 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      <div className="bg-white dark:bg-gray-900 p-10 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800">
+      <div className="bg-white dark:bg-gray-900 p-6 md:p-10 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800">
           <div className="flex items-center justify-between mb-10">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Revenue Analytics</h2>
             <select className="bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-2 text-sm outline-none font-medium">

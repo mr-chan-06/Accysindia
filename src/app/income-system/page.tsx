@@ -15,7 +15,7 @@ export default function IncomeSystem() {
   };
 
   return (
-    <div className="pt-20 min-h-screen bg-white dark:bg-black overflow-hidden relative">
+    <div className="min-h-screen bg-white dark:bg-black overflow-hidden relative">
       <div className="bg-gradient-to-br from-primary via-accent-foreground to-black py-32 rounded-b-[4rem] relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <motion.span 

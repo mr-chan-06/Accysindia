@@ -3,14 +3,15 @@
 import { useSession } from "next-auth/react";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { LayoutDashboard, Users, ShoppingBag, Settings, LogOut, Award, Package } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, Settings, LogOut, Award, Package, Menu, X } from "lucide-react";
 import { signOut } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
   const pathname = usePathname();
   const router = useRouter();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isLoginPage = pathname === "/admin";
 
@@ -53,17 +54,29 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black flex">
-      <aside className="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 hidden lg:flex flex-col fixed h-full z-40">
-        <div className="h-20 flex items-center px-6 border-b border-gray-200 dark:border-gray-800">
-          <Link href="/" className="text-xl font-bold text-primary flex items-center gap-2">
+      {/* Mobile Menu Backdrop */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside className={`w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col fixed h-full z-50 transition-transform duration-300 lg:translate-x-0 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className="h-20 flex items-center justify-between px-6 border-b border-gray-200 dark:border-gray-800">
+          <Link href="/" className="text-xl font-bold text-primary flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center text-sm font-bold shadow-lg">A</div>
             <span>Admin Panel</span>
           </Link>
+          <button className="lg:hidden text-gray-500 hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
+            <X className="w-6 h-6" />
+          </button>
         </div>
         
         <nav className="flex-1 py-6 px-4 space-y-2">
           {navItems.map((item) => (
-             <Link key={item.name} href={item.href} className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-primary/10 hover:text-primary transition-colors font-medium">
+             <Link key={item.name} href={item.href} onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-primary/10 hover:text-primary transition-colors font-medium">
                <item.icon className="w-5 h-5" />
                <span>{item.name}</span>
              </Link>
@@ -79,8 +92,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       <main className="flex-1 lg:ml-64 flex flex-col min-h-screen overflow-hidden">
-        <header className="h-20 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 flex items-center justify-end px-8 sticky top-0 z-30">
-          <div className="flex items-center gap-4">
+        <header className="h-20 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-4 sm:px-8 sticky top-0 z-30">
+          <button className="lg:hidden p-2 text-gray-500 hover:text-primary" onClick={() => setIsMobileMenuOpen(true)}>
+            <Menu className="w-6 h-6" />
+          </button>
+          <div className="flex items-center gap-4 ml-auto">
              <div className="text-right hidden sm:block">
                <div className="text-sm font-bold text-gray-900 dark:text-white">{session?.user?.name || "Super Admin"}</div>
                <div className="text-xs text-gray-500 font-medium">{session?.user?.email || "admin@accsysindia.com"}</div>

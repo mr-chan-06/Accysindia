@@ -3,6 +3,10 @@ import dbConnect from "@/lib/mongodb";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
+import { Product } from "@/models/Product";
+import { Plan } from "@/models/Plan";
+import { Leader } from "@/models/Leader";
+
 export async function GET(req: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -12,16 +16,17 @@ export async function GET(req: Request) {
 
     await dbConnect();
 
-    const revenue = "₹45,23,100";
+    const [productsCount, plansCount, leadersCount] = await Promise.all([
+      Product.countDocuments(),
+      Plan.countDocuments(),
+      Leader.countDocuments()
+    ]);
     
     return NextResponse.json({
-      revenue,
-      activeMembers: 0,
-      totalPV: 0,
-      productsSold: "8,340",
-      monthlyGrowth: "+24.5%",
+      productsCount,
+      plansCount,
+      leadersCount,
       chartData: [40, 60, 45, 80, 65, 90, 100],
-      recentMembers: []
     }, { status: 200 });
     
   } catch (error: any) {
