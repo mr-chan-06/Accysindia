@@ -29,8 +29,6 @@ export default function AdminDashboard() {
   if (!data) return <div className="text-red-500 font-medium">Failed to load dashboard data. Ensure MongoDB is running and you are an admin.</div>;
 
   const stats = [
-    { title: "Users Submitted", value: data.activeMembers, icon: Users, color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-900/20" },
-    { title: "Total PV Values", value: `${data.totalPV || 0} PV`, icon: Activity, color: "text-emerald-500", bg: "bg-emerald-50 dark:bg-emerald-900/20" },
     { title: "Total Revenue", value: data.revenue, icon: DollarSign, color: "text-green-500", bg: "bg-green-50 dark:bg-green-900/20" },
     { title: "Products Sold", value: data.productsSold, icon: ShoppingBag, color: "text-purple-500", bg: "bg-purple-50 dark:bg-purple-900/20" },
   ];
@@ -64,8 +62,7 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      <div className="grid xl:grid-cols-3 gap-8">
-        <div className="xl:col-span-2 bg-white dark:bg-gray-900 p-10 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800">
+      <div className="bg-white dark:bg-gray-900 p-10 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800">
           <div className="flex items-center justify-between mb-10">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Revenue Analytics</h2>
             <select className="bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-2 text-sm outline-none font-medium">
@@ -94,32 +91,6 @@ export default function AdminDashboard() {
             <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
           </div>
         </div>
-
-        <div className="bg-white dark:bg-gray-900 p-10 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800">
-          <div className="flex items-center justify-between mb-10">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Recent Members</h2>
-            <button className="text-primary text-sm font-bold hover:underline">View All</button>
-          </div>
-          <div className="space-y-8">
-            {data.recentMembers?.length > 0 ? data.recentMembers.map((member: any, i: number) => (
-             <div key={i} className="flex items-center justify-between group">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/20 flex items-center justify-center font-bold text-lg text-primary group-hover:bg-primary group-hover:text-white transition-colors uppercase shrink-0">
-                    {member.name?.[0] || "U"}
-                  </div>
-                  <div>
-                    <h4 className="text-base font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors cursor-pointer">{member.name}</h4>
-                    <p className="text-sm text-gray-500 font-medium">{member.email}</p>
-                  </div>
-                </div>
-                <span className="text-xs text-emerald-500 font-bold shrink-0">New User</span>
-              </div>
-            )) : (
-              <div className="text-gray-500 font-medium pb-4">No recent members found in DB.</div>
-            )}
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

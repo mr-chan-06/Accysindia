@@ -60,16 +60,7 @@ export default function Navbar() {
                   Logout
                 </button>
               </>
-            ) : (
-              <>
-                <Link href="/auth/login" className="text-sm font-medium hover:text-primary transition-colors">
-                  Sign In
-                </Link>
-                <Link href="/auth/register" className="px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-secondary to-amber-500 rounded-full shadow-lg shadow-secondary/30 hover:shadow-secondary/50 hover:-translate-y-0.5 transition-all">
-                  Join Now
-                </Link>
-              </>
-            )}
+            ) : null}
           </div>
 
           <button className="md:hidden text-foreground" onClick={() => setIsOpen(!isOpen)}>
@@ -99,11 +90,7 @@ export default function Navbar() {
                >
                  Logout
                </button>
-            ) : (
-              <Link href="/auth/login" className="block px-3 py-3 text-base font-medium text-primary hover:bg-primary/5 rounded-md" onClick={() => setIsOpen(false)}>
-                Sign In
-              </Link>
-            )}
+            ) : null}
           </div>
         </div>
       )}

@@ -88,13 +88,13 @@ export default function Plans() {
                     ))}
                   </ul>
 
-                  <Link href={`/auth/register?planId=${plan._id}`} className={`block text-center w-full py-5 rounded-2xl font-bold text-xl transition-all shadow-lg mt-auto ${
+                  <div className={`mt-auto block text-center w-full py-5 rounded-2xl font-bold text-xl transition-all shadow-lg ${
                     plan.popular 
-                      ? "bg-gradient-to-r from-secondary to-yellow-500 text-white hover:shadow-secondary/40 hover:-translate-y-1" 
-                      : "bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-primary dark:hover:bg-primary hover:text-white"
+                      ? "bg-gradient-to-r from-secondary to-yellow-500 text-white" 
+                      : "bg-gray-900 dark:bg-white text-white dark:text-gray-900"
                   }`}>
-                    Join with {plan.name}
-                  </Link>
+                    {plan.name}
+                  </div>
                 </motion.div>
               );
             })}

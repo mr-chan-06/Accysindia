@@ -38,9 +38,6 @@ export default function Home() {
               Join the fastest-growing network of entrepreneurs. Get access to premium products and build a lucrative referral business today.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Link href="/auth/register" className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-primary to-accent-foreground text-white rounded-full font-bold text-lg hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 transition-all flex items-center justify-center gap-2">
-                Join Now <ArrowRight className="w-6 h-6" />
-              </Link>
               <Link href="/plans" className="w-full sm:w-auto px-10 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-bold text-lg hover:bg-white/20 hover:-translate-y-1 transition-all flex items-center justify-center">
                 Explore Plans
               </Link>
@@ -119,8 +116,8 @@ export default function Home() {
         <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
           <h2 className="text-5xl md:text-6xl font-extrabold text-white mb-8 tracking-tight">Ready to Transform Your Life?</h2>
           <p className="text-2xl text-white/90 mb-12 font-light">Join thousands of successful earners in our network.</p>
-          <Link href="/auth/register" className="inline-flex items-center justify-center px-10 py-5 bg-white text-primary rounded-full font-bold text-xl hover:bg-gray-50 hover:scale-105 transition-all shadow-2xl">
-            Create Your Account
+          <Link href="/plans" className="inline-flex items-center justify-center px-10 py-5 bg-white text-primary rounded-full font-bold text-xl hover:bg-gray-50 hover:scale-105 transition-all shadow-2xl">
+            Explore Plans
           </Link>
         </div>
       </section>
