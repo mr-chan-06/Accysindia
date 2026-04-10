@@ -84,7 +84,7 @@ export default function Products() {
                   >
                     <div className="relative h-72 overflow-hidden bg-gray-200">
                       <img 
-                        src={product.image?.startsWith('/') ? product.image : `https://images.unsplash.com/photo-${product.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`} 
+                        src={product.image?.startsWith('/') || product.image?.startsWith('data:') || product.image?.startsWith('http') ? product.image : `https://images.unsplash.com/photo-${product.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`} 
                         alt={product.name} 
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1586201375761-83865001e31c" }}

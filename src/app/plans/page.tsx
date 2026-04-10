@@ -39,11 +39,11 @@ export default function Plans() {
     <div className="min-h-screen bg-gray-50 dark:bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
         <motion.div
-           initial={{ opacity: 0, y: -20 }}
-           animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
         >
           <span className="text-primary font-bold tracking-wider uppercase mb-4 block">Get Started Today</span>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight">Membership Kits</h1>
+          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight">Privilege Membership Packages</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">Choose the perfect entry kit to start your digital commerce journey. Earn PV points instantly upon joining the network.</p>
         </motion.div>
 
@@ -88,11 +88,10 @@ export default function Plans() {
                     ))}
                   </ul>
 
-                  <div className={`mt-auto block text-center w-full py-5 rounded-2xl font-bold text-xl transition-all shadow-lg ${
-                    plan.popular 
-                      ? "bg-gradient-to-r from-secondary to-yellow-500 text-white" 
+                  <div className={`mt-auto block text-center w-full py-5 rounded-2xl font-bold text-xl transition-all shadow-lg ${plan.popular
+                      ? "bg-gradient-to-r from-secondary to-yellow-500 text-white"
                       : "bg-gray-900 dark:bg-white text-white dark:text-gray-900"
-                  }`}>
+                    }`}>
                     {plan.name}
                   </div>
                 </motion.div>
