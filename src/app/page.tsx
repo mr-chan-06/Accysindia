@@ -108,6 +108,54 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Founder Section */}
+      <section className="py-24 bg-white dark:bg-black relative z-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900/40 dark:to-black rounded-[3rem] p-8 md:p-14 shadow-2xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-800 relative overflow-hidden group">
+            {/* Decorative blob */}
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="w-56 h-56 md:w-72 md:h-72 shrink-0 rounded-full overflow-hidden border-8 border-white dark:border-gray-800 shadow-2xl relative z-10"
+            >
+              <img 
+                src="/founder.jpg" 
+                alt="Mr.V.Hariprakash" 
+                className="w-full h-full object-cover object-top hover:scale-110 transition-transform duration-700"
+                onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" }}
+              />
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-center md:text-left flex-1 relative z-10"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm tracking-widest uppercase mb-6">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                Eagles Team Founder
+              </div>
+              <h2 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-3 tracking-tight">
+                Mr. V. Hariprakash
+              </h2>
+              <div className="w-16 h-1.5 bg-gradient-to-r from-primary to-yellow-400 rounded-full mx-auto md:mx-0 mb-6" />
+              <h3 className="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300 mb-6 drop-shadow-sm">
+                Founder
+              </h3>
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed font-light">
+                Leading with vision and dedication, to empower individuals toward financial independence and personal growth. His commitment to excellence drives the core values of our platform.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Parallax Section */}
       <section className="relative py-40 overflow-hidden">
         <div className="absolute inset-0 z-0 bg-fixed bg-center bg-cover" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')" }}>
