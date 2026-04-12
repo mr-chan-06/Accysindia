@@ -25,9 +25,16 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white border border-white/20 text-sm font-semibold tracking-wider uppercase mb-8 inline-block shadow-xl">
-              Welcome to the Future
-            </span>
+            <div className="flex justify-center mb-8">
+              <div className="inline-flex items-center gap-4 px-2 pr-8 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl hover:bg-black/60 transition-all hover:scale-105 duration-300">
+                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-yellow-500/50 bg-black flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(234,179,8,0.3)]">
+                  <img src="/eagles-logo.jpg" alt="Eagles Logo" className="w-full h-full object-cover" />
+                </div>
+                <span className="text-3xl font-black tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 via-yellow-400 to-yellow-600 drop-shadow-sm">
+                  TEAM
+                </span>
+              </div>
+            </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight mb-8">
               Grow Your Income with <br className="hidden md:block"/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-yellow-300 drop-shadow-lg">
