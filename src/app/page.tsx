@@ -137,9 +137,11 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-center md:text-left flex-1 relative z-10"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm tracking-widest uppercase mb-6">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                Eagles Team Founder
+              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm tracking-widest uppercase mb-6 shadow-sm">
+                <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-primary/20 bg-black flex items-center justify-center shrink-0">
+                  <img src="/eagles-logo.jpg" alt="Eagles Logo" className="w-full h-full object-contain" />
+                </div>
+                <span>Team Founder</span>
               </div>
               <h2 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-3 tracking-tight">
                 Mr. V. Hariprakash
