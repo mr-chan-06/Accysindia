@@ -7,9 +7,9 @@ import { ArrowRight, ShoppingBag, ShieldCheck, TrendingUp, Users } from "lucide-
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen pt-24">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/80 z-10" />
           <img 
@@ -19,7 +19,7 @@ export default function Home() {
           />
         </div>
         
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-24">
+        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
