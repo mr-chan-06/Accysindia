@@ -7,7 +7,7 @@ import { ArrowRight, ShoppingBag, ShieldCheck, TrendingUp, Users } from "lucide-
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen pt-24">
+    <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
