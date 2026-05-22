@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 
 import AuthProvider from "@/components/AuthProvider";
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
+import Watermark from "@/components/ui/Watermark";
 
 export default function RootLayout({
   children,
@@ -26,12 +27,13 @@ export default function RootLayout({
       lang="en"
       className={`${poppins.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col font-sans relative">
         <AuthProvider>
           <ClientLayoutWrapper>
             {children}
           </ClientLayoutWrapper>
         </AuthProvider>
+        <Watermark />
       </body>
     </html>
   );

@@ -66,7 +66,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside className={`w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col fixed h-full z-50 transition-transform duration-300 lg:translate-x-0 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="h-20 flex items-center justify-between px-6 border-b border-gray-200 dark:border-gray-800">
           <Link href="/" className="text-xl font-bold text-primary flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center text-sm font-bold shadow-lg">A</div>
+            <div className="w-9 h-9 rounded-full overflow-hidden border border-yellow-500/30 bg-black flex items-center justify-center shrink-0 shadow-lg shadow-yellow-500/10">
+              <img src="/eagles-logo.png" alt="Eagles Logo" className="w-full h-full object-cover" />
+            </div>
             <span>Admin Panel</span>
           </Link>
           <button className="lg:hidden text-gray-500 hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>

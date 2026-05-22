@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #6b21a8; /* Purple */
-  --primary-foreground: #ffffff;
-  --secondary: #d97706; /* Gold */
-  --secondary-foreground: #ffffff;
-  --accent: #f3e8ff; /* Soft purple */
-  --accent-foreground: #4c1d95;
+  --background: #f4f1ec;
+  --foreground: #1f1f1f;
+  --primary: #d4af37; /* Golden */
+  --primary-foreground: #111111;
+  --secondary: #7f7f7f; /* Steel grey */
+  --secondary-foreground: #f8f6f0;
+  --accent: #ece3d3; /* Warm grey */
+  --accent-foreground: #333333;
 }
 
 @theme inline {
@@ -25,12 +25,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --primary: #9333ea;
-    --secondary: #f59e0b;
-    --accent: #3b0764;
-    --accent-foreground: #e9d5ff;
+    --background: #101010;
+    --foreground: #f4f3f0;
+    --primary: #d4af37;
+    --secondary: #9ca3af;
+    --accent: #2f2f2f;
+    --accent-foreground: #f4f1e8;
   }
 }
 
@@ -38,4 +38,66 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+/* Theme overrides for existing utility class uses */
+.bg-white {
+  background-color: #f4f1ec !important;
+}
+.bg-gray-50 {
+  background-color: #f4f1ec !important;
+}
+.bg-gray-100 {
+  background-color: #ece7db !important;
+}
+.bg-black {
+  background-color: #141414 !important;
+}
+.bg-gray-800 {
+  background-color: #1b1b1b !important;
+}
+.bg-gray-900 {
+  background-color: #0f0f0f !important;
+}
+.text-gray-900 {
+  color: #232323 !important;
+}
+.text-gray-700 {
+  color: #4f4f4f !important;
+}
+.text-gray-600 {
+  color: #5f5f5f !important;
+}
+.text-gray-500,
+.text-gray-400 {
+  color: #7d7d7d !important;
+}
+.border-gray-100 {
+  border-color: #d6cfc0 !important;
+}
+.border-gray-200 {
+  border-color: #c3b9a8 !important;
+}
+.border-gray-800 {
+  border-color: #232323 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bg-white {
+    background-color: #181818 !important;
+  }
+  .bg-gray-50 {
+    background-color: #181818 !important;
+  }
+  .text-gray-900 {
+    color: #e5e5e5 !important;
+  }
+  .text-gray-700 {
+    color: #cccccc !important;
+  }
+  .text-gray-600,
+  .text-gray-500,
+  .text-gray-400 {
+    color: #a8a8a8 !important;
+  }
 }

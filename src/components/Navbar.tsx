@@ -33,10 +33,10 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-12">
           <Link href="/" className="text-2xl font-bold text-primary flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center shadow-lg shadow-primary/30">
-              A
+            <div className="w-9 h-9 rounded-full overflow-hidden border border-yellow-500/30 bg-black flex items-center justify-center shrink-0 shadow-lg shadow-yellow-500/10">
+              <img src="/eagles-logo.png" alt="Eagles Logo" className="w-full h-full object-cover" />
             </div>
-            <span className="tracking-tight">ACCSYSINDIA</span>
+            <span className="tracking-tight">EAGLES TEAM</span>
           </Link>
 
           <nav className="hidden md:flex gap-8">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Facebook, Instagram, Youtube, X } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -7,10 +8,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="text-2xl font-bold text-primary flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center shadow-lg shadow-primary/30">
-                A
+              <div className="w-9 h-9 rounded-full overflow-hidden border border-yellow-500/30 bg-black flex items-center justify-center shrink-0 shadow-lg shadow-yellow-500/10">
+                <img src="/eagles-logo.png" alt="Eagles Logo" className="w-full h-full object-cover" />
               </div>
-              <span className="tracking-tight">ACCSYSINDIA</span>
+              <span className="tracking-tight">EAGLES TEAM</span>
             </Link>
             <p className="text-sm text-gray-500 dark:text-gray-400 max-w-md leading-relaxed">
               Grow Your Income with Smart Digital Commerce. Join our platform to access premium products, membership benefits, and a lucrative referral system designed for your success.
@@ -25,6 +26,24 @@ export default function Footer() {
               <li><Link href="/income-system" className="text-sm text-gray-500 hover:text-primary transition-colors">Income System</Link></li>
               <li><Link href="/products" className="text-sm text-gray-500 hover:text-primary transition-colors">Products</Link></li>
             </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-6">Follow Us</h3>
+            <div className="flex items-center gap-3">
+              <Link href="https://www.instagram.com/accsyseagles?igsh=MWt3ZWxkYTNuamU5aA==" target="_blank" rel="noreferrer" className="inline-flex p-3 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                <Instagram className="w-5 h-5" />
+              </Link>
+              <Link href="https://www.facebook.com/share/18k296XrUx/" target="_blank" rel="noreferrer" className="inline-flex p-3 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                <Facebook className="w-5 h-5" />
+              </Link>
+              <Link href="https://youtube.com/@accsyseagles?si=6790zQYvn1-d2L3o" target="_blank" rel="noreferrer" className="inline-flex p-3 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                <Youtube className="w-5 h-5" />
+              </Link>
+              <Link href="https://x.com/accsyseagles?t=6GNm-35cdibikI6LPp0GoA&s=09" target="_blank" rel="noreferrer" className="inline-flex p-3 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                <X className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
           
           <div>
