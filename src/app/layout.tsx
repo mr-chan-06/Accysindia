@@ -9,8 +9,12 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "ACCSYSINDIA - Digital Commerce Platform",
+  title: "EAGLESTEAM",
   description: "Grow Your Income with Smart Digital Commerce. 5000+ Cr turnover, 10000+ products, 300+ centers.",
+  icons: {
+    icon: "/eagles-logo.png",
+    apple: "/eagles-logo.png",
+  },
 };
 
 import AuthProvider from "@/components/AuthProvider";
