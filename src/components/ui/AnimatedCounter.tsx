@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView, useMotionValue, useSpring } from "framer-motion";
 
 interface AnimatedCounterProps {
@@ -20,19 +20,31 @@ export default function AnimatedCounter({ value, duration = 2, suffix = "", pref
     bounce: 0,
   });
 
-  useEffect(() => {
-    if (isInView) {
-      motionValue.set(value);
-    }
-  }, [isInView, motionValue, value]);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (isInView && mounted) {
+      motionValue.set(value);
+    }
+  }, [isInView, motionValue, value, mounted]);
+
+  useEffect(() => {
+    if (!mounted) return;
     return springValue.on("change", (latest) => {
       if (ref.current) {
         ref.current.textContent = prefix + Intl.NumberFormat("en-IN").format(Math.floor(latest)) + suffix;
       }
     });
-  }, [springValue, suffix, prefix]);
+  }, [springValue, suffix, prefix, mounted]);
 
-  return <span ref={ref}>{prefix}0{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {mounted ? `${prefix}0${suffix}` : `${prefix}${Intl.NumberFormat("en-IN").format(value)}${suffix}`}
+    </span>
+  );
 }
+
