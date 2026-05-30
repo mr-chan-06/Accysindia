@@ -94,7 +94,7 @@ export default function LeadersManagement() {
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 gap-4">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight mb-2">Leadership CMS</h1>
-          <p className="text-gray-500 dark:text-gray-400">Manage founders, presidents, and vice presidents displayed on the About page.</p>
+          <p className="text-gray-500 dark:text-gray-400">Manage founders, presidents, and vice presidents displayed across the website (Home, About, and About Eagles pages).</p>
         </div>
         <button 
           onClick={() => {

@@ -3,18 +3,27 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Target, History, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
+import ImageWithFallback from "@/components/ImageWithFallback";
 
 export default function About() {
   const [leaders, setLeaders] = useState<any[]>([]);
+  const [settings, setSettings] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchLeaders = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch("/api/leaders");
-        if (res.ok) {
-          const data = await res.json();
-          setLeaders(data);
+        const [leadersRes, settingsRes] = await Promise.all([
+          fetch("/api/leaders"),
+          fetch("/api/settings")
+        ]);
+        if (leadersRes.ok) {
+          const leadersData = await leadersRes.json();
+          setLeaders(leadersData);
+        }
+        if (settingsRes.ok) {
+          const settingsData = await settingsRes.json();
+          setSettings(settingsData);
         }
       } catch (e) {
         console.error(e);
@@ -22,8 +31,17 @@ export default function About() {
         setLoading(false);
       }
     };
-    fetchLeaders();
+    fetchData();
   }, []);
+
+  const missionPoints = settings?.missionPoints && settings.missionPoints.length > 0 
+    ? settings.missionPoints 
+    : [
+        "Provide premium quality products at the most competitive prices.",
+        "Offer a transparent, compliant, and highly profitable referral income model.",
+        "Build a strong, educated community of motivated leaders.",
+        "Ensure 100% customer and distributor satisfaction at all times."
+      ];
 
   return (
     <div className="bg-white dark:bg-black min-h-screen">
@@ -63,7 +81,7 @@ export default function About() {
               </div>
               <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">Our Vision</h2>
               <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-                To become the most trusted and fastest-growing digital commerce platform in India. We aim to create a network of self-reliant entrepreneurs operating across every corner of the country, powered by ethical business practices and modern technology.
+                {settings?.visionStatement || "To become the most trusted and fastest-growing digital commerce platform in India. We aim to create a network of self-reliant entrepreneurs operating across every corner of the country, powered by ethical business practices and modern technology."}
               </p>
             </motion.div>
 
@@ -78,12 +96,7 @@ export default function About() {
               </div>
               <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">Our Mission</h2>
               <ul className="space-y-5">
-                {[
-                  "Provide premium quality products at the most competitive prices.",
-                  "Offer a transparent, compliant, and highly profitable referral income model.",
-                  "Build a strong, educated community of motivated leaders.",
-                  "Ensure 100% customer and distributor satisfaction at all times."
-                ].map((item, i) => (
+                {missionPoints.map((item: string, i: number) => (
                   <li key={i} className="flex items-start gap-4">
                     <CheckCircle2 className="w-7 h-7 text-secondary shrink-0 mt-0.5" />
                     <span className="text-gray-700 dark:text-gray-300 text-lg">{item}</span>
@@ -129,8 +142,11 @@ export default function About() {
                         {leader.image && leader.image.startsWith('15') ? (
                           <img src={`https://images.unsplash.com/photo-${leader.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80`} alt={leader.name} className="w-full h-full object-cover" />
                         ) : (
-                          <img src={leader.image} alt={leader.name} className="w-full h-full object-cover"
-                            onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" }}
+                          <ImageWithFallback 
+                            src={leader.image} 
+                            fallbackSrc="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                            alt={leader.name} 
+                            className="w-full h-full object-cover"
                           />
                         )}
                       </div>
@@ -169,8 +185,11 @@ export default function About() {
                         {leader.image && leader.image.startsWith('15') ? (
                           <img src={`https://images.unsplash.com/photo-${leader.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80`} alt={leader.name} className="w-full h-full object-cover" />
                         ) : (
-                          <img src={leader.image} alt={leader.name} className="w-full h-full object-cover"
-                            onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" }}
+                          <ImageWithFallback 
+                            src={leader.image} 
+                            fallbackSrc="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                            alt={leader.name} 
+                            className="w-full h-full object-cover"
                           />
                         )}
                       </div>

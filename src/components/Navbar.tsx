@@ -18,10 +18,12 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Products", href: "/products" },
-    { name: "Plans", href: "/plans" },
-    { name: "Income System", href: "/income-system" },
+    { name: "Product", href: "/products" },
+    { name: "Plan", href: "/plans" },
+    { name: "Achievers", href: "/achievers" },
+    { name: "About Eagles Team", href: "/about-eagles" },
+    { name: "About company Event tickets and products", href: "/company-events" },
+    { name: "Contact Us", href: "/contact" },
   ];
 
   return (
