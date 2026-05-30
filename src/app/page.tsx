@@ -23,6 +23,9 @@ import type { Metadata } from "next";
 
 // Highly descriptive, comprehensive SEO Metadata for search crawlers
 export const metadata: Metadata = {
+  // Provide a base URL for Open Graph/Twitter images. Vercel requires an absolute URL.
+  // Use an environment variable so it works both locally and in production.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://your-site.vercel.app"),
   title: "EAGLESTEAM | Smart Digital Commerce & Income Opportunity",
   description: "Join EAGLES TEAM and grow your income with Accsysindia's Smart Digital Commerce platform. 5000+ Cr turnover, 10000+ products, 300+ active centers, and 100k+ happy members.",
   keywords: [
