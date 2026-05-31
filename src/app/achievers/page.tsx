@@ -227,18 +227,18 @@ export default function Achievers() {
                     <div className="w-full aspect-video sm:aspect-[4/3] overflow-hidden relative">
                       <img
                         src={item.image}
-                        alt={item.title}
+                        alt={item.name}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                       <div className="absolute top-4 right-4 z-10 px-2.5 py-0.5 bg-black/45 backdrop-blur-md rounded-full text-[10px] text-white/95 font-bold uppercase tracking-wider">
-                        Eagles Team
+                        {item.role || "Eagles Team"}
                       </div>
                     </div>
 
                     <div className="p-8 flex-1 flex flex-col justify-between bg-gradient-to-b from-white to-gray-50/30 dark:from-gray-800 dark:to-gray-900/10">
                       <div>
                         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-1 group-hover:text-primary transition-colors">
-                          {item.title}
+                          {item.name}
                         </h3>
                         <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3 font-light">
                           {item.description}
