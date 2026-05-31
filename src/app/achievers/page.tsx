@@ -41,7 +41,32 @@ const TOUR_PHOTOS = [
   }
 ];
 
+// Dynamic loading of achievers from admin API
+import { useState, useEffect } from "react";
+
+// hooks moved inside component
+
 export default function Achievers() {
+  // State for achievers data
+  const [achievers, setAchievers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch achievers from admin API
+  useEffect(() => {
+    const fetchAchievers = async () => {
+      try {
+        const res = await fetch('/api/achievers');
+        if (!res.ok) throw new Error('Failed to fetch achievers');
+        const data = await res.json();
+        setAchievers(data);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAchievers();
+  }, []);
   return (
     <div className="bg-white dark:bg-black min-h-screen border-t dark:border-gray-800">
       
@@ -175,6 +200,59 @@ export default function Achievers() {
 
       </section>
 
+      {/* Achievers Gallery Section */}
+      <section className="py-24 bg-gray-50 dark:bg-gray-900/40 border-t border-gray-100 dark:border-gray-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4">
+              Gallery & Highlights
+            </span>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
+              EAGLES TEAM ACHIEVERS
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 text-xl leading-relaxed">
+              A visual journey highlighting our training seminars, leadership forums, celebrations, and key community milestones across India.
+            </p>
+          </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+              {loading ? (
+                <p className="text-center text-gray-600 dark:text-gray-400">Loading achievers...</p>
+              ) : (
+                achievers.map((item) => (
+                  <div
+                    key={item._id ?? item.id}
+                    className="bg-white dark:bg-gray-800 rounded-[2rem] shadow-xl shadow-gray-200/40 dark:shadow-none border border-gray-100 dark:border-gray-700/50 overflow-hidden group hover:border-primary/20 transition-all flex flex-col justify-between"
+                  >
+                    <div className="w-full aspect-video sm:aspect-[4/3] overflow-hidden relative">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute top-4 right-4 z-10 px-2.5 py-0.5 bg-black/45 backdrop-blur-md rounded-full text-[10px] text-white/95 font-bold uppercase tracking-wider">
+                        Eagles Team
+                      </div>
+                    </div>
+
+                    <div className="p-8 flex-1 flex flex-col justify-between bg-gradient-to-b from-white to-gray-50/30 dark:from-gray-800 dark:to-gray-900/10">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-1 group-hover:text-primary transition-colors">
+                          {item.title}
+                        </h3>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3 font-light">
+                          {item.description}
+                        </p>
+                      </div>
+                      <div className="w-8 h-1 bg-gradient-to-r from-primary to-amber-500 rounded-full mt-6 group-hover:w-16 transition-all duration-300" />
+                    </div>
+                  </div>
+                ))
+              )}
+
+            </div>
+        </div>
+      </section>
     </div>
   );
 }
