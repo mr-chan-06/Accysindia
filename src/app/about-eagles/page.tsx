@@ -66,7 +66,7 @@ export default function AboutEagles() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="text-primary font-bold tracking-wider uppercase mb-4 block">Who We Are</span>
           <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-6">
-            About the <span className="text-primary">Eagles Team</span>
+            About the <span className="text-primary">Accsys India</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
             Leading direct-selling entrepreneurship across India. Founded with a vision to empower individuals to achieve absolute financial security.

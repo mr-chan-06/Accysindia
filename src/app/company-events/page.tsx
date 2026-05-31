@@ -120,6 +120,87 @@ export default function CompanyEvents() {
         </div>
       </section>
 
+      {/* About Eagles Team Section */}
+      <section className="py-24 bg-white dark:bg-black border-b dark:border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
+            <div>
+              <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4">
+                About Us
+              </span>
+              <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
+                Welcome to the Eagles Team
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6 font-light">
+                The Eagles Team represents the next evolution of Accsys India - a dynamic network of entrepreneurs, leaders, and innovators committed to transforming the direct commerce landscape in India.
+              </p>
+              
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shrink-0">
+                    <Sparkles className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Our Mission</h3>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                      Empower direct sellers and entrepreneurs with ethical business practices, comprehensive training, and a supportive community that values integrity and sustainable growth.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shrink-0">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Our Vision</h3>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                      Build a thriving ecosystem of matched pairs and qualifiers who achieve financial freedom through ethical direct commerce, earning recognition, vehicles, and international opportunities.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary shrink-0">
+                    <Building className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Our Values</h3>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                      Transparency, Compliance, Teamwork, Excellence. We operate within all Ministry guidelines and national direct selling regulations to ensure every member's trust and safety.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-yellow-500/10 rounded-[3rem] blur-3xl" />
+              <div className="relative bg-gray-50 dark:bg-gray-900 rounded-[3rem] p-12 border border-gray-100 dark:border-gray-800 shadow-2xl">
+                <div className="space-y-8">
+                  <div className="text-center py-8">
+                    <div className="text-5xl font-black text-primary mb-2">500+</div>
+                    <p className="text-gray-600 dark:text-gray-400 font-semibold">Active Members</p>
+                  </div>
+                  <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+                  <div className="text-center py-8">
+                    <div className="text-5xl font-black text-primary mb-2">48+</div>
+                    <p className="text-gray-600 dark:text-gray-400 font-semibold">Active Centers</p>
+                  </div>
+                  <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+                  <div className="text-center py-8">
+                    <div className="text-5xl font-black text-primary mb-2">₹10Cr+</div>
+                    <p className="text-gray-600 dark:text-gray-400 font-semibold">Collective Earnings</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* Parent Company: Accsys India Founders & Directors */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-20">

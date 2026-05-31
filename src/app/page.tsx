@@ -14,9 +14,8 @@ import {
   Volume2
 } from "lucide-react";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
-import ImageWithFallback from "@/components/ImageWithFallback";
+
 import dbConnect from "@/lib/mongodb";
-import { GalleryPhoto } from "@/models/GalleryPhoto";
 import { Leader } from "@/models/Leader";
 import { Setting } from "@/models/Setting";
 import type { Metadata } from "next";
@@ -53,84 +52,13 @@ export const metadata: Metadata = {
   }
 };
 
-const FALLBACK_PHOTOS = [
-  {
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    title: "Leadership Seminars",
-    description: "Empowering our members with extensive leadership and marketing training sessions.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    title: "Team Collaboration",
-    description: "Fostering synergy and joint business growth opportunities nationwide.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    title: "Annual Rewards Meet",
-    description: "Honoring outstanding accomplishments, awards, and milestones of our top achievers.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    title: "Corporate Strategy Sessions",
-    description: "Laying solid strategic roadmaps for the upcoming digital commerce eras.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    title: "Celebration & Joy",
-    description: "Celebrating combined milestones, teamwork success, and strong community building.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    title: "Eagles Academy Classes",
-    description: "Delivering business principles and continuous learning directly from senior founders.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    title: "Community Outreach",
-    description: "Connecting hearts, creating positive community footprints, and empowering families.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    title: "Digital Commerce Innovations",
-    description: "Harnessing the power of the internet and direct commerce platforms for steady income.",
-  },
-];
-
-const FALLBACK_VPS = [
-  {
-    _id: "vp1",
-    name: "Mr. K. Raghavan",
-    role: "Eagles Team Vice President",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    description: "Lead strategies manager. Developing direct selling protocols and educational seminars for scaling regional hubs."
-  },
-  {
-    _id: "vp2",
-    name: "Mrs. Anjali Sharma",
-    role: "Eagles Team Vice President",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    description: "Director of training systems. Championing national training frameworks and digital commerce awareness events."
-  },
-  {
-    _id: "vp3",
-    name: "Mr. Ramesh Kumar",
-    role: "Eagles Team Vice President",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-    description: "Logistics and operation coordinator. Spearheading seamless integration of warehouse inventories and active delivery centers."
-  }
-];
-
 export default async function Home() {
-  let gallery: any[] = [];
   let leaders: any[] = [];
   
   let settings: any = null;
   
   try {
     await dbConnect();
-    const photos = await GalleryPhoto.find({}).sort({ slot: 1 }).lean();
-    gallery = JSON.parse(JSON.stringify(photos));
-    
     const dbLeaders = await Leader.find({}).sort({ createdAt: 1 }).lean();
     leaders = JSON.parse(JSON.stringify(dbLeaders));
 
@@ -141,22 +69,6 @@ export default async function Home() {
   } catch (e) {
     console.error("Failed to load DB items in Server Component:", e);
   }
-
-  const galleryItems = Array.from({ length: 8 }, (_, i) => {
-    const slotNum = i + 1;
-    const customPhoto = gallery.find((p) => p.slot === slotNum);
-    return {
-      slot: slotNum,
-      image: customPhoto?.image || FALLBACK_PHOTOS[i].image,
-      title: customPhoto?.title || FALLBACK_PHOTOS[i].title,
-      description: customPhoto?.description || FALLBACK_PHOTOS[i].description,
-      isCustom: !!customPhoto,
-    };
-  });
-
-  // Filter vice presidents from DB, fallback if none found
-  const dbVPs = leaders.filter(l => l.role?.toLowerCase().includes("vice"));
-  const vicePresidents = dbVPs.length > 0 ? dbVPs : FALLBACK_VPS;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -339,54 +251,6 @@ export default async function Home() {
         </div>
       </section>
 
-
-
-      {/* Board of Vice Presidents Showcase */}
-      <section className="py-28 bg-gray-50 dark:bg-gray-900/40 relative z-20 border-t border-b border-gray-100 dark:border-gray-800/65">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4">
-              Executive Committee
-            </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
-              Accsys Board of Vice Presidents
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-xl leading-relaxed">
-              Our Senior Vice Presidents spearhead marketing scaling, warehouse logistics, and network operations nationwide.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-10">
-            {vicePresidents.map((vp) => (
-              <div 
-                key={vp._id}
-                className="bg-white dark:bg-gray-800 rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700/50 hover:border-primary/30 hover:-translate-y-2 transition-all duration-300 flex flex-col group"
-              >
-                <div className="relative aspect-square overflow-hidden bg-gray-200">
-                  <ImageWithFallback 
-                    src={vp.image?.startsWith('15') ? `https://images.unsplash.com/photo-${vp.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80` : (vp.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80")} 
-                    fallbackSrc="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                    alt={vp.name} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute top-4 right-4 bg-black/45 backdrop-blur px-3 py-1 rounded-full text-[10px] text-primary font-bold uppercase tracking-wider">
-                    VP Council
-                  </div>
-                </div>
-                <div className="p-8 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-primary transition-colors">{vp.name}</h3>
-                    <p className="text-primary font-bold text-sm mb-4 uppercase tracking-wider">{vp.role || "Eagles Team Vice President"}</p>
-                    <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6 font-medium">{vp.description || "Leading dynamic teams to ensure direct sales achievements and operational network integrity."}</p>
-                  </div>
-                  <div className="w-10 h-1 bg-gradient-to-r from-primary to-amber-500 rounded-full group-hover:w-20 transition-all duration-300" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Real Impact & Testimonials */}
       <section className="py-28 bg-white dark:bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -448,55 +312,6 @@ export default async function Home() {
                     <h4 className="font-bold text-gray-900 dark:text-white text-sm">{t.name}</h4>
                     <p className="text-gray-500 text-xs">{t.role}</p>
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 8-Photo Frame Grid Section */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-900/40 relative z-20 border-t border-b border-gray-100 dark:border-gray-800/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4">
-              Gallery & Highlights
-            </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
-              EAGLES TEAM ACHIEVERS
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-xl leading-relaxed">
-              A visual journey highlighting our training seminars, leadership forums, celebrations, and key community milestones across India.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {galleryItems.map((item, i) => (
-              <div
-                key={item.slot}
-                className="bg-white dark:bg-gray-800 rounded-[2rem] shadow-xl shadow-gray-200/40 dark:shadow-none border border-gray-100 dark:border-gray-700/50 overflow-hidden group hover:border-primary/20 transition-all flex flex-col justify-between"
-              >
-                <div className="w-full aspect-video sm:aspect-[4/3] overflow-hidden relative">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute top-4 right-4 z-10 px-2.5 py-0.5 bg-black/45 backdrop-blur-md rounded-full text-[10px] text-white/95 font-bold uppercase tracking-wider">
-                    {item.isCustom ? "Verified Highlight" : "Eagles Team"}
-                  </div>
-                </div>
-
-                <div className="p-8 flex-1 flex flex-col justify-between bg-gradient-to-b from-white to-gray-50/30 dark:from-gray-800 dark:to-gray-900/10">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-1 group-hover:text-primary transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3 font-light">
-                      {item.description}
-                    </p>
-                  </div>
-                  <div className="w-8 h-1 bg-gradient-to-r from-primary to-amber-500 rounded-full mt-6 group-hover:w-16 transition-all duration-300" />
                 </div>
               </div>
             ))}

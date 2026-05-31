@@ -21,8 +21,9 @@ export default function Navbar() {
     { name: "Product", href: "/products" },
     { name: "Plan", href: "/plans" },
     { name: "Achievers", href: "/achievers" },
-    { name: "About Eagles Team", href: "/about-eagles" },
-    { name: "About company Event tickets and products", href: "/company-events" },
+    { name: "About Eagles Team", href: "/about-company" },
+    { name: "About company", href: "/about-eagles" },
+    { name: "Event tickets and products", href: "/company-events" },
     { name: "Contact Us", href: "/contact" },
   ];
 
