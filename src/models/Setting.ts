@@ -21,6 +21,11 @@ export interface ISetting extends Document {
   statProducts: number;
   statCenters: number;
   statMembers: number;
+  statCarAchievers: number;
+  statHouseAchievers: number;
+  statIncomeEarners: number;
+  statAbroadTrips: number;
+  statWeeklyEarners: number;
 
   // Vision & Mission
   visionStatement: string;
@@ -65,6 +70,11 @@ const SettingSchema = new Schema(
     statProducts: { type: Number, default: 10000 },
     statCenters: { type: Number, default: 300 },
     statMembers: { type: Number, default: 100 },
+    statCarAchievers: { type: Number, default: 500 },
+    statHouseAchievers: { type: Number, default: 100 },
+    statIncomeEarners: { type: Number, default: 10000 },
+    statAbroadTrips: { type: Number, default: 10 },
+    statWeeklyEarners: { type: Number, default: 1000 },
 
     visionStatement: { type: String, default: "To become the most trusted and fastest-growing digital commerce platform in India. We aim to create a network of self-reliant entrepreneurs operating across every corner of the country, powered by ethical business practices and modern technology." },
     missionPoints: {

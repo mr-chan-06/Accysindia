@@ -41,6 +41,11 @@ export default function SettingsManagement() {
     statProducts: 10000,
     statCenters: 300,
     statMembers: 100,
+    statCarAchievers: 500,
+    statHouseAchievers: 100,
+    statIncomeEarners: 10000,
+    statAbroadTrips: 10,
+    statWeeklyEarners: 1000,
     visionStatement: "",
     missionPoints: [] as string[],
     rebrandingDescription1: "",
@@ -380,42 +385,51 @@ export default function SettingsManagement() {
             {/* Stats Counter Section */}
             <div className="flex items-center gap-3 border-b dark:border-gray-800 pb-4 pt-6">
               <Award className="w-6 h-6 text-primary" />
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Home Page Live Stats Counters</h2>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Home Page Live Stats Counters (Eagles Team Milestones)</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+             <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Crore+ Turnover</label>
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Car Achievers</label>
                 <input 
                   type="number" 
-                  value={settings.statTurnover} 
-                  onChange={e => setSettings({...settings, statTurnover: parseInt(e.target.value) || 0})} 
+                  value={settings.statCarAchievers ?? 500} 
+                  onChange={e => setSettings({...settings, statCarAchievers: parseInt(e.target.value) || 0})} 
                   className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-bold" 
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Premium Products</label>
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">House Achievers</label>
                 <input 
                   type="number" 
-                  value={settings.statProducts} 
-                  onChange={e => setSettings({...settings, statProducts: parseInt(e.target.value) || 0})} 
+                  value={settings.statHouseAchievers ?? 100} 
+                  onChange={e => setSettings({...settings, statHouseAchievers: parseInt(e.target.value) || 0})} 
                   className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-bold" 
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Active Centers</label>
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Income Earners</label>
                 <input 
                   type="number" 
-                  value={settings.statCenters} 
-                  onChange={e => setSettings({...settings, statCenters: parseInt(e.target.value) || 0})} 
+                  value={settings.statIncomeEarners ?? 10000} 
+                  onChange={e => setSettings({...settings, statIncomeEarners: parseInt(e.target.value) || 0})} 
+                  className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-850 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-bold" 
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Abroad Trips</label>
+                <input 
+                  type="number" 
+                  value={settings.statAbroadTrips ?? 10} 
+                  onChange={e => setSettings({...settings, statAbroadTrips: parseInt(e.target.value) || 0})} 
                   className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-bold" 
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Happy Members (in thousands)</label>
+                <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Weekly Earners (Target: 1000+)</label>
                 <input 
                   type="number" 
-                  value={settings.statMembers} 
-                  onChange={e => setSettings({...settings, statMembers: parseInt(e.target.value) || 0})} 
+                  value={settings.statWeeklyEarners ?? 1000} 
+                  onChange={e => setSettings({...settings, statWeeklyEarners: parseInt(e.target.value) || 0})} 
                   className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-bold" 
                 />
               </div>

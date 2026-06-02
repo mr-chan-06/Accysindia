@@ -147,20 +147,32 @@ export default async function Home() {
             </div>
           </div>
 
+          {/* Stats Section Heading */}
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4 animate-pulse">
+              Vision Roadmap
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">
+              EAGLES TEAM VISION 2028
+            </h2>
+            <div className="w-24 h-1.5 bg-gradient-to-r from-primary to-yellow-500 rounded-full mx-auto mt-6" />
+          </div>
+
           {/* Stats Section */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12">
             {[
-              { label: "Crore+ Turnover", value: settings?.statTurnover ?? 5000, prefix: "₹" },
-              { label: "Premium Products", value: settings?.statProducts ?? 10000, suffix: "+" },
-              { label: "Active Centers", value: settings?.statCenters ?? 300, suffix: "+" },
-              { label: "Happy Members", value: settings?.statMembers ?? 100, suffix: "k+" }
+               { label: "CAR ACHIEVERS", value: 500, suffix: "+" },
+               { label: "HOUSE ACHIEVERS", value: 100, suffix: "+" },
+               { label: "INCOME EARNERS", value: 10000, suffix: "+" },
+               { label: "ABROAD TRIPS", value: 10, suffix: "+" },
+               { label: "WEEKLY 60000 INCOME EARNERS", value: 1000, suffix: "+" }
             ].map((stat, i) => (
               <div 
                 key={i}
-                className="text-center transform hover:scale-105 transition-transform duration-300"
+                className="text-center transform hover:scale-105 transition-transform duration-300 last:col-span-2 lg:last:col-span-1"
               >
                 <h3 className="text-5xl md:text-6xl font-extrabold text-primary mb-3 drop-shadow-sm">
-                  <AnimatedCounter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 </h3>
                 <p className="text-gray-500 dark:text-gray-400 font-semibold text-lg">{stat.label}</p>
               </div>
@@ -251,75 +263,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Real Impact & Testimonials */}
-      <section className="py-28 bg-white dark:bg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4">
-              Real Impact
-            </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
-              Trusted by 100k+ Earners Nationwide
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-xl leading-relaxed">
-              Read how members of all background profiles leverage the EAGLESTEAM tools for strong outcomes.
-            </p>
-          </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Rajesh Kumar",
-                role: "Ex-Corporate Banker, New Delhi",
-                quote: "Transitioning from corporate banking to smart commerce was a critical choice. The EAGLESTEAM systems allowed me to match my banking income within 8 months of starting. The support is highly structured.",
-                stars: 5,
-                initials: "RK"
-              },
-              {
-                name: "Anish Patel",
-                role: "College Student, Ahmedabad",
-                quote: "EAGLESTEAM fit perfectly into my schedule. Starting with a basic privilege pack, I built a small team network that completely funds my daily educational needs. Simple, clear, and highly rewarding.",
-                stars: 5,
-                initials: "AP"
-              },
-              {
-                name: "Sunita Rao",
-                role: "Independent Retailer, Bengaluru",
-                quote: "Accsys India has given local store owners like me an incredible product catalog advantage. The repurchase margins on daily essentials are high, and the delivery speed keeps my retail clients happy.",
-                stars: 5,
-                initials: "SR"
-              }
-            ].map((t, idx) => (
-              <div 
-                key={idx}
-                className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl shadow-gray-200/30 dark:shadow-none border border-gray-100 dark:border-gray-700/50 flex flex-col justify-between hover:border-primary/20 hover:scale-[1.02] transition-all duration-300"
-              >
-                <div>
-                  <div className="flex gap-1 mb-6">
-                    {Array.from({ length: t.stars }).map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed mb-8 italic">
-                    "{t.quote}"
-                  </p>
-                </div>
-                <div className="flex items-center gap-4 border-t dark:border-gray-700/50 pt-5 mt-auto">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold text-xs flex items-center justify-center">
-                    {t.initials}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 dark:text-white text-sm">{t.name}</h4>
-                    <p className="text-gray-500 text-xs">{t.role}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Parallax Section */}
       <section className="relative py-40 overflow-hidden">
         <div className="absolute inset-0 z-0 bg-fixed bg-center bg-cover animate-fade-in" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')" }}>
           <div className="absolute inset-0 bg-primary/95 mix-blend-multiply z-10" />
