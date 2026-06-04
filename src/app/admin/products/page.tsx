@@ -2,6 +2,7 @@
 
 import { Plus, Edit3, Trash2, Loader2, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { DEFAULT_KITS } from "@/app/products/page";
 
 export default function ProductsManagement() {
   const [products, setProducts] = useState<any[]>([]);
@@ -14,13 +15,20 @@ export default function ProductsManagement() {
     name: "", category: "Grocery", price: "", stock: "", pv: "", description: ""
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const fetchProducts = async () => {
     try {
       const res = await fetch("/api/admin/products");
-      if (res.ok) setProducts(await res.json());
+      if (res.ok) {
+        const dbProducts = await res.json();
+        setProducts([...DEFAULT_KITS, ...dbProducts]);
+      } else {
+        setProducts(DEFAULT_KITS);
+      }
     } catch (e) {
       console.error(e);
+      setProducts(DEFAULT_KITS);
     } finally {
       setLoading(false);
     }
@@ -31,6 +39,10 @@ export default function ProductsManagement() {
   }, []);
 
   const handleDelete = async (id: string) => {
+    if (id.startsWith("kit")) {
+      alert("Built-in system kits are read-only and cannot be deleted.");
+      return;
+    }
     if (!confirm("Are you sure you want to delete this product?")) return;
     try {
       const res = await fetch(`/api/admin/products/${id}`, { method: "DELETE" });
@@ -40,7 +52,32 @@ export default function ProductsManagement() {
     }
   };
 
-  const handleAddProduct = async (e: React.FormEvent) => {
+  const handleEditClick = (product: any) => {
+    if (product._id.startsWith("kit")) {
+      alert("Built-in system kits are read-only and cannot be edited in the CMS.");
+      return;
+    }
+    setEditingId(product._id);
+    setFormData({
+      name: product.name,
+      category: product.category,
+      price: product.price.toString(),
+      stock: product.stock.toString(),
+      pv: product.pv.toString(),
+      description: product.description || ""
+    });
+    setImageFile(null);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setEditingId(null);
+    setFormData({ name: "", category: "Grocery", price: "", stock: "", pv: "", description: "" });
+    setImageFile(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     try {
@@ -55,17 +92,21 @@ export default function ProductsManagement() {
         data.append('image', imageFile);
       }
 
-      const res = await fetch("/api/admin/products", {
-        method: "POST",
+      const url = editingId ? `/api/admin/products/${editingId}` : "/api/admin/products";
+      const method = editingId ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method: method,
         body: data,
       });
       if (res.ok) {
-        setIsModalOpen(false);
-        setFormData({ name: "", category: "Grocery", price: "", stock: "", pv: "", description: "" });
-        setImageFile(null);
+        closeModal();
         fetchProducts();
-        setSuccessMessage("Product successfully added to the catalog!");
+        setSuccessMessage(editingId ? "Product successfully updated!" : "Product successfully added to the catalog!");
         setTimeout(() => setSuccessMessage(""), 3500);
+      } else {
+        const err = await res.json();
+        alert("Failed to save: " + err.message);
       }
     } catch (e) {
       console.error(e);
@@ -120,27 +161,49 @@ export default function ProductsManagement() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
-                {products.map((product) => (
-                  <tr key={product._id} className="hover:bg-primary/5 transition-colors group">
-                    <td className="px-10 py-6 font-bold text-gray-900 dark:text-white text-base max-w-[200px] truncate">{product.name}</td>
-                    <td className="px-10 py-6 text-sm font-semibold text-primary">{product.category}</td>
-                    <td className="px-10 py-6 text-base font-extrabold text-gray-900 dark:text-white">₹{product.price}</td>
-                    <td className="px-10 py-6">
-                      <span className={`px-4 py-1.5 text-xs font-bold rounded-full ${product.stock > 20 ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400' : 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400'}`}>
-                        {product.stock} in stock
-                      </span>
-                    </td>
-                    <td className="px-10 py-6 text-base font-black text-emerald-500">+{product.pv} PV</td>
-                    <td className="px-10 py-6 flex justify-end gap-3 opacity-80 group-hover:opacity-100 transition-opacity">
-                      <button className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white transition-colors title='Edit'">
-                        <Edit3 className="w-4 h-4" />
-                      </button>
-                      <button onClick={() => handleDelete(product._id)} className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-red-500 hover:text-white transition-colors title='Delete'">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {products.map((product) => {
+                  const isBuiltIn = product._id.startsWith("kit");
+                  return (
+                    <tr key={product._id} className="hover:bg-primary/5 transition-colors group">
+                      <td className="px-10 py-6 font-bold text-gray-900 dark:text-white text-base max-w-[250px] truncate">
+                        <div className="flex items-center gap-2.5">
+                          <span className="truncate">{product.name}</span>
+                          {isBuiltIn && (
+                            <span className="shrink-0 bg-primary/10 text-primary border border-primary/20 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                              Built-in
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-10 py-6 text-sm font-semibold text-primary">{product.category}</td>
+                      <td className="px-10 py-6 text-base font-extrabold text-gray-900 dark:text-white">₹{product.price}</td>
+                      <td className="px-10 py-6">
+                        <span className={`px-4 py-1.5 text-xs font-bold rounded-full ${isBuiltIn || product.stock > 20 ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400' : 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400'}`}>
+                          {isBuiltIn ? "Unlimited" : `${product.stock} in stock`}
+                        </span>
+                      </td>
+                      <td className="px-10 py-6 text-base font-black text-emerald-500">+{product.pv} PV</td>
+                      <td className="px-10 py-6 flex justify-end gap-3 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <button 
+                          onClick={() => handleEditClick(product)} 
+                          title={isBuiltIn ? "Built-in system kits cannot be edited in CMS" : "Edit Product"}
+                          disabled={isBuiltIn}
+                          className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${isBuiltIn ? "bg-gray-50 dark:bg-gray-800/30 text-gray-300 dark:text-gray-700 cursor-not-allowed opacity-50" : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white active:scale-95"}`}
+                        >
+                          <Edit3 className="w-4 h-4" />
+                        </button>
+                        <button 
+                          onClick={() => handleDelete(product._id)} 
+                          title={isBuiltIn ? "Built-in system kits cannot be deleted" : "Delete Product"}
+                          disabled={isBuiltIn}
+                          className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${isBuiltIn ? "bg-gray-50 dark:bg-gray-800/30 text-gray-300 dark:text-gray-700 cursor-not-allowed opacity-50" : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-red-500 hover:text-white active:scale-95"}`}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -150,11 +213,11 @@ export default function ProductsManagement() {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white dark:bg-gray-900 w-full max-w-3xl rounded-[2.5rem] p-10 shadow-2xl relative border border-gray-100 dark:border-gray-800">
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-8 right-8 w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-500 hover:text-primary hover:bg-primary/10 transition-colors">
+            <button onClick={closeModal} className="absolute top-8 right-8 w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-500 hover:text-primary hover:bg-primary/10 transition-colors">
               <X className="w-5 h-5" />
             </button>
-            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight">Add New Product</h2>
-            <form onSubmit={handleAddProduct} className="space-y-6">
+            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight">{editingId ? "Edit Product" : "Add New Product"}</h2>
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 dark:text-gray-400 uppercase tracking-widest mb-3">Product Name</label>
@@ -163,6 +226,7 @@ export default function ProductsManagement() {
                 <div>
                   <label className="block text-xs font-bold text-gray-700 dark:text-gray-400 uppercase tracking-widest mb-3">Category</label>
                   <select value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-bold cursor-pointer transition-colors">
+                    <option>Premium Kits</option>
                     <option>Grocery</option>
                     <option>Garments</option>
                     <option>Health & Personal Care</option>
@@ -194,7 +258,7 @@ export default function ProductsManagement() {
               </div>
               
               <button disabled={submitting} type="submit" className="w-full py-5 bg-gradient-to-r from-secondary to-amber-500 text-white rounded-2xl font-black tracking-wide text-xl hover:shadow-xl hover:shadow-secondary/30 hover:-translate-y-0.5 transition-all disabled:opacity-70 mt-2 flex justify-center items-center gap-2">
-                {submitting ? "Saving Data..." : "Publish Product to Catalog"}
+                {submitting ? "Saving Data..." : editingId ? "Update Product Details" : "Publish Product to Catalog"}
               </button>
             </form>
           </div>

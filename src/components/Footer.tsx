@@ -80,13 +80,13 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-6">Contact</h3>
             <ul className="space-y-4 text-sm text-gray-500">
               <li className="flex gap-2 items-start">
-                <span className="text-primary mt-1">📍</span> {settings?.officeAddress || "123 Business Avenue, Tech Hub"}
+                <span className="text-primary mt-1">📍</span> {settings?.officeAddress || "No .11 SRI RAMAMURTHY NAGAR SOOTHUPAKKAM ROAD KUMMANUR RED HILLS CHENNAI-600052"}
               </li>
               <li className="flex gap-2 items-center">
                 <span className="text-primary">✉️</span> {settings?.email1 || "info@accsysindia.com"}<br/>{settings?.email2 || "support@accsysindia.com"}
               </li>
               <li className="flex gap-2 items-center">
-                <span className="text-primary">📞</span> {settings?.phone1 || "+91 98765 43210"}<br/>{settings?.phone2 || "+91 91234 56789"}
+                <span className="text-primary">📞</span> {settings?.phone1 || "9381234562"}<br/>{settings?.phone2 || "9092888123"}
               </li>
             </ul>
           </div>

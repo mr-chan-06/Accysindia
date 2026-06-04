@@ -257,7 +257,7 @@ export default function SettingsManagement() {
                   value={settings.phone1} 
                   onChange={e => setSettings({...settings, phone1: e.target.value})} 
                   className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-medium" 
-                  placeholder="e.g. +91 98765 43210" 
+                  placeholder="9381234562" 
                 />
               </div>
               <div>
@@ -267,7 +267,7 @@ export default function SettingsManagement() {
                   value={settings.phone2} 
                   onChange={e => setSettings({...settings, phone2: e.target.value})} 
                   className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-medium" 
-                  placeholder="e.g. +91 91234 56789" 
+                  placeholder="9092888123" 
                 />
               </div>
               <div>
@@ -307,7 +307,7 @@ export default function SettingsManagement() {
                   value={settings.officeAddress} 
                   onChange={e => setSettings({...settings, officeAddress: e.target.value})} 
                   className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-medium" 
-                  placeholder="123 Business Avenue, Tech Hub, Silicon City, IN 560001" 
+                  placeholder="No .11 SRI RAMAMURTHY NAGAR SOOTHUPAKKAM ROAD KUMMANUR RED HILLS CHENNAI-600052" 
                 />
               </div>
             </div>

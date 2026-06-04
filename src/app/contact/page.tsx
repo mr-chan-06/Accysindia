@@ -85,7 +85,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Corporate Office</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-xl leading-relaxed">{settings?.officeAddress || "123 Business Avenue, Tech Hub, Silicon City, IN 560001"}</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xl leading-relaxed">{settings?.officeAddress || "No .11 SRI RAMAMURTHY NAGAR SOOTHUPAKKAM ROAD KUMMANUR RED HILLS CHENNAI-600052"}</p>
                 </div>
               </div>
               
@@ -95,7 +95,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">WhatsApp & Support</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-xl leading-relaxed">{settings?.phone1 || "+91 98765 43210"}<br/>{settings?.phone2 || "+91 91234 56789"}</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xl leading-relaxed">{settings?.phone1 || "9381234562"}<br/>{settings?.phone2 || "9092888123"}</p>
                 </div>
               </div>
 

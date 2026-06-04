@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { LayoutDashboard, ShoppingBag, Settings, LogOut, Award, Package, Menu, X, Users } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, Settings, LogOut, Award, Package, Menu, X, Users, Ticket } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 
@@ -49,6 +49,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { name: "Membership Plans", href: "/admin/plans", icon: Package },
     { name: "Products", href: "/admin/products", icon: ShoppingBag },
+    { name: "Ticket Registrations", href: "/admin/tickets", icon: Ticket },
     { name: "Leadership", href: "/admin/leaders", icon: Award },
     { name: "Achievers", href: "/admin/achievers", icon: Users },
     { name: "Site Settings", href: "/admin/settings", icon: Settings },

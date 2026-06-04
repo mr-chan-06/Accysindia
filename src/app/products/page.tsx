@@ -5,12 +5,12 @@ import { useState, useEffect } from "react";
 import { ShoppingCart, Star, Loader2, ShoppingBag, Play, X, MessageSquare, PhoneCall, Sparkles, Check, Download } from "lucide-react";
 import ImageWithFallback from "@/components/ImageWithFallback";
 
-const DEFAULT_KITS = [
+export const DEFAULT_KITS = [
   {
     _id: "kit1",
     name: "Womens Kit",
     category: "Premium Kits",
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "/uploads/products/Napkin.png",
     description: "A tailored collection of organic beauty care, personal hygiene, and wellness products designed specifically for modern women. Click to play video guide!",
     price: 4999,
     pv: 60,
@@ -20,7 +20,7 @@ const DEFAULT_KITS = [
     _id: "kit2",
     name: "Provision Kit",
     category: "Premium Kits",
-    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "/uploads/products/Provision kit.png",
     description: "Your ultimate household bundle. Contains premium grocery staples, pulses, oils, spices, and daily essentials for your home. Only 60PV for all! Click to view details.",
     price: 4500,
     pv: 60,
@@ -123,16 +123,6 @@ const DEFAULT_KITS = [
     price: 5200,
     pv: 60,
   },
-    {
-      _id: "kit6",
-      name: "Napkin Kit",
-      category: "Premium Kits",
-      image: "/uploads/products/napkin.png",
-      description: "A handy kit featuring premium napkins and essential accessories for events and daily use. Click to play video guide!",
-      price: 2999,
-      pv: 60,
-      videoUrl: "https://youtube.com/watch?v=CrElJ8a0bjs&feature=shared"
-    },
 ];
 
 const getYoutubeEmbedUrl = (url: string | null) => {

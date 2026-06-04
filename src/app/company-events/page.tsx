@@ -93,9 +93,29 @@ export default function CompanyEvents() {
     ? settings.dispatchCenters 
     : ACTIVE_CENTERS;
 
-  const handleBooking = (e: React.FormEvent) => {
+  const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
-    setBookedSuccess(true);
+    try {
+      const res = await fetch("/api/tickets", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          eventTitle: selectedEvent,
+          name: bookingForm.name,
+          email: bookingForm.email,
+          phone: bookingForm.phone,
+          ticketsCount: bookingForm.ticketsCount
+        })
+      });
+      if (res.ok) {
+        setBookedSuccess(true);
+      } else {
+        alert("Failed to queue booking query. Please check parameters.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error submitting ticket request.");
+    }
   };
 
   const handleWhatsAppTicketInquiry = () => {
@@ -222,9 +242,9 @@ export default function CompanyEvents() {
             {displayFounders.map((f) => (
               <div 
                 key={f._id}
-                className="w-full md:w-[350px] bg-gray-50 dark:bg-gray-900 rounded-[2.5rem] p-8 border border-gray-100 dark:border-gray-800 shadow-xl flex flex-col items-center text-center group"
+                className="w-full md:w-[280px] bg-gray-50 dark:bg-gray-900 rounded-[2rem] p-6 border border-gray-100 dark:border-gray-800 shadow-xl flex flex-col items-center text-center group"
               >
-                <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg mb-6 shrink-0 bg-gray-100">
+                <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-md mb-4 shrink-0 bg-gray-100">
                   <ImageWithFallback 
                     src={f.image?.startsWith('/') || f.image?.startsWith('http') ? f.image : "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"} 
                     fallbackSrc="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
@@ -232,9 +252,9 @@ export default function CompanyEvents() {
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-1 group-hover:text-primary transition-colors">{f.name}</h3>
-                <span className="text-primary font-bold text-xs uppercase tracking-widest mb-4 bg-primary/10 px-3 py-1 rounded-full">{f.role || "Director"}</span>
-                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed font-semibold">{f.description || "Driving corporate values, ethical trade parameters, and strict national direct selling guidelines compliance."}</p>
+                <h3 className="text-xl font-black text-gray-900 dark:text-white mb-1 group-hover:text-primary transition-colors">{f.name}</h3>
+                <span className="text-primary font-bold text-xs uppercase tracking-widest mb-3 bg-primary/10 px-3 py-1 rounded-full">{f.role || "Director"}</span>
+                <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed font-semibold">{f.description || "Driving corporate values, ethical trade parameters, and strict national direct selling guidelines compliance."}</p>
               </div>
             ))}
           </div>

@@ -141,7 +141,7 @@ export default async function Home() {
                 Welcome to the <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-400">Eagles Team</span>
               </h2>
               <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed font-light mb-8">
-                We are thrilled to welcome you to the **Eagles Team**! Since our groundbreaking transformation in **2026**, our network has scaled to help entrepreneurs claim their financial destiny. Under the visionary mentorship of our founder and senior vice presidents, we provide you with all tools, priority direct selling kits, high PV counts, and binary income cycles to scale your passive revenue.
+                We are thrilled to welcome you to the **Eagles Team**! Since our groundbreaking transformation in **2018**, our network has scaled to help entrepreneurs claim their financial destiny. Under the visionary mentorship of our founder and senior vice presidents, we provide you with all tools, priority direct selling kits, high PV counts, and binary income cycles to scale your passive revenue.
               </p>
               <div className="w-20 h-1 bg-gradient-to-r from-primary to-yellow-400 rounded-full mx-auto" />
             </div>
