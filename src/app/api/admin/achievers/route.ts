@@ -30,6 +30,8 @@ export async function POST(req: NextRequest) {
     const name = formData.get("name") as string;
     const role = formData.get("role") as string;
     const description = (formData.get("description") as string) ?? "";
+    const location = (formData.get("location") as string) ?? "";
+    const date = (formData.get("date") as string) ?? "";
     const imageFile = formData.get("image") as any;
     if (!name || !role) {
       return NextResponse.json({ message: "Missing required fields" }, { status: 400 });
@@ -42,7 +44,7 @@ export async function POST(req: NextRequest) {
       imageUrl = `data:${mimeType};base64,${buffer.toString("base64")}`;
     }
     await dbConnect();
-    const newAchiever = await Achiever.create({ name, role, description, image: imageUrl });
+    const newAchiever = await Achiever.create({ name, role, description, location, date, image: imageUrl });
     return NextResponse.json({ message: "Achiever added", achiever: newAchiever }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ message: "Server error", error: error.message }, { status: 500 });
@@ -60,11 +62,13 @@ export async function PUT(req: NextRequest) {
     const name = formData.get("name") as string;
     const role = formData.get("role") as string;
     const description = (formData.get("description") as string) ?? "";
+    const location = (formData.get("location") as string) ?? "";
+    const date = (formData.get("date") as string) ?? "";
     const imageFile = formData.get("image") as any;
     if (!id) {
       return NextResponse.json({ message: "Missing ID" }, { status: 400 });
     }
-    let updateData: any = { name, role, description };
+    let updateData: any = { name, role, description, location, date };
     if (imageFile && imageFile.name) {
       const bytes = await imageFile.arrayBuffer();
       const buffer = Buffer.from(bytes);

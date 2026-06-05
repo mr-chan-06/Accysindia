@@ -5,6 +5,8 @@ export interface IAchiever extends Document {
   role: string;
   description?: string;
   image: string;
+  location?: string;
+  date?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -15,6 +17,8 @@ const AchieverSchema: Schema = new Schema(
     role: { type: String, required: true },
     description: { type: String, default: "" },
     image: { type: String, required: true },
+    location: { type: String, default: "" },
+    date: { type: String, default: "" },
   },
   {
     timestamps: true,

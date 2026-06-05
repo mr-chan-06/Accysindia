@@ -67,16 +67,16 @@ export const DEFAULT_KITS = [
   },
   {
     _id: "kit3",
-    name: "Spiralna Kit",
+    name: "Spirulina Kit",
     category: "Premium Kits",
-    image: "https://images.unsplash.com/photo-1607619056574-7b8d304b3b33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "/uploads/products/Spiruli.png",
     description: "Premium health package powered by highly pure organic Spirulina tablets, extracts, and herbal vitality formulations. Only 60PV for all!",
     price: 3999,
     pv: 60,
   },
   {
     _id: "kit4",
-    name: "Inner Waer Kit",
+    name: "Gents Trunk Kit",
     category: "Premium Kits",
     image: "/uploads/products/Inners.png",
     description: "Ultimate luxury and everyday comfort. Styled with organic, ultra-breathable combed cotton threads. Only 60PV for all! Click to view details.",
@@ -197,7 +197,7 @@ export default function Products() {
             Eagles Team Joining Packages
           </span>
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 shadow-sm tracking-tight drop-shadow-lg">
-            Eagles Team 60PV Kits
+            Eagles Team Packages
           </h1>
           <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto font-medium">
             Unlock your binary income cycle. All premium joining packages below are valued at exactly <strong>60PV</strong> for simplified network balance matching.

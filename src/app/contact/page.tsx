@@ -178,7 +178,7 @@ export default function Contact() {
                       <option>Provision Kit (60PV)</option>
                       <option>Womens Kit (60PV)</option>
                       <option>Spirulina Kit (60PV)</option>
-                      <option>Inner Wear Kit (60PV)</option>
+                      <option>Gents Trunk Kit (60PV)</option>
                       <option>Garments Kit (60PV)</option>
                     </select>
                   </div>
