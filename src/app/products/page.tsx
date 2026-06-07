@@ -197,7 +197,7 @@ export default function Products() {
             Eagles Team Joining Packages
           </span>
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 shadow-sm tracking-tight drop-shadow-lg">
-            Eagles Team Packages
+            ACCSYS INDIA PRIVILEGE MEMBERS PACKAGES
           </h1>
           <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto font-medium">
             Unlock your binary income cycle. All premium joining packages below are valued at exactly <strong>60PV</strong> for simplified network balance matching.

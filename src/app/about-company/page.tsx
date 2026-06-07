@@ -14,6 +14,7 @@ const FOUNDER_INFO = {
   vision: "He envisions a future where direct commerce becomes a respected, well-regulated industry that transforms lives and creates genuine economic opportunities for millions of Indians."
 };
 
+
 const COMPANY_VALUES = [
   {
     icon: Heart,
@@ -59,6 +60,25 @@ const MILESTONES = [
 export default function AboutCompany() {
   const [founder, setFounder] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [founders, setFounders] = useState<any[]>([]);
+  const FALLBACK_FOUNDERS = [
+    {
+      _id: "founder1",
+      name: "Mr. V. Hariprakash",
+      role: "Founding Director",
+      image: "/founder.jpg",
+      description: "Original founder of Accsys India. Leading the organizational transformation into the Eagles Team network."
+    },
+    {
+      _id: "founder2",
+      name: "Dr. S. K. Subramanian",
+      role: "Corporate Managing Director",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80",
+      description: "Corporate management and compliance expert. Overseeing logistics integrations and Ministry compliance."
+    }
+  ];
+  const displayFounders = founders.length > 0 ? founders : FALLBACK_FOUNDERS;
+
 
   useEffect(() => {
     // Try to fetch founder data from API
@@ -70,6 +90,9 @@ export default function AboutCompany() {
           if (foundingDirector) {
             setFounder(foundingDirector);
           }
+          // Set founders list (exclude directors if needed)
+          const filteredFounders = data.filter((l: any) => !l.role?.toLowerCase().includes("vice"));
+          setFounders(filteredFounders);
         }
         setLoading(false);
       })
@@ -91,7 +114,7 @@ export default function AboutCompany() {
           >
             <span className="text-primary font-bold tracking-wider uppercase mb-4 block">Our Story</span>
             <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-6">
-              About EAGLES TEAM
+              About ACCSYSINDIA
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
               Building a legacy of ethical direct commerce, sustainable growth, and genuine opportunities for every member of our Eagles Team community.
@@ -271,6 +294,46 @@ export default function AboutCompany() {
             <p className="text-gray-600 dark:text-gray-400 font-semibold text-lg">Collective Earnings Generated</p>
           </div>
         </motion.div>
+      </section>
+
+      {/* Parent Company: Accsys India Founders & Directors */}
+      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4">
+            Corporate Board
+          </span>
+          <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight">
+            Accsys Founders & Directors
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed font-light">
+            The visionary corporate officers and compliance directors behind Accsys India's trading registration and logistical supply operations.
+          </p>
+        </div>
+
+        {loading ? (
+          <div className="flex justify-center py-10"><Loader2 className="w-10 h-10 text-primary animate-spin" /></div>
+        ) : (
+          <div className="flex flex-wrap justify-center gap-10">
+            {displayFounders.map((f) => (
+              <div
+                key={f._id}
+                className="w-full md:w-[280px] bg-gray-50 dark:bg-gray-900 rounded-[2rem] p-6 border border-gray-100 dark:border-gray-800 shadow-xl flex flex-col items-center text-center group"
+              >
+                <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-md mb-4 shrink-0 bg-gray-100">
+                  <ImageWithFallback
+                    src={f.image?.startsWith('/') || f.image?.startsWith('http') ? f.image : ""}
+                    fallbackSrc="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                    alt={f.name}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="text-xl font-black text-gray-900 dark:text-white mb-1 group-hover:text-primary transition-colors">{f.name}</h3>
+                <span className="text-primary font-bold text-xs uppercase tracking-widest mb-3 bg-primary/10 px-3 py-1 rounded-full">{f.role || "Director"}</span>
+                <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed font-semibold">{f.description || "Driving corporate values, ethical trade parameters, and strict national direct selling guidelines compliance."}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
     </div>

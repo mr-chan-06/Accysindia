@@ -221,8 +221,8 @@ export default function CompanyEvents() {
         </div>
       </section>
 
-      {/* Parent Company: Accsys India Founders & Directors */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Parent Company: Accsys India Founders & Directors - moved to About Company */}
+      {/*
         <div className="text-center max-w-3xl mx-auto mb-20">
           <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4">
             Corporate Board
@@ -259,7 +259,7 @@ export default function CompanyEvents() {
             ))}
           </div>
         )}
-      </section>
+      */}
 
       {/* Event Tickets Sales & Booking Forms */}
       <section className="py-24 bg-gray-50 dark:bg-gray-900/40 border-t border-b border-gray-100 dark:border-gray-800">

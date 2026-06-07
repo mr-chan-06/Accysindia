@@ -51,6 +51,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: "Products", href: "/admin/products", icon: ShoppingBag },
     { name: "Ticket Registrations", href: "/admin/tickets", icon: Ticket },
     { name: "Leadership", href: "/admin/leaders", icon: Award },
+    { name: "Founders & Directors", href: "/admin/founders", icon: Users },
     { name: "Achievers", href: "/admin/achievers", icon: Users },
     { name: "Site Settings", href: "/admin/settings", icon: Settings },
   ];
