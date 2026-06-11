@@ -29,7 +29,6 @@ export default function AdminDashboard() {
   if (!data) return <div className="text-red-500 font-medium">Failed to load dashboard data. Ensure MongoDB is running and you are an admin.</div>;
 
   const stats = [
-    { title: "Membership Plans", value: data.plansCount, icon: Activity, color: "text-green-500", bg: "bg-green-50 dark:bg-green-900/20" },
     { title: "Store Products", value: data.productsCount, icon: ShoppingBag, color: "text-purple-500", bg: "bg-purple-50 dark:bg-purple-900/20" },
     { title: "Leadership Team", value: data.leadersCount, icon: Users, color: "text-blue-500", bg: "bg-blue-50 dark:bg-blue-900/20" },
   ];

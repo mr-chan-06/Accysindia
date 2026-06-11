@@ -5,16 +5,6 @@ import { useState, useEffect } from "react";
 import { Award, Target, Users, Zap, Heart, Globe, Loader2 } from "lucide-react";
 import ImageWithFallback from "@/components/ImageWithFallback";
 
-const FOUNDER_INFO = {
-  name: "Mr. V. Hariprakash",
-  title: "Founding Director & Visionary",
-  image: "/founder.jpg",
-  bio: "Mr. V. Hariprakash is the visionary founder of Accsys India, an enterprise dedicated to revolutionizing direct commerce in India. With decades of experience in ethical direct selling and network building, he established Accsys India with a singular mission: to create sustainable wealth for entrepreneurs through transparent, compliant business practices.",
-  leadership: "His leadership philosophy centers on integrity, innovation, and inclusion. Under his guidance, Accsys India has grown into a thriving ecosystem with 500+ active members across 48+ centers, generating collective earnings exceeding ₹10 crores. Mr. Hariprakash is committed to mentoring the next generation of leaders and ensuring every team member achieves financial freedom with dignity.",
-  vision: "He envisions a future where direct commerce becomes a respected, well-regulated industry that transforms lives and creates genuine economic opportunities for millions of Indians."
-};
-
-
 const COMPANY_VALUES = [
   {
     icon: Heart,
@@ -58,7 +48,6 @@ const MILESTONES = [
 ];
 
 export default function AboutCompany() {
-  const [founder, setFounder] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [founders, setFounders] = useState<any[]>([]);
   const FALLBACK_FOUNDERS = [
@@ -86,10 +75,6 @@ export default function AboutCompany() {
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
-          const foundingDirector = data.find((l: any) => l.role?.toLowerCase().includes("director"));
-          if (foundingDirector) {
-            setFounder(foundingDirector);
-          }
           // Set founders list (exclude directors if needed)
           const filteredFounders = data.filter((l: any) => !l.role?.toLowerCase().includes("vice"));
           setFounders(filteredFounders);
@@ -98,8 +83,6 @@ export default function AboutCompany() {
       })
       .catch(() => setLoading(false));
   }, []);
-
-  const displayFounder = founder || FOUNDER_INFO;
 
   return (
     <div className="bg-white dark:bg-black min-h-screen">
@@ -120,62 +103,6 @@ export default function AboutCompany() {
               Building a legacy of ethical direct commerce, sustainable growth, and genuine opportunities for every member of our Eagles Team community.
             </p>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Founder Section */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-900/40 border-b dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-yellow-500/10 rounded-[3rem] blur-2xl" />
-              <div className="relative w-full aspect-square rounded-[3rem] overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl bg-gray-100">
-                <ImageWithFallback
-                  src={displayFounder.image?.startsWith('/') || displayFounder.image?.startsWith('http') ? displayFounder.image : "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"}
-                  fallbackSrc="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                  alt={displayFounder.name}
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4">
-                Our Founder
-              </span>
-              <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-2 tracking-tight">
-                {displayFounder.name}
-              </h2>
-              <p className="text-primary font-bold text-lg mb-6 uppercase tracking-wider">{displayFounder.title}</p>
-              
-              <div className="space-y-6">
-                <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-                  {displayFounder.bio}
-                </p>
-                <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-                  {displayFounder.leadership}
-                </p>
-                <div className="bg-primary/10 border border-primary/30 rounded-2xl p-6">
-                  <p className="text-primary font-semibold italic">
-                    "{displayFounder.vision}"
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-          </div>
         </div>
       </section>
 
@@ -319,10 +246,10 @@ export default function AboutCompany() {
                 key={f._id}
                 className="w-full md:w-[280px] bg-gray-50 dark:bg-gray-900 rounded-[2rem] p-6 border border-gray-100 dark:border-gray-800 shadow-xl flex flex-col items-center text-center group"
               >
-                <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-md mb-4 shrink-0 bg-gray-100">
+                <div className="w-28 h-28 rounded-2xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-md mb-4 shrink-0 bg-gray-100">
                   <ImageWithFallback
-                    src={f.image?.startsWith('/') || f.image?.startsWith('http') ? f.image : ""}
-                    fallbackSrc="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                    src={f.image?.startsWith('/') || f.image?.startsWith('http') || f.image?.startsWith('data:') ? f.image : ""}
+                    fallbackSrc="/founder.jpg"
                     alt={f.name}
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />

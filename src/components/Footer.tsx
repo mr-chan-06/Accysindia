@@ -51,7 +51,6 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-6">Quick Links</h3>
             <ul className="space-y-4">
               <li><Link href="/products" className="text-sm text-gray-500 hover:text-primary transition-colors">Products</Link></li>
-              <li><Link href="/plans" className="text-sm text-gray-500 hover:text-primary transition-colors">Membership Plans</Link></li>
               <li><Link href="/achievers" className="text-sm text-gray-500 hover:text-primary transition-colors">Achievers</Link></li>
               <li><Link href="/about-eagles" className="text-sm text-gray-500 hover:text-primary transition-colors">About Eagles Team</Link></li>
               <li><Link href="/company-events" className="text-sm text-gray-500 hover:text-primary transition-colors">Company Events & Tickets</Link></li>

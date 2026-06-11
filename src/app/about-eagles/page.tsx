@@ -3,7 +3,7 @@
 import ImageWithFallback from "@/components/ImageWithFallback";
 
 import { motion } from "framer-motion";
-import { Award, CheckCircle2, History, Target, Users, BookOpen, Star } from "lucide-react";
+import { Award, CheckCircle2, History, Target, Users, BookOpen, Star, Zap, GitFork, RefreshCw, Check, Layers } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const FALLBACK_VPS = [

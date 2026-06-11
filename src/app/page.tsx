@@ -233,7 +233,7 @@ export default async function Home() {
                 </p>
               </div>
               <Link 
-                href="/plans" 
+                href="/products" 
                 className="inline-flex items-center justify-center px-6 py-3.5 bg-gradient-to-r from-primary to-yellow-500 text-black rounded-2xl font-bold text-sm transition-all hover:opacity-95 gap-2 mt-auto shadow-lg shadow-primary/10"
               >
                 Calculator & Plans <ArrowUpRight className="w-4 h-4" />
@@ -273,7 +273,7 @@ export default async function Home() {
           <p className="text-2xl text-white/90 mb-12 font-light">Join thousands of successful business earners in our network today.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link 
-              href="/plans" 
+              href="/products" 
               className="inline-flex items-center justify-center px-10 py-5 bg-white text-primary rounded-full font-bold text-xl hover:scale-105 hover:shadow-2xl transition-all shadow-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
               Explore Packages
