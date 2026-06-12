@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Award, Target, Users, Zap, Heart, Globe, Loader2 } from "lucide-react";
+import { Award, Target, Users, Zap, Heart, Globe, Loader2, FileText, Download, ExternalLink } from "lucide-react";
 import ImageWithFallback from "@/components/ImageWithFallback";
 
 const COMPANY_VALUES = [
@@ -46,6 +46,69 @@ const MILESTONES = [
   { year: "2024", event: "Crossed 500+ Active Members Milestone" },
   { year: "2026", event: "₹10Cr+ Collective Earnings Achievement" }
 ];
+
+function DocumentsList() {
+  const [docs, setDocs] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/documents")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) setDocs(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div className="flex justify-center py-10"><Loader2 className="w-10 h-10 text-primary animate-spin" /></div>;
+  if (docs.length === 0) return (
+    <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-3xl border border-dashed border-gray-200 dark:border-gray-700">
+      <p className="text-gray-500 dark:text-gray-400 font-medium italic">No public documents are currently available for download.</p>
+    </div>
+  );
+
+  return (
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {docs.map((doc) => (
+        <motion.div
+          key={doc._id}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+          className="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl hover:shadow-primary/5 hover:border-primary/20 transition-all group"
+        >
+          <div className="flex items-start justify-between mb-6">
+            <div className="w-14 h-14 bg-red-100 dark:bg-red-500/10 rounded-2xl flex items-center justify-center text-red-600 dark:text-red-400 shrink-0">
+              <FileText className="w-7 h-7" />
+            </div>
+            <a 
+              href={doc.url} 
+              download={doc.name}
+              className="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-900 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all shadow-inner"
+              title="Download Document"
+            >
+              <Download className="w-4 h-4" />
+            </a>
+          </div>
+          <h3 className="text-lg font-black text-gray-900 dark:text-white mb-2 line-clamp-1">{doc.name}</h3>
+          <div className="flex items-center justify-between mt-auto">
+             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">{doc.type.split('/')[1] || "Document"}</span>
+             <a 
+              href={doc.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary text-xs font-black flex items-center gap-1 hover:underline underline-offset-4"
+             >
+               View Details <ExternalLink className="w-3 h-3" />
+             </a>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
 export default function AboutCompany() {
   const [loading, setLoading] = useState(true);
@@ -221,6 +284,25 @@ export default function AboutCompany() {
             <p className="text-gray-600 dark:text-gray-400 font-semibold text-lg">Collective Earnings Generated</p>
           </div>
         </motion.div>
+      </section>
+
+      {/* Corporate Documents Section */}
+      <section className="py-24 bg-gray-50 dark:bg-gray-900/40 border-t border-b dark:border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4">
+              Transparency
+            </span>
+            <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight">
+              Corporate Documents
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed font-light">
+              Official registration certificates, legal filings, and compliance documents for Accsys India and Eagles Team operations.
+            </p>
+          </div>
+
+          <DocumentsList />
+        </div>
       </section>
 
       {/* Parent Company: Accsys India Founders & Directors */}
