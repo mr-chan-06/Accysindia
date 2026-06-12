@@ -151,6 +151,7 @@ export default function Products() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeSpecs, setActiveSpecs] = useState<any | null>(null);
   const [activeSpecsName, setActiveSpecsName] = useState<string>("");
+  const [viewingProduct, setViewingProduct] = useState<any | null>(null);
 
   // Calculator State
   const [leftIDs, setLeftIDs] = useState(1);
@@ -391,17 +392,13 @@ export default function Products() {
                         </div>
 
                         <div className="flex items-center gap-3">
-                          {/* Details inquiry */}
+                          {/* View Product Details */}
                           <button
-                            onClick={() => {
-                              setInquireProduct(product);
-                              setInquiryForm({ name: "", phone: "", notes: "" });
-                              setFormSubmitted(false);
-                            }}
-                            title="Inquire Product Details"
-                            className="flex items-center justify-center px-4 py-3 bg-secondary/15 hover:bg-secondary/30 text-gray-800 dark:text-white rounded-xl text-xs font-bold transition-all border border-gray-200 dark:border-gray-800"
+                            onClick={() => setViewingProduct(product)}
+                            title="View Product Details"
+                            className="flex items-center justify-center px-3 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-xl text-[11px] font-bold transition-all border border-primary/20"
                           >
-                            <MessageSquare className="w-4 h-4 mr-1.5" /> Product details want to ask
+                            <Sparkles className="w-3 h-3 mr-1" /> View Details
                           </button>
 
                           <button
@@ -472,31 +469,6 @@ export default function Products() {
                 animate={{ opacity: 1, y: 0 }}
                 className="grid lg:grid-cols-2 gap-12 items-center"
               >
-                <div className="space-y-6">
-                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
-                    <Zap className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white">Direct Referral Income</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light">
-                    Initiate your network setup with direct joining sponsorships. Matching pairs from your Left and Right lines immediately release active income.
-                  </p>
-
-                  <div className="bg-amber-500/10 border border-amber-500/20 p-5 rounded-2xl">
-                    <h4 className="text-sm font-bold text-primary uppercase tracking-wider mb-2">First Week Release Requirement</h4>
-                    <p className="text-sm text-gray-700 dark:text-gray-300 font-semibold">
-                      *Your 1st week income will be released with a tail of min 60 PV. That is, a 1:2 or 2:1 active package matching count. Subsequent payouts process on a pure 1:1 balance.
-                    </p>
-                  </div>
-
-                  <div className="border-t dark:border-gray-800 pt-6">
-                    <div className="flex items-center gap-4 text-3xl font-black text-gray-900 dark:text-white">
-                      <span>Payout:</span>
-                      <span className="text-primary">₹600*</span>
-                      <span className="text-sm text-gray-400 font-normal uppercase">per matched 60PV Cycle</span>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Visual Binary tree for 60PV */}
                 <div className="bg-gray-50 dark:bg-gray-900 rounded-[3rem] p-10 border border-gray-100 dark:border-gray-800 flex flex-col items-center justify-center min-h-[350px]">
                   <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-8">Basic 60PV Match Structure</h4>
@@ -536,6 +508,31 @@ export default function Products() {
                     <span className="text-xs font-extrabold text-gray-600 dark:text-gray-400">
                       Matched PV = 60 PV <span className="text-emerald-500 font-black ml-1">→ Payout ₹600</span>
                     </span>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+                    <Zap className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white">Direct Referral Income</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light">
+                    Initiate your network setup with direct joining sponsorships. Matching pairs from your Left and Right lines immediately release active income.
+                  </p>
+
+                  <div className="bg-amber-500/10 border border-amber-500/20 p-5 rounded-2xl">
+                    <h4 className="text-sm font-bold text-primary uppercase tracking-wider mb-2">First Week Release Requirement</h4>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 font-semibold">
+                      *Your 1st week income will be released with a tail of min 60 PV. That is, a 1:2 or 2:1 active package matching count. Subsequent payouts process on a pure 1:1 balance.
+                    </p>
+                  </div>
+
+                  <div className="border-t dark:border-gray-800 pt-6">
+                    <div className="flex items-center gap-4 text-3xl font-black text-gray-900 dark:text-white">
+                      <span>Payout:</span>
+                      <span className="text-primary">₹600*</span>
+                      <span className="text-sm text-gray-400 font-normal uppercase">per matched 60PV Cycle</span>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -697,100 +694,6 @@ export default function Products() {
                 {/* Strategy Details Layout */}
                 <div className="grid lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
                   {/* Strategy Info Panel */}
-                  <div className="space-y-6">
-                    {activeIdStrategy === "1id" && (
-                      <div className="space-y-4">
-                        <h4 className="text-2xl font-bold text-gray-900 dark:text-white">Single ID Payout Model</h4>
-                        <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-light">
-                          With a single active ID, 8 new package sales on your Left Team and 8 on your Right Team yield a matched volume of 480 PV.
-                        </p>
-                        <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-xl space-y-2">
-                          <div className="flex justify-between font-semibold text-sm">
-                            <span className="text-gray-400">Total Income:</span>
-                            <span className="text-gray-900 dark:text-white font-extrabold">₹4,800</span>
-                          </div>
-                          <div className="flex justify-between font-semibold text-sm">
-                            <span className="text-gray-400">Weekly Cap:</span>
-                            <span className="text-gray-900 dark:text-white font-extrabold">₹60,000 / Week</span>
-                          </div>
-                          <div className="flex justify-between font-semibold text-sm">
-                            <span className="text-gray-400">Yearly Cap:</span>
-                            <span className="text-primary font-black">₹31.2 Lakhs / Year</span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {activeIdStrategy === "3id" && (
-                      <div className="space-y-4">
-                        <h4 className="text-2xl font-bold text-gray-900 dark:text-white">3-ID Placement Multiplier</h4>
-                        <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-light">
-                          Own 3 positions (U1, U2, U3) yourself. Registering the same 16 sales (4 Left / 4 Right under U2, and 4 Left / 4 Right under U3) triggers payouts on all 3 IDs!
-                        </p>
-                        <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-xl space-y-2">
-                          <div className="flex justify-between font-semibold text-xs border-b dark:border-gray-800 pb-2 mb-2 text-gray-500">
-                            <span>ID Split Payouts:</span>
-                            <span>U1: ₹5,400 | U2: ₹2,400 | U3: ₹2,400</span>
-                          </div>
-                          <div className="flex justify-between font-semibold text-sm">
-                            <span className="text-gray-400">Total Combined Income:</span>
-                            <span className="text-emerald-500 font-extrabold">₹10,200 <span className="text-xs text-gray-400 font-normal">(Double for same work!)</span></span>
-                          </div>
-                          <div className="flex justify-between font-semibold text-sm">
-                            <span className="text-gray-400">Weekly Cap:</span>
-                            <span className="text-gray-900 dark:text-white font-extrabold">₹1.8 Lakhs / Week</span>
-                          </div>
-                          <div className="flex justify-between font-semibold text-sm">
-                            <span className="text-gray-400">Yearly Cap:</span>
-                            <span className="text-primary font-black">₹93 Lakhs / Year</span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {activeIdStrategy === "7id" && (
-                      <div className="space-y-4">
-                        <h4 className="text-2xl font-bold text-gray-900 dark:text-white">7-ID Ultimate Leader Matrix</h4>
-                        <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-light">
-                          The most lucrative placement. Owning U1 to U7 positions lets you capture matching binary overrides at three levels. Placing 16 sales (groups of 2 under U4-U7) pays all 7 accounts!
-                        </p>
-                        <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-xl space-y-2">
-                          <div className="flex justify-between font-semibold text-[10px] border-b dark:border-gray-800 pb-2 mb-2 text-gray-500">
-                            <span>ID Split Payouts:</span>
-                            <span>U1: ₹6,600 | U2/U3: ₹3k ea | U4-U7: ₹1.2k ea</span>
-                          </div>
-                          <div className="flex justify-between font-semibold text-sm">
-                            <span className="text-gray-400">Total Combined Income:</span>
-                            <span className="text-emerald-500 font-extrabold">₹17,400 <span className="text-xs text-gray-400 font-normal">(3.6x Income multiplier!)</span></span>
-                          </div>
-                          <div className="flex justify-between font-semibold text-sm">
-                            <span className="text-gray-400">Weekly Cap:</span>
-                            <span className="text-gray-900 dark:text-white font-extrabold">₹4.2 Lakhs / Week</span>
-                          </div>
-                          <div className="flex justify-between font-semibold text-sm">
-                            <span className="text-gray-400">Yearly Cap:</span>
-                            <span className="text-primary font-black">₹2.18 Crores / Year</span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="border-t dark:border-gray-800 pt-6 space-y-3">
-                      <h5 className="font-extrabold text-sm uppercase tracking-wider text-gray-500">Key Strategic Benefits</h5>
-                      <ul className="space-y-2">
-                        <li className="flex items-center gap-2 text-sm font-semibold text-gray-755 dark:text-gray-300">
-                          <Check className="w-4 h-4 text-emerald-500" /> Same efforts, dramatically higher incomes
-                        </li>
-                        <li className="flex items-center gap-2 text-sm font-semibold text-gray-755 dark:text-gray-300">
-                          <Check className="w-4 h-4 text-emerald-500" /> Each individual ID is capped at ₹60,000/week
-                        </li>
-                        <li className="flex items-center gap-2 text-sm font-semibold text-gray-755 dark:text-gray-300">
-                          <Check className="w-4 h-4 text-emerald-500" /> Limitless potential with more active direct lines
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
                   {/* Strategy Tree Diagram Output */}
                   <div>
                     {activeIdStrategy === "1id" && (
@@ -1001,6 +904,100 @@ export default function Products() {
                       </div>
                     )}
                   </div>
+
+                  <div className="space-y-6">
+                    {activeIdStrategy === "1id" && (
+                      <div className="space-y-4">
+                        <h4 className="text-2xl font-bold text-gray-900 dark:text-white">Single ID Payout Model</h4>
+                        <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-light">
+                          With a single active ID, 8 new package sales on your Left Team and 8 on your Right Team yield a matched volume of 480 PV.
+                        </p>
+                        <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-xl space-y-2">
+                          <div className="flex justify-between font-semibold text-sm">
+                            <span className="text-gray-400">Total Income:</span>
+                            <span className="text-gray-900 dark:text-white font-extrabold">₹4,800</span>
+                          </div>
+                          <div className="flex justify-between font-semibold text-sm">
+                            <span className="text-gray-400">Weekly Cap:</span>
+                            <span className="text-gray-900 dark:text-white font-extrabold">₹60,000 / Week</span>
+                          </div>
+                          <div className="flex justify-between font-semibold text-sm">
+                            <span className="text-gray-400">Yearly Cap:</span>
+                            <span className="text-primary font-black">₹31.2 Lakhs / Year</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {activeIdStrategy === "3id" && (
+                      <div className="space-y-4">
+                        <h4 className="text-2xl font-bold text-gray-900 dark:text-white">3-ID Placement Multiplier</h4>
+                        <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-light">
+                          Own 3 positions (U1, U2, U3) yourself. Registering the same 16 sales (4 Left / 4 Right under U2, and 4 Left / 4 Right under U3) triggers payouts on all 3 IDs!
+                        </p>
+                        <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-xl space-y-2">
+                          <div className="flex justify-between font-semibold text-xs border-b dark:border-gray-800 pb-2 mb-2 text-gray-500">
+                            <span>ID Split Payouts:</span>
+                            <span>U1: ₹5,400 | U2: ₹2,400 | U3: ₹2,400</span>
+                          </div>
+                          <div className="flex justify-between font-semibold text-sm">
+                            <span className="text-gray-400">Total Combined Income:</span>
+                            <span className="text-emerald-500 font-extrabold">₹10,200 <span className="text-xs text-gray-400 font-normal">(Double for same work!)</span></span>
+                          </div>
+                          <div className="flex justify-between font-semibold text-sm">
+                            <span className="text-gray-400">Weekly Cap:</span>
+                            <span className="text-gray-900 dark:text-white font-extrabold">₹1.8 Lakhs / Week</span>
+                          </div>
+                          <div className="flex justify-between font-semibold text-sm">
+                            <span className="text-gray-400">Yearly Cap:</span>
+                            <span className="text-primary font-black">₹93 Lakhs / Year</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {activeIdStrategy === "7id" && (
+                      <div className="space-y-4">
+                        <h4 className="text-2xl font-bold text-gray-900 dark:text-white">7-ID Ultimate Leader Matrix</h4>
+                        <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-light">
+                          The most lucrative placement. Owning U1 to U7 positions lets you capture matching binary overrides at three levels. Placing 16 sales (groups of 2 under U4-U7) pays all 7 accounts!
+                        </p>
+                        <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-xl space-y-2">
+                          <div className="flex justify-between font-semibold text-[10px] border-b dark:border-gray-800 pb-2 mb-2 text-gray-500">
+                            <span>ID Split Payouts:</span>
+                            <span>U1: ₹6,600 | U2/U3: ₹3k ea | U4-U7: ₹1.2k ea</span>
+                          </div>
+                          <div className="flex justify-between font-semibold text-sm">
+                            <span className="text-gray-400">Total Combined Income:</span>
+                            <span className="text-emerald-500 font-extrabold">₹17,400 <span className="text-xs text-gray-400 font-normal">(3.6x Income multiplier!)</span></span>
+                          </div>
+                          <div className="flex justify-between font-semibold text-sm">
+                            <span className="text-gray-400">Weekly Cap:</span>
+                            <span className="text-gray-900 dark:text-white font-extrabold">₹4.2 Lakhs / Week</span>
+                          </div>
+                          <div className="flex justify-between font-semibold text-sm">
+                            <span className="text-gray-400">Yearly Cap:</span>
+                            <span className="text-primary font-black">₹2.18 Crores / Year</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="border-t dark:border-gray-800 pt-6 space-y-3">
+                      <h5 className="font-extrabold text-sm uppercase tracking-wider text-gray-500">Key Strategic Benefits</h5>
+                      <ul className="space-y-2">
+                        <li className="flex items-center gap-2 text-sm font-semibold text-gray-755 dark:text-gray-300">
+                          <Check className="w-4 h-4 text-emerald-500" /> Same efforts, dramatically higher incomes
+                        </li>
+                        <li className="flex items-center gap-2 text-sm font-semibold text-gray-755 dark:text-gray-300">
+                          <Check className="w-4 h-4 text-emerald-500" /> Each individual ID is capped at ₹60,000/week
+                        </li>
+                        <li className="flex items-center gap-2 text-sm font-semibold text-gray-755 dark:text-gray-300">
+                          <Check className="w-4 h-4 text-emerald-500" /> Limitless potential with more active direct lines
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -1012,6 +1009,29 @@ export default function Products() {
                 animate={{ opacity: 1, y: 0 }}
                 className="grid lg:grid-cols-2 gap-12 items-center"
               >
+                <div className="bg-gray-50 dark:bg-gray-900 rounded-[3rem] p-10 border border-gray-100 dark:border-gray-800 flex flex-col justify-between min-h-[350px]">
+                  <div>
+                    <h4 className="text-lg font-black text-gray-955 dark:text-white mb-2">Monthly Limits & Caps</h4>
+                    <p className="text-sm text-gray-400 font-medium mb-6">Standard repurchase ceilings for Eagles Team members.</p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-6 pb-6">
+                    <div className="p-6 bg-white dark:bg-black rounded-2xl border border-gray-100 dark:border-gray-800 text-center shadow-sm">
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Max Income / Month</span>
+                      <span className="text-2xl font-black text-primary">₹2.5 Lakhs</span>
+                    </div>
+
+                    <div className="p-6 bg-white dark:bg-black rounded-2xl border border-gray-100 dark:border-gray-800 text-center shadow-sm">
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Yearly Earnings Ceiling</span>
+                      <span className="text-2xl font-black text-primary">₹30 Lakhs</span>
+                    </div>
+                  </div>
+
+                  <p className="text-[10px] text-gray-400 font-bold text-center uppercase tracking-wider">
+                    *Monthly ceiling and payouts are subject to change as per direct selling policies.
+                  </p>
+                </div>
+
                 <div className="space-y-6">
                   <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
                     <RefreshCw className="w-6 h-6 animate-spin-slow" />
@@ -1041,29 +1061,6 @@ export default function Products() {
                   <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-xs text-red-500 font-bold">
                     ⚠️ Carry Forward is NOT applicable for Repurchase Income. Points do not carry over to the next month and must match within the active calendar month.
                   </div>
-                </div>
-
-                <div className="bg-gray-50 dark:bg-gray-900 rounded-[3rem] p-10 border border-gray-100 dark:border-gray-800 flex flex-col justify-between min-h-[350px]">
-                  <div>
-                    <h4 className="text-lg font-black text-gray-955 dark:text-white mb-2">Monthly Limits & Caps</h4>
-                    <p className="text-sm text-gray-400 font-medium mb-6">Standard repurchase ceilings for Eagles Team members.</p>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-6 pb-6">
-                    <div className="p-6 bg-white dark:bg-black rounded-2xl border border-gray-100 dark:border-gray-800 text-center shadow-sm">
-                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Max Income / Month</span>
-                      <span className="text-2xl font-black text-primary">₹2.5 Lakhs</span>
-                    </div>
-
-                    <div className="p-6 bg-white dark:bg-black rounded-2xl border border-gray-100 dark:border-gray-800 text-center shadow-sm">
-                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Yearly Earnings Ceiling</span>
-                      <span className="text-2xl font-black text-primary">₹30 Lakhs</span>
-                    </div>
-                  </div>
-
-                  <p className="text-[10px] text-gray-400 font-bold text-center uppercase tracking-wider">
-                    *Monthly ceiling and payouts are subject to change as per direct selling policies.
-                  </p>
                 </div>
               </motion.div>
             )}
@@ -1175,6 +1172,58 @@ export default function Products() {
           </div>
         </div>
       </section>
+
+      {/* Product Details Modal */}
+      <AnimatePresence>
+        {viewingProduct && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            onClick={() => setViewingProduct(null)}
+          >
+            <motion.div
+              initial={{ y: 16, scale: 0.97 }}
+              animate={{ y: 0, scale: 1 }}
+              exit={{ y: 16, scale: 0.97 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-sm bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-2xl p-6 relative"
+            >
+              {/* Close */}
+              <button
+                onClick={() => setViewingProduct(null)}
+                className="absolute top-4 right-4 p-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full text-gray-500 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              {/* Product name + category */}
+              <div className="mb-4 pr-8">
+                <span className="text-[10px] font-bold text-primary uppercase tracking-widest">{viewingProduct.category}</span>
+                <h3 className="text-lg font-black text-gray-900 dark:text-white mt-0.5">{viewingProduct.name}</h3>
+              </div>
+
+              {/* Description */}
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-medium">
+                {viewingProduct.description || "No description available for this product."}
+              </p>
+
+              {/* Details if present */}
+              {viewingProduct.details && (
+                <ul className="mt-4 space-y-1.5 border-t dark:border-gray-800 pt-4">
+                  {viewingProduct.details.split('\n').filter((l: string) => l.trim()).map((line: string, i: number) => (
+                    <li key={i} className="flex items-start gap-2 text-xs text-gray-600 dark:text-gray-400 font-medium">
+                      <span className="text-primary font-black shrink-0">›</span>
+                      <span>{line.replace(/^[•\-\*]\s*/, '')}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Video Modal Player (triggers on Womens Kit click) */}
       <AnimatePresence>

@@ -12,7 +12,7 @@ export default function ProductsManagement() {
   const [successMessage, setSuccessMessage] = useState("");
 
   const [formData, setFormData] = useState({
-    name: "", category: "Grocery", price: "", stock: "", pv: "", description: ""
+    name: "", category: "Grocery", price: "", stock: "", pv: "", description: "", details: ""
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -64,7 +64,8 @@ export default function ProductsManagement() {
       price: product.price.toString(),
       stock: product.stock.toString(),
       pv: product.pv.toString(),
-      description: product.description || ""
+      description: product.description || "",
+      details: product.details || ""
     });
     setImageFile(null);
     setIsModalOpen(true);
@@ -73,7 +74,7 @@ export default function ProductsManagement() {
   const closeModal = () => {
     setIsModalOpen(false);
     setEditingId(null);
-    setFormData({ name: "", category: "Grocery", price: "", stock: "", pv: "", description: "" });
+    setFormData({ name: "", category: "Grocery", price: "", stock: "", pv: "", description: "", details: "" });
     setImageFile(null);
   };
 
@@ -88,6 +89,7 @@ export default function ProductsManagement() {
       data.append('stock', formData.stock);
       data.append('pv', formData.pv);
       data.append('description', formData.description);
+      data.append('details', formData.details);
       if (imageFile) {
         data.append('image', imageFile);
       }
@@ -253,8 +255,13 @@ export default function ProductsManagement() {
                 <input type="file" accept="image/*" onChange={e => setImageFile(e.target.files?.[0] || null)} className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-medium" />
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-700 dark:text-gray-400 uppercase tracking-widest mb-3">Description (Optional)</label>
-                <textarea rows={4} value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-medium resize-none leading-relaxed" placeholder="Product details..."></textarea>
+                <label className="block text-xs font-bold text-gray-700 dark:text-gray-400 uppercase tracking-widest mb-3">Short Description (shown on product card)</label>
+                <textarea rows={3} value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-medium resize-none leading-relaxed" placeholder="Brief product description for the listing card..."></textarea>
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-700 dark:text-gray-400 uppercase tracking-widest mb-1">Product Details / Highlights <span className="text-primary">(shown in Details modal)</span></label>
+                <p className="text-xs text-gray-400 mb-3">Add full product details, key highlights, ingredients, usage instructions, warranty, etc. This is shown when a customer clicks &quot;View Details&quot;.</p>
+                <textarea rows={6} value={formData.details} onChange={e => setFormData({...formData, details: e.target.value})} className="w-full px-5 py-4 bg-primary/5 dark:bg-primary/5 border border-primary/20 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-medium resize-none leading-relaxed" placeholder="• Key Ingredient: Organic Spirulina&#10;• Net Weight: 500g&#10;• Usage: Take 2 tablets daily&#10;• Shelf Life: 24 months from manufacture date&#10;• Storage: Store in a cool, dry place..."></textarea>
               </div>
               
               <button disabled={submitting} type="submit" className="w-full py-5 bg-gradient-to-r from-secondary to-amber-500 text-white rounded-2xl font-black tracking-wide text-xl hover:shadow-xl hover:shadow-secondary/30 hover:-translate-y-0.5 transition-all disabled:opacity-70 mt-2 flex justify-center items-center gap-2">

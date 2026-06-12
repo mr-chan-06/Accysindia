@@ -33,6 +33,7 @@ export async function PUT(req: Request, context: { params: Promise<{ id: string 
     
     const name = formData.get('name') as string;
     const description = formData.get('description') as string;
+    const details = formData.get('details') as string;
     const price = formData.get('price');
     const category = formData.get('category') as string;
     const stock = formData.get('stock');
@@ -51,6 +52,7 @@ export async function PUT(req: Request, context: { params: Promise<{ id: string 
 
     product.name = name;
     product.description = description || "Premium product description.";
+    product.details = details || "";
     product.price = Number(price);
     product.category = category;
     product.stock = Number(stock) || 0;

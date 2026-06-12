@@ -31,6 +31,7 @@ export async function POST(req: Request) {
     const formData = await req.formData();
     const name = formData.get('name') as string;
     const description = formData.get('description') as string;
+    const details = formData.get('details') as string;
     const price = formData.get('price');
     const category = formData.get('category') as string;
     const stock = formData.get('stock');
@@ -57,6 +58,7 @@ export async function POST(req: Request) {
     const newProduct = await Product.create({
       name,
       description: description || "Premium product description.",
+      details: details || "",
       price: Number(price),
       category,
       image: imageUrl,

@@ -197,46 +197,51 @@ export default async function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-10">
-            {/* Card 1: Explore Products */}
-            <div className="bg-white dark:bg-gray-800 p-10 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700/50 flex flex-col justify-between hover:-translate-y-2 hover:border-primary/20 transition-all duration-300 group">
-              <div>
-                <div className="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                  <ShoppingBag className="w-7 h-7 text-emerald-500" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Explore Products</h3>
-                <p className="text-gray-500 dark:text-gray-400 font-semibold mb-6">Womens Kit, Provision Kit, & More</p>
-                <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed mb-8">
-                  Browse our 5 dedicated premium starter kits, including the famous **Provision Kit (60PV)** and the **Womens Kit** (with instant product guide videos).
-                </p>
-              </div>
-              <Link 
-                href="/products" 
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-gray-100 dark:bg-gray-700 hover:bg-primary hover:text-black dark:hover:bg-primary rounded-2xl font-bold text-sm transition-all gap-2 mt-auto"
-              >
-                Browse Products <ArrowUpRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            {/* Card 2: Explore Plans */}
+            {/* Featured Card: Products & Binary Plans */}
             <div className="bg-white dark:bg-gray-800 p-10 rounded-[2.5rem] shadow-2xl border-2 border-primary/50 relative flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 group">
               <div className="absolute -top-5 right-10 bg-gradient-to-r from-primary to-yellow-500 text-black px-5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase shadow-md">
                 Income Matching
               </div>
-              <div>
-                <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                  <TrendingUp className="w-7 h-7 text-primary" />
+              <div className="flex-1">
+                <div className="flex gap-4 mb-8">
+                  <div className="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <ShoppingBag className="w-7 h-7 text-emerald-500" />
+                  </div>
+                  <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <TrendingUp className="w-7 h-7 text-primary" />
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Explore Binary Plans</h3>
-                <p className="text-primary font-semibold mb-6">60PV Matches = ₹5,400 to ₹6,000</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Products & Plans</h3>
+                <p className="text-primary font-semibold mb-6">Premium Kits & Weekly Payouts</p>
                 <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed mb-8">
-                  Unveil our high-yield matching pairing matrix. Learn how a network structure of 20 Left and 20 Right IDs builds instant financial payouts.
+                  Browse our premium starter kits (60PV) and discover our high-yield matching matrix for instant financial cycles.
                 </p>
               </div>
               <Link 
                 href="/products" 
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-gradient-to-r from-primary to-yellow-500 text-black rounded-2xl font-bold text-sm transition-all hover:opacity-95 gap-2 mt-auto shadow-lg shadow-primary/10"
+                className="inline-flex items-center justify-center px-6 py-4 bg-gradient-to-r from-primary to-yellow-500 text-black rounded-2xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-primary/25 gap-2 mt-auto"
               >
-                Calculator & Plans <ArrowUpRight className="w-4 h-4" />
+                Explore Products & Plans <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Card 2: About Eagles */}
+            <div className="bg-white dark:bg-gray-800 p-10 rounded-[2.5rem] shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700/50 flex flex-col justify-between hover:-translate-y-2 hover:border-primary/20 transition-all duration-300 group">
+              <div>
+                <div className="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                  <Users className="w-7 h-7 text-amber-500" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">About Eagles</h3>
+                <p className="text-gray-500 dark:text-gray-400 font-semibold mb-6">The 2026 Historic Milestone</p>
+                <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed mb-8">
+                  Learn about the transformation from ACCSYSINDIA to the **Eagles Team**. Discover our mission to empower citizens through ethical direct commerce protocols.
+                </p>
+              </div>
+              <Link 
+                href="/about-eagles" 
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-gray-100 dark:bg-gray-700 hover:bg-primary hover:text-black dark:hover:bg-primary rounded-2xl font-bold text-sm transition-all gap-2 mt-auto"
+              >
+                Our Mission <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
 
@@ -247,9 +252,9 @@ export default async function Home() {
                   <Award className="w-7 h-7 text-indigo-500" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Explore Achievers</h3>
-                <p className="text-gray-500 dark:text-gray-400 font-semibold mb-6">National Tours & Successes</p>
+                <p className="text-gray-500 dark:text-gray-400 font-semibold mb-6">National Tours & Success Stories</p>
                 <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed mb-8">
-                  Celebrate our top performing entrepreneurs. Check the premium national tour tickets, group achievements, and live celebration pictures.
+                  Celebrate our top performing entrepreneurs. Check the premium national tour tickets and live success pictures from our network.
                 </p>
               </div>
               <Link 
