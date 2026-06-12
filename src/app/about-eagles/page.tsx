@@ -52,13 +52,13 @@ const FALLBACK_MENTORS = [
     _id: "m2",
     name: "Mr. Vijaykumar",
     role: "Founder & Director",
-    image: "/uploads/founders/Vijayakumar FD.jpg.jpeg",
+    image: "/uploads/founders/Vijaykumar FD.jpg.jpeg",
     description: "Specializing in digital commerce and binary match strategies."
   },
   {
     _id: "m3",
     name: "Mr. GR Vijay",
-    role: "Board of Vice President",
+    role: "Founder & Director",
     image: "/uploads/founders/GR Vijay BOVP.jpg.jpeg",
     description: "Dedicated to personal branding and scaling regional business hubs."
   }
