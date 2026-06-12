@@ -103,7 +103,7 @@ export default function LeadersManagement() {
             setImageFile(null);
             setIsModalOpen(true);
           }}
-          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-secondary to-amber-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-secondary/20 transition-all hover:-translate-y-0.5"
+          className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-secondary to-amber-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-secondary/20 transition-all hover:-translate-y-0.5 active:scale-95"
         >
           <Plus className="w-5 h-5" /> Add Member
         </button>
@@ -118,7 +118,7 @@ export default function LeadersManagement() {
         </div>
       )}
 
-      <div className="bg-white dark:bg-gray-900 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden min-h-[400px]">
+      <div className="bg-white dark:bg-gray-900 rounded-[1.5rem] md:rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden min-h-[400px]">
         {loading ? (
           <div className="w-full h-64 flex items-center justify-center"><Loader2 className="w-8 h-8 text-primary animate-spin" /></div>
         ) : leaders.length === 0 ? (
@@ -131,18 +131,18 @@ export default function LeadersManagement() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-gray-50 dark:bg-gray-800/30 border-b border-gray-100 dark:border-gray-800">
-                  <th className="px-10 py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed">Member Details</th>
-                  <th className="px-10 py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed">Role</th>
-                  <th className="px-10 py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed">Description</th>
-                  <th className="px-10 py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed text-right">Actions</th>
+                  <th className="px-6 md:px-10 py-5 md:py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed whitespace-nowrap">Member Details</th>
+                  <th className="px-6 md:px-10 py-5 md:py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed whitespace-nowrap">Role</th>
+                  <th className="px-6 md:px-10 py-5 md:py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed whitespace-nowrap">Description</th>
+                  <th className="px-6 md:px-10 py-5 md:py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed text-right whitespace-nowrap">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                 {leaders.map((leader) => (
                   <tr key={leader._id} className="hover:bg-primary/5 transition-colors group">
-                    <td className="px-10 py-6 flex items-center gap-4">
+                    <td className="px-6 md:px-10 py-5 md:py-6 flex items-center gap-4">
                       {leader.image ? (
-                        <div className="w-14 h-14 rounded-full overflow-hidden bg-gray-100 border-2 border-primary/20 shrink-0 relative">
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden bg-gray-100 border-2 border-primary/20 shrink-0 relative">
                           {leader.image.startsWith('15') ? (
                              <img src={`https://images.unsplash.com/photo-${leader.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80`} alt={leader.name} className="w-full h-full object-cover" />
                           ) : (
@@ -150,17 +150,17 @@ export default function LeadersManagement() {
                           )}
                         </div>
                       ) : (
-                        <div className="w-14 h-14 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-xl shrink-0">
+                        <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm md:text-xl shrink-0">
                           {leader.name[0]}
                         </div>
                       )}
                       <div>
-                        <div className="font-bold text-gray-900 dark:text-white text-base">{leader.name}</div>
+                        <div className="font-bold text-gray-900 dark:text-white text-sm md:text-base whitespace-nowrap">{leader.name}</div>
                       </div>
                     </td>
-                    <td className="px-10 py-6 text-sm font-semibold text-primary">{leader.role}</td>
-                    <td className="px-10 py-6 text-sm text-gray-500 max-w-xs truncate">{leader.description || "-"}</td>
-                    <td className="px-10 py-6 flex justify-end gap-3 opacity-80 group-hover:opacity-100 transition-opacity mt-4 items-center">
+                    <td className="px-6 md:px-10 py-5 md:py-6 text-xs md:text-sm font-semibold text-primary whitespace-nowrap">{leader.role}</td>
+                    <td className="px-6 md:px-10 py-5 md:py-6 text-xs md:text-sm text-gray-500 max-w-[150px] md:max-w-xs truncate">{leader.description || "-"}</td>
+                    <td className="px-6 md:px-10 py-5 md:py-6 flex justify-end gap-3 opacity-80 group-hover:opacity-100 transition-opacity items-center">
                       <button onClick={() => handleEdit(leader)} className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white transition-colors title='Edit'">
                         <Edit3 className="w-4 h-4" />
                       </button>
@@ -177,14 +177,14 @@ export default function LeadersManagement() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 w-full max-w-2xl rounded-[2.5rem] p-10 shadow-2xl relative border border-gray-100 dark:border-gray-800">
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-8 right-8 w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-500 hover:text-primary hover:bg-primary/10 transition-colors">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-2 md:p-4 overflow-y-auto">
+          <div className="bg-white dark:bg-gray-900 w-full max-w-2xl rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-2xl relative border border-gray-100 dark:border-gray-800 my-8">
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 md:top-8 md:right-8 w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-500 hover:text-primary hover:bg-primary/10 transition-colors">
               <X className="w-5 h-5" />
             </button>
-            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight">{editingLeaderId ? "Edit Team Member" : "Add Team Member"}</h2>
-            <form onSubmit={handleAddLeader} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-8">
+            <h2 className="text-xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-6 md:mb-8 tracking-tight">{editingLeaderId ? "Edit Team Member" : "Add Team Member"}</h2>
+            <form onSubmit={handleAddLeader} className="space-y-4 md:space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 dark:text-gray-400 uppercase tracking-widest mb-3">Full Name</label>
                   <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-medium" placeholder="E.g. Arjun Kumar" />
@@ -211,7 +211,7 @@ export default function LeadersManagement() {
                 <textarea rows={3} value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-medium resize-none leading-relaxed" placeholder="Short inspiring quote or bio..."></textarea>
               </div>
               
-              <button disabled={submitting} type="submit" className="w-full py-5 bg-gradient-to-r from-secondary to-amber-500 text-white rounded-2xl font-black tracking-wide text-xl hover:shadow-xl hover:shadow-secondary/30 hover:-translate-y-0.5 transition-all disabled:opacity-70 mt-4 flex justify-center items-center gap-2">
+              <button disabled={submitting} type="submit" className="w-full py-4 md:py-5 bg-gradient-to-r from-secondary to-amber-500 text-white rounded-2xl font-black tracking-wide text-lg md:text-xl hover:shadow-xl hover:shadow-secondary/30 hover:-translate-y-0.5 transition-all disabled:opacity-70 mt-4 flex justify-center items-center gap-2 active:scale-95">
                 {submitting ? "Saving Profile..." : (editingLeaderId ? "Update Profile" : "Publish Profile to Website")}
               </button>
             </form>

@@ -119,14 +119,14 @@ export default function ProductsManagement() {
 
   return (
     <div className="max-w-7xl mx-auto pb-20">
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 gap-4">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 md:mb-10 gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight mb-2">Products CMS</h1>
-          <p className="text-gray-500 dark:text-gray-400">Manage e-commerce inventory and PV allocations directly on MongoDB.</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white tracking-tight mb-2">Products CMS</h1>
+          <p className="text-sm md:text-base text-gray-500 dark:text-gray-400">Manage e-commerce inventory and PV allocations directly on MongoDB.</p>
         </div>
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-secondary to-amber-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-secondary/20 transition-all hover:-translate-y-0.5"
+          className="w-full md:w-auto flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-secondary to-amber-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-secondary/20 transition-all hover:-translate-y-0.5 active:scale-95"
         >
           <Plus className="w-5 h-5" /> Add Product
         </button>
@@ -141,7 +141,7 @@ export default function ProductsManagement() {
         </div>
       )}
 
-      <div className="bg-white dark:bg-gray-900 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden min-h-[400px]">
+      <div className="bg-white dark:bg-gray-900 rounded-[1.5rem] md:rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden min-h-[400px]">
         {loading ? (
           <div className="w-full h-64 flex items-center justify-center"><Loader2 className="w-8 h-8 text-primary animate-spin" /></div>
         ) : products.length === 0 ? (
@@ -154,51 +154,43 @@ export default function ProductsManagement() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-gray-50 dark:bg-gray-800/30 border-b border-gray-100 dark:border-gray-800">
-                  <th className="px-10 py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed">Product Name</th>
-                  <th className="px-10 py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed">Category</th>
-                  <th className="px-10 py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed">Price</th>
-                  <th className="px-10 py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed">Stock</th>
-                  <th className="px-10 py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed">PV Allocation</th>
-                  <th className="px-10 py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed text-right">Actions</th>
+                  <th className="px-6 md:px-10 py-5 md:py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed whitespace-nowrap">Product Name</th>
+                  <th className="px-6 md:px-10 py-5 md:py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed whitespace-nowrap">Category</th>
+                  <th className="px-6 md:px-10 py-5 md:py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed whitespace-nowrap">Price</th>
+                  <th className="px-6 md:px-10 py-5 md:py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed whitespace-nowrap">Stock</th>
+                  <th className="px-6 md:px-10 py-5 md:py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed whitespace-nowrap">PV Allocation</th>
+                  <th className="px-6 md:px-10 py-5 md:py-6 text-xs font-bold text-gray-400 uppercase tracking-widest leading-relaxed text-right whitespace-nowrap">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                 {products.map((product) => {
-                  const isBuiltIn = product._id.startsWith("kit");
                   return (
                     <tr key={product._id} className="hover:bg-primary/5 transition-colors group">
-                      <td className="px-10 py-6 font-bold text-gray-900 dark:text-white text-base max-w-[250px] truncate">
+                    <td className="px-6 md:px-10 py-5 md:py-6 font-bold text-gray-900 dark:text-white text-sm md:text-base max-w-[180px] md:max-w-[250px] truncate">
                         <div className="flex items-center gap-2.5">
                           <span className="truncate">{product.name}</span>
-                          {isBuiltIn && (
-                            <span className="shrink-0 bg-primary/10 text-primary border border-primary/20 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                              Built-in
-                            </span>
-                          )}
                         </div>
                       </td>
-                      <td className="px-10 py-6 text-sm font-semibold text-primary">{product.category}</td>
-                      <td className="px-10 py-6 text-base font-extrabold text-gray-900 dark:text-white">₹{product.price}</td>
-                      <td className="px-10 py-6">
-                        <span className={`px-4 py-1.5 text-xs font-bold rounded-full ${isBuiltIn || product.stock > 20 ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400' : 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400'}`}>
-                          {isBuiltIn ? "Unlimited" : `${product.stock} in stock`}
+                      <td className="px-6 md:px-10 py-5 md:py-6 text-xs md:text-sm font-semibold text-primary">{product.category}</td>
+                      <td className="px-6 md:px-10 py-5 md:py-6 text-sm md:text-base font-extrabold text-gray-900 dark:text-white whitespace-nowrap">₹{product.price}</td>
+                      <td className="px-6 md:px-10 py-5 md:py-6">
+                        <span className={`px-3 md:px-4 py-1 md:py-1.5 text-[10px] md:text-xs font-bold rounded-full whitespace-nowrap ${product.stock > 20 ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400' : 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400'}`}>
+                          {product.stock} in stock
                         </span>
                       </td>
-                      <td className="px-10 py-6 text-base font-black text-emerald-500">+{product.pv} PV</td>
-                      <td className="px-10 py-6 flex justify-end gap-3 opacity-80 group-hover:opacity-100 transition-opacity">
+                      <td className="px-6 md:px-10 py-5 md:py-6 text-sm md:text-base font-black text-emerald-500 whitespace-nowrap">+{product.pv} PV</td>
+                      <td className="px-6 md:px-10 py-5 md:py-6 flex justify-end gap-3 opacity-80 group-hover:opacity-100 transition-opacity">
                         <button 
                           onClick={() => handleEditClick(product)} 
-                          title={isBuiltIn ? "Built-in system kits cannot be edited in CMS" : "Edit Product"}
-                          disabled={isBuiltIn}
-                          className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${isBuiltIn ? "bg-gray-50 dark:bg-gray-800/30 text-gray-300 dark:text-gray-700 cursor-not-allowed opacity-50" : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white active:scale-95"}`}
+                          title="Edit Product"
+                          className="w-10 h-10 rounded-xl flex items-center justify-center transition-all bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white active:scale-95"
                         >
                           <Edit3 className="w-4 h-4" />
                         </button>
                         <button 
                           onClick={() => handleDelete(product._id)} 
-                          title={isBuiltIn ? "Built-in system kits cannot be deleted" : "Delete Product"}
-                          disabled={isBuiltIn}
-                          className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${isBuiltIn ? "bg-gray-50 dark:bg-gray-800/30 text-gray-300 dark:text-gray-700 cursor-not-allowed opacity-50" : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-red-500 hover:text-white active:scale-95"}`}
+                          title="Delete Product"
+                          className="w-10 h-10 rounded-xl flex items-center justify-center transition-all bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-red-500 hover:text-white active:scale-95"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -213,13 +205,13 @@ export default function ProductsManagement() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-gray-900 w-full max-w-3xl rounded-[2.5rem] p-10 shadow-2xl relative border border-gray-100 dark:border-gray-800">
-            <button onClick={closeModal} className="absolute top-8 right-8 w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-500 hover:text-primary hover:bg-primary/10 transition-colors">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-2 md:p-4 overflow-y-auto">
+          <div className="bg-white dark:bg-gray-900 w-full max-w-3xl rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-2xl relative border border-gray-100 dark:border-gray-800 my-8">
+            <button onClick={closeModal} className="absolute top-6 right-6 md:top-8 md:right-8 w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-500 hover:text-primary hover:bg-primary/10 transition-colors">
               <X className="w-5 h-5" />
             </button>
-            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-8 tracking-tight">{editingId ? "Edit Product" : "Add New Product"}</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <h2 className="text-xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-6 md:mb-8 tracking-tight">{editingId ? "Edit Product" : "Add New Product"}</h2>
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 dark:text-gray-400 uppercase tracking-widest mb-3">Product Name</label>
@@ -236,10 +228,10 @@ export default function ProductsManagement() {
                   </select>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 dark:text-gray-400 uppercase tracking-widest mb-3">Price (₹)</label>
-                  <input type="number" min="0" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} required className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-black text-xl" placeholder="1000" />
+                  <input type="number" min="0" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} required className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-black text-lg md:text-xl" placeholder="1000" />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 dark:text-gray-400 uppercase tracking-widest mb-3">Stock count</label>
@@ -264,8 +256,8 @@ export default function ProductsManagement() {
                 <textarea rows={6} value={formData.details} onChange={e => setFormData({...formData, details: e.target.value})} className="w-full px-5 py-4 bg-primary/5 dark:bg-primary/5 border border-primary/20 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-medium resize-none leading-relaxed" placeholder="• Key Ingredient: Organic Spirulina&#10;• Net Weight: 500g&#10;• Usage: Take 2 tablets daily&#10;• Shelf Life: 24 months from manufacture date&#10;• Storage: Store in a cool, dry place..."></textarea>
               </div>
               
-              <button disabled={submitting} type="submit" className="w-full py-5 bg-gradient-to-r from-secondary to-amber-500 text-white rounded-2xl font-black tracking-wide text-xl hover:shadow-xl hover:shadow-secondary/30 hover:-translate-y-0.5 transition-all disabled:opacity-70 mt-2 flex justify-center items-center gap-2">
-                {submitting ? "Saving Data..." : editingId ? "Update Product Details" : "Publish Product to Catalog"}
+              <button disabled={submitting} type="submit" className="w-full py-4 md:py-5 bg-gradient-to-r from-secondary to-amber-500 text-white rounded-2xl font-black tracking-wide text-lg md:text-xl hover:shadow-xl hover:shadow-secondary/30 hover:-translate-y-0.5 transition-all disabled:opacity-70 mt-2 flex justify-center items-center gap-2 active:scale-95">
+                {submitting ? "Saving Data..." : editingId ? "Update Product" : "Publish Product"}
               </button>
             </form>
           </div>
