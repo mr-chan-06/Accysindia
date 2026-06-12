@@ -196,27 +196,7 @@ export default function AboutEagles() {
         </div>
       </section>
 
-      {/* 2026 Historic Rebranding Journey */}
-      <section className="py-24 bg-white dark:bg-black border-b border-gray-100 dark:border-gray-800/80">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="w-16 h-16 bg-primary/10 rounded-3xl flex items-center justify-center text-primary shrink-0 animate-pulse">
-              <History className="w-8 h-8" />
-            </div>
-            <div>
-              <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight">
-                The Historic 2026 Transition
-              </h2>
-              <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light mb-4">
-                {settings?.rebrandingDescription1 || "Originally established as ACCSYSINDIA, our direct selling model scaled rapidly across Southern and Western India. In 2026, recognizing the need to accelerate leadership growth and prioritize advanced digital commerce channels, the organization proudly transitioned to the EAGLES TEAM brand."}
-              </p>
-              <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light">
-                {settings?.rebrandingDescription2 || "This shift introduced high Point Values (60PV standard kits), priority dispatch warehouses, and advanced matching pairings systems, scaling passive income payouts to hundreds of new earners monthly."}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Board of Vice Presidents */}
       <section className="py-24 bg-gray-50 dark:bg-gray-900/40 border-t border-gray-100 dark:border-gray-800">
