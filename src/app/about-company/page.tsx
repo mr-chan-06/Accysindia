@@ -302,6 +302,18 @@ export default function AboutCompany() {
           </div>
 
           <DocumentsList />
+
+          <div className="mt-16 text-center">
+            <a 
+              href="https://accsysindia.in/compliance_documents" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-gray-800 text-primary font-bold rounded-2xl border border-primary/20 hover:bg-primary hover:text-white transition-all shadow-lg hover:shadow-primary/20 group"
+            >
+              For more Documents
+              <ExternalLink className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
         </div>
       </section>
 
