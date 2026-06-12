@@ -13,7 +13,7 @@ export default function LeadersManagement() {
   const [editingLeaderId, setEditingLeaderId] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
-    name: "", role: "Founder", description: ""
+    name: "", role: "Mentor", description: ""
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -74,8 +74,7 @@ export default function LeadersManagement() {
       });
       
       if (res.ok) {
-        setIsModalOpen(false);
-        setFormData({ name: "", role: "Founder", description: "" });
+        setFormData({ name: "", role: "Mentor", description: "" });
         setImageFile(null);
         setEditingLeaderId(null);
         fetchLeaders();
@@ -98,7 +97,7 @@ export default function LeadersManagement() {
         </div>
         <button 
           onClick={() => {
-            setFormData({ name: "", role: "Founder", description: "" });
+            setFormData({ name: "", role: "Mentor", description: "" });
             setEditingLeaderId(null);
             setImageFile(null);
             setIsModalOpen(true);
@@ -194,6 +193,8 @@ export default function LeadersManagement() {
                   <select value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary outline-none dark:text-white font-bold cursor-pointer transition-colors">
                     <option>Founder</option>
                     <option>Founder & Chairman</option>
+                    <option>Chief Mentor</option>
+                    <option>Mentor</option>
                     <option>President</option>
                     <option>Vice President</option>
                     <option>Chief Executive Officer</option>

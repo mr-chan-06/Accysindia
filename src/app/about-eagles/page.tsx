@@ -30,8 +30,44 @@ const FALLBACK_VPS = [
   }
 ];
 
+const FALLBACK_FOUNDERS = [
+  {
+    _id: "f1",
+    name: "Mr. V. Hariprakash",
+    role: "Chief Mentor & Founder",
+    image: "/founder.jpg",
+    description: "Under the visionary mentorship of Mr. V. Hariprakash, the Eagles Team has established a professional education framework that teaches modern direct-marketing, personal development, and passive business structuring models. His core philosophy revolves around establishing absolute transparency, empowering household earners, and mentoring a highly compliant and motivated community that guarantees growth for every team member."
+  }
+];
+
+const FALLBACK_MENTORS = [
+  {
+    _id: "m1",
+    name: "Eagles Mentor 1",
+    role: "Eagles Team Mentor",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    description: "Expert in network growth and leadership transformation."
+  },
+  {
+    _id: "m2",
+    name: "Eagles Mentor 2",
+    role: "Eagles Team Mentor",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+    description: "Specializing in digital commerce and binary match strategies."
+  },
+  {
+    _id: "m3",
+    name: "Eagles Mentor 3",
+    role: "Eagles Team Mentor",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
+    description: "Dedicated to personal branding and scaling regional business hubs."
+  }
+];
+
 export default function AboutEagles() {
   const [vps, setVPs] = useState<any[]>([]);
+  const [founders, setFounders] = useState<any[]>([]);
+  const [mentors, setMentors] = useState<any[]>([]);
   const [settings, setSettings] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -42,8 +78,15 @@ export default function AboutEagles() {
     ])
       .then(([leadersData, settingsData]) => {
         if (Array.isArray(leadersData)) {
-          const filtered = leadersData.filter((l: any) => l.role?.toLowerCase().includes("vice"));
-          setVPs(filtered);
+          // Filter Leaders by Role
+          const vpList = leadersData.filter((l: any) => l.role?.toLowerCase().includes("vice"));
+          const founderList = leadersData.filter((l: any) => l.role?.toLowerCase().includes("founder"));
+          const mentorList = leadersData.filter((l: any) => l.role?.toLowerCase().includes("mentor") && !l.role?.toLowerCase().includes("chief mentor"));
+          const chiefMentors = leadersData.filter((l: any) => l.role?.toLowerCase().includes("chief mentor"));
+
+          setVPs(vpList);
+          setFounders(founderList);
+          setMentors([...chiefMentors, ...mentorList]);
         }
         if (settingsData) {
           setSettings(settingsData);
@@ -57,6 +100,8 @@ export default function AboutEagles() {
   }, []);
 
   const displayVPs = vps.length > 0 ? vps : FALLBACK_VPS;
+  const displayFounders = founders.length > 0 ? founders : FALLBACK_FOUNDERS;
+  const displayMentors = mentors.length > 0 ? mentors : FALLBACK_MENTORS;
 
   return (
     <div className="bg-white dark:bg-black min-h-screen border-t dark:border-gray-800">
@@ -74,38 +119,98 @@ export default function AboutEagles() {
         </div>
       </section>
 
-      {/* Mr. V. Hariprakash Founders Story */}
-      <section className="py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-16 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900/40 dark:to-black rounded-[3rem] p-10 md:p-16 border border-gray-100 dark:border-gray-800 shadow-2xl relative overflow-hidden group">
-          <div className="absolute -top-32 -right-32 w-72 h-72 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
-          
-          <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white dark:border-gray-800 shadow-2xl shrink-0">
-            <img 
-              src="/founder.jpg" 
-              alt="Mr. V. Hariprakash Team Founder" 
-              className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
-            />
+      {/* Founders Section */}
+      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <span className="bg-primary/20 text-primary text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest inline-block mb-4">
+             The Foundation
+          </span>
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
+            Our Visionary Founders
+          </h2>
+        </div>
+
+        <div className="space-y-16">
+          {displayFounders.map((founder, index) => (
+            <motion.div 
+              key={founder._id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900/40 dark:to-black rounded-[3rem] p-10 md:p-16 border border-gray-100 dark:border-gray-800 shadow-2xl relative overflow-hidden group`}
+            >
+              <div className="absolute -top-32 -right-32 w-72 h-72 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
+              
+              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white dark:border-gray-800 shadow-2xl shrink-0">
+                <ImageWithFallback 
+                  src={founder.image?.startsWith('15') ? `https://images.unsplash.com/photo-${founder.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80` : (founder.image || "/founder.jpg")} 
+                  fallbackSrc="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                  alt={founder.name} 
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+
+              <div className="space-y-6 flex-1 text-center lg:text-left">
+                <span className="bg-primary/20 text-primary text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest inline-block">
+                  {founder.role || "Team Founder"}
+                </span>
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
+                  {founder.name}
+                </h2>
+                <div className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light whitespace-pre-line">
+                  {founder.description}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Eagles Mentors Section */}
+      <section className="py-24 bg-gray-50 dark:bg-gray-900/40 border-t border-b border-gray-100 dark:border-gray-800/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <span className="text-secondary font-black text-xs uppercase tracking-widest bg-secondary/10 px-4 py-2 rounded-full inline-block mb-4">
+              Eagles Academy
+            </span>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
+              Eagles Mentors
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 text-xl leading-relaxed">
+              Highly experienced leadership coaches dedicated to transformation, network ethics, and digital commerce mentoring.
+            </p>
           </div>
 
-          <div className="space-y-6 flex-1 text-center lg:text-left">
-            <span className="bg-primary/20 text-primary text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest inline-block">
-              Chief Mentor & Founder
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
-              Mr. V. Hariprakash
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light">
-              Under the visionary mentorship of **Mr. V. Hariprakash**, the Eagles Team has established a professional education framework that teaches modern direct-marketing, personal development, and passive business structuring models.
-            </p>
-            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light">
-              His core philosophy revolves around establishing absolute transparency, empowering household earners, and mentoring a highly compliant and motivated community that guarantees growth for every team member.
-            </p>
+          <div className="grid md:grid-cols-3 gap-10">
+            {displayMentors.map((mentor) => (
+              <motion.div 
+                key={mentor._id}
+                whileHover={{ y: -10 }}
+                className="bg-white dark:bg-gray-800 rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700/50 flex flex-col group p-6"
+              >
+                <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-gray-200 mb-8">
+                  <ImageWithFallback 
+                      src={mentor.image?.startsWith('15') ? `https://images.unsplash.com/photo-${mentor.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80` : (mentor.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80")} 
+                      fallbackSrc="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                      alt={mentor.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                </div>
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">{mentor.name}</h3>
+                  <p className="text-secondary font-bold text-sm mb-4 uppercase tracking-wider">{mentor.role || "Eagles Mentor"}</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed font-medium line-clamp-3">
+                    {mentor.description || "Dedicated mentor guiding teams towards financial independence and professional leadership."}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* 2026 Historic Rebranding Journey */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-900/40 border-t border-b border-gray-100 dark:border-gray-800/80">
+      <section className="py-24 bg-white dark:bg-black border-b border-gray-100 dark:border-gray-800/80">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="w-16 h-16 bg-primary/10 rounded-3xl flex items-center justify-center text-primary shrink-0 animate-pulse">
@@ -122,41 +227,6 @@ export default function AboutEagles() {
                 {settings?.rebrandingDescription2 || "This shift introduced high Point Values (60PV standard kits), priority dispatch warehouses, and advanced matching pairings systems, scaling passive income payouts to hundreds of new earners monthly."}
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Vision & Mission */}
-      <section className="py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-16">
-          <div className="bg-primary/5 p-12 rounded-[2.5rem] border border-primary/10">
-            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-8">
-              <Target className="w-8 h-8 text-primary" />
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">Our Vision</h2>
-            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light">
-              To build the most secure and ethical direct selling academy in India. We aim to equip 1 million happy families with steady passive cycle matching income streams by 2030, powered by high-quality products.
-            </p>
-          </div>
-
-          <div className="bg-secondary/5 p-12 rounded-[2.5rem] border border-secondary/10">
-            <div className="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mb-8">
-              <BookOpen className="w-8 h-8 text-secondary" />
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">Eagles Academy Mission</h2>
-            <ul className="space-y-4">
-              {[
-                "Educate our network on binary matching pairs formulas.",
-                "Deliver premium 60PV daily essentials and wellness kits.",
-                "Offer a highly transparent, fully compliant direct commerce system.",
-                "Establish local active delivery centers to eliminate delays."
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-secondary shrink-0 mt-0.5" />
-                  <span className="text-gray-700 dark:text-gray-300 text-lg font-semibold">{item}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
@@ -205,6 +275,60 @@ export default function AboutEagles() {
         </div>
       </section>
 
+      {/* Vision & Mission Section */}
+      <section className="py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t dark:border-gray-800">
+        <div className="grid md:grid-cols-2 gap-12">
+          
+          {/* Vision Card */}
+          <div className="bg-primary/5 p-10 md:p-14 rounded-[3rem] border border-primary/10 relative overflow-hidden group">
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
+            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-10">
+              <Target className="w-8 h-8 text-primary" />
+            </div>
+            <h2 className="text-4xl font-black text-gray-900 dark:text-white mb-8 tracking-tight">Our Vision</h2>
+            <ul className="space-y-6">
+              {[
+                "Empower Millions of Entrepreneurs through a technology-driven business platform.",
+                "Create Financial Freedom by providing sustainable income opportunities.",
+                "Become India's Leading Digital Commerce Network built on trust, innovation, and growth."
+              ].map((point, i) => (
+                <li key={i} className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-1">
+                    <span className="text-primary text-xs font-black">{i + 1}</span>
+                  </div>
+                  <span className="text-gray-700 dark:text-gray-300 text-lg font-medium leading-relaxed">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Mission Card */}
+          <div className="bg-secondary/5 p-10 md:p-14 rounded-[3rem] border border-secondary/10 relative overflow-hidden group">
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-secondary/10 rounded-full blur-3xl group-hover:bg-secondary/20 transition-all duration-700" />
+            <div className="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mb-10">
+              <BookOpen className="w-8 h-8 text-secondary" />
+            </div>
+            <h2 className="text-4xl font-black text-gray-900 dark:text-white mb-8 tracking-tight">Our Mission</h2>
+            <ul className="space-y-6">
+              {[
+                "Provide Quality Products and Services through an integrated digital ecosystem.",
+                "Develop Leaders and Business Owners through training, mentorship, and teamwork.",
+                "Enable Members to Earn, Grow, and Succeed using ethical and scalable network marketing practices."
+              ].map((point, i) => (
+                <li key={i} className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center shrink-0 mt-1">
+                    <span className="text-secondary text-xs font-black">{i + 1}</span>
+                  </div>
+                  <span className="text-gray-700 dark:text-gray-300 text-lg font-medium leading-relaxed">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   );
 }
+
