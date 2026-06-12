@@ -140,7 +140,7 @@ export default function Products() {
   const [dbProducts, setDbProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<string[]>(["All", "Premium Kits"]);
-  
+
   // Modals state
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [inquireProduct, setInquireProduct] = useState<any | null>(null);
@@ -153,9 +153,9 @@ export default function Products() {
   const [activeSpecsName, setActiveSpecsName] = useState<string>("");
 
   // Calculator State
-  const [leftIDs, setLeftIDs] = useState(20);
-  const [rightIDs, setRightIDs] = useState(20);
-  
+  const [leftIDs, setLeftIDs] = useState(1);
+  const [rightIDs, setRightIDs] = useState(1);
+
   // Dashboard & Strategy State
   const [activeIncomeTab, setActiveIncomeTab] = useState("direct");
   const [activeIdStrategy, setActiveIdStrategy] = useState("1id");
@@ -164,9 +164,8 @@ export default function Products() {
   const totalLeftPV = leftIDs * 60;
   const totalRightPV = rightIDs * 60;
   const matchedPairs = Math.min(leftIDs, rightIDs);
-  
-  const minEarning = matchedPairs * 270;
-  const maxEarning = matchedPairs * 300;
+
+  const earning = matchedPairs * 600;
 
   useEffect(() => {
     fetch("/api/products")
@@ -188,8 +187,8 @@ export default function Products() {
   // Merge default premium kits with custom loaded products
   const allProducts = [...DEFAULT_KITS, ...dbProducts];
 
-  const filteredProducts = activeCategory === "All" 
-    ? allProducts 
+  const filteredProducts = activeCategory === "All"
+    ? allProducts
     : allProducts.filter(p => p.category === activeCategory);
 
   const handleInquirySubmit = (e: React.FormEvent) => {
@@ -204,7 +203,7 @@ export default function Products() {
 
   return (
     <div className="bg-gray-50 dark:bg-black min-h-screen border-t dark:border-gray-800">
-      
+
       {/* Premium Header */}
       <div className="bg-gradient-to-r from-primary via-yellow-600 to-amber-700 pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center mix-blend-overlay opacity-20"></div>
@@ -223,7 +222,7 @@ export default function Products() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-[500px]">
         {loading ? (
-           <div className="flex items-center justify-center p-20"><Loader2 className="w-12 h-12 text-primary animate-spin" /></div>
+          <div className="flex items-center justify-center p-20"><Loader2 className="w-12 h-12 text-primary animate-spin" /></div>
         ) : (
           <>
             {/* Category Filter Pills */}
@@ -233,11 +232,10 @@ export default function Products() {
                   <button
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
-                    className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${
-                      activeCategory === cat 
-                        ? "bg-primary text-black shadow-xl shadow-primary/30 -translate-y-1" 
-                        : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-0.5"
-                    }`}
+                    className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${activeCategory === cat
+                      ? "bg-primary text-black shadow-xl shadow-primary/30 -translate-y-1"
+                      : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:-translate-y-0.5"
+                      }`}
                   >
                     {cat}
                   </button>
@@ -246,13 +244,13 @@ export default function Products() {
             )}
 
             {filteredProducts.length === 0 ? (
-               <div className="text-center py-32 bg-white dark:bg-gray-900 rounded-[2.5rem] border border-gray-100 dark:border-gray-800 shadow-lg max-w-3xl mx-auto flex flex-col items-center">
-                 <div className="w-24 h-24 bg-primary/10 text-primary rounded-3xl flex items-center justify-center mb-6">
-                   <ShoppingBag className="w-12 h-12" />
-                 </div>
-                 <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-3">No Products Yet</h3>
-                 <p className="text-gray-500 font-medium text-lg max-w-sm">Products uploaded by the Administrator from the CMS panel will appear right here.</p>
-               </div>
+              <div className="text-center py-32 bg-white dark:bg-gray-900 rounded-[2.5rem] border border-gray-100 dark:border-gray-800 shadow-lg max-w-3xl mx-auto flex flex-col items-center">
+                <div className="w-24 h-24 bg-primary/10 text-primary rounded-3xl flex items-center justify-center mb-6">
+                  <ShoppingBag className="w-12 h-12" />
+                </div>
+                <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-3">No Products Yet</h3>
+                <p className="text-gray-500 font-medium text-lg max-w-sm">Products uploaded by the Administrator from the CMS panel will appear right here.</p>
+              </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                 {filteredProducts.map((product, index) => (
@@ -265,7 +263,7 @@ export default function Products() {
                   >
                     <div>
                       {/* Product Image and badges */}
-                      <div 
+                      <div
                         className={`relative h-72 overflow-hidden bg-gray-200 ${(product.videoUrl || product.items || product.specs) ? 'cursor-pointer' : ''}`}
                         onClick={() => {
                           if (product.videoUrl) {
@@ -279,10 +277,10 @@ export default function Products() {
                           }
                         }}
                       >
-                        <ImageWithFallback 
-                          src={product.image?.startsWith('/') || product.image?.startsWith('data:') || product.image?.startsWith('http') ? product.image : `https://images.unsplash.com/photo-${product.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`} 
+                        <ImageWithFallback
+                          src={product.image?.startsWith('/') || product.image?.startsWith('data:') || product.image?.startsWith('http') ? product.image : `https://images.unsplash.com/photo-${product.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`}
                           fallbackSrc="https://images.unsplash.com/photo-1586201375761-83865001e31c"
-                          alt={product.name} 
+                          alt={product.name}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         />
 
@@ -394,7 +392,7 @@ export default function Products() {
 
                         <div className="flex items-center gap-3">
                           {/* Details inquiry */}
-                          <button 
+                          <button
                             onClick={() => {
                               setInquireProduct(product);
                               setInquiryForm({ name: "", phone: "", notes: "" });
@@ -406,7 +404,7 @@ export default function Products() {
                             <MessageSquare className="w-4 h-4 mr-1.5" /> Product details want to ask
                           </button>
 
-                          <button 
+                          <button
                             onClick={() => handleWhatsAppRedirect(product)}
                             title="Purchase via WhatsApp"
                             className="flex items-center justify-center w-12 h-12 bg-emerald-500 text-white rounded-xl font-bold hover:scale-105 transition-all shadow-md"
@@ -453,11 +451,10 @@ export default function Products() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveIncomeTab(tab.id)}
-                  className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all ${
-                    activeIncomeTab === tab.id
-                      ? "bg-primary text-black shadow-lg shadow-primary/25"
-                      : "bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
-                  }`}
+                  className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all ${activeIncomeTab === tab.id
+                    ? "bg-primary text-black shadow-lg shadow-primary/25"
+                    : "bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    }`}
                 >
                   <Icon className="w-4 h-4" />
                   {tab.name}
@@ -483,7 +480,7 @@ export default function Products() {
                   <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light">
                     Initiate your network setup with direct joining sponsorships. Matching pairs from your Left and Right lines immediately release active income.
                   </p>
-                  
+
                   <div className="bg-amber-500/10 border border-amber-500/20 p-5 rounded-2xl">
                     <h4 className="text-sm font-bold text-primary uppercase tracking-wider mb-2">First Week Release Requirement</h4>
                     <p className="text-sm text-gray-700 dark:text-gray-300 font-semibold">
@@ -503,7 +500,7 @@ export default function Products() {
                 {/* Visual Binary tree for 60PV */}
                 <div className="bg-gray-50 dark:bg-gray-900 rounded-[3rem] p-10 border border-gray-100 dark:border-gray-800 flex flex-col items-center justify-center min-h-[350px]">
                   <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-8">Basic 60PV Match Structure</h4>
-                  
+
                   {/* YOU */}
                   <div className="flex flex-col items-center mb-6">
                     <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-purple-600 via-pink-500 to-orange-400 text-white flex items-center justify-center font-bold shadow-lg shadow-pink-500/25">
@@ -515,7 +512,7 @@ export default function Products() {
                   {/* Left & Right */}
                   <div className="flex justify-between w-full max-w-xs relative px-10">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 h-0.5 bg-gray-300 dark:bg-gray-700"></div>
-                    
+
                     {/* Left Node */}
                     <div className="flex flex-col items-center w-1/2">
                       <div className="w-0.5 h-6 bg-gray-300 dark:bg-gray-700"></div>
@@ -552,6 +549,82 @@ export default function Products() {
                 className="space-y-12"
               >
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
+                  {/* Calculator Panel */}
+                  <div className="bg-gray-50 dark:bg-gray-900 rounded-[3rem] p-8 border border-gray-100 dark:border-gray-800 shadow-xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl" />
+
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                        <Calculator className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-black text-gray-900 dark:text-white">Matching Calculator</h4>
+                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Estimate Eagles pair cycle income</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-6">
+                      <div>
+                        <div className="flex justify-between font-bold text-xs text-gray-700 dark:text-gray-300 mb-1.5">
+                          <span>Left Team Active IDs</span>
+                          <span className="text-primary">{leftIDs} IDs ({totalLeftPV} PV)</span>
+                        </div>
+                        <input
+                           type="range"
+                           min="0"
+                           max="100"
+                           value={leftIDs}
+                           onChange={(e) => setLeftIDs(parseInt(e.target.value))}
+                           className="w-full h-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg appearance-none cursor-pointer accent-primary"
+                        />
+                      </div>
+
+                      <div>
+                        <div className="flex justify-between font-bold text-xs text-gray-700 dark:text-gray-300 mb-1.5">
+                          <span>Right Team Active IDs</span>
+                          <span className="text-primary">{rightIDs} IDs ({totalRightPV} PV)</span>
+                        </div>
+                        <input
+                           type="range"
+                           min="0"
+                           max="100"
+                           value={rightIDs}
+                           onChange={(e) => setRightIDs(parseInt(e.target.value))}
+                           className="w-full h-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg appearance-none cursor-pointer accent-primary"
+                        />
+                      </div>
+
+                      <div className="bg-white dark:bg-black p-5 rounded-2xl border border-gray-150 dark:border-gray-800 space-y-3">
+                        <div className="flex justify-between text-xs text-gray-500 font-semibold">
+                          <span className="flex items-center gap-1.5"><Layers className="w-3.5 h-3.5" /> Matches Formed</span>
+                          <span className="text-gray-900 dark:text-white font-bold">{matchedPairs} Pairs</span>
+                        </div>
+
+                        {/* Carry forward display */}
+                        <div className="flex justify-between text-xs text-gray-500 font-semibold border-b dark:border-gray-800 pb-3">
+                          <span>Carry Forward PV</span>
+                          <span className="text-primary font-bold">
+                            {leftIDs > rightIDs ? `${(leftIDs - rightIDs) * 600} PV Left` : rightIDs > leftIDs ? `${(rightIDs - leftIDs) * 600} PV Right` : "Balanced"}
+                          </span>
+                        </div>
+
+                        <div className="pt-2">
+                          <div className="flex justify-between items-center">
+                            <span className="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider flex items-center gap-1">
+                              <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" /> Income
+                            </span>
+                            <div className="text-right">
+                              <div className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-400">
+                                ₹{earning.toLocaleString()}
+                              </div>
+                              <span className="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Estimated weekly payout</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="space-y-6">
                     <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
                       <Users className="w-6 h-6" />
@@ -575,82 +648,6 @@ export default function Products() {
                         <div>
                           <span className="font-bold text-gray-955 dark:text-white block">Carry Forward System:</span>
                           <span className="text-sm text-gray-500 font-semibold">If you have 3000 PV (50 IDs) on the Left and 2400 PV (40 IDs) on the Right, you match 2400 PV to earn ₹24,000. The remaining 600 PV will be carried forward to next week.</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Calculator Panel */}
-                  <div className="bg-gray-50 dark:bg-gray-900 rounded-[3rem] p-8 border border-gray-100 dark:border-gray-800 shadow-xl relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl" />
-                    
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
-                        <Calculator className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-black text-gray-900 dark:text-white">Matching Calculator</h4>
-                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Estimate Eagles pair cycle income</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-6">
-                      <div>
-                        <div className="flex justify-between font-bold text-xs text-gray-700 dark:text-gray-300 mb-1.5">
-                          <span>Left Team Active IDs</span>
-                          <span className="text-primary">{leftIDs} IDs ({totalLeftPV} PV)</span>
-                        </div>
-                        <input 
-                          type="range" 
-                          min="0" 
-                          max="50" 
-                          value={leftIDs}
-                          onChange={(e) => setLeftIDs(parseInt(e.target.value))}
-                          className="w-full h-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg appearance-none cursor-pointer accent-primary"
-                        />
-                      </div>
-
-                      <div>
-                        <div className="flex justify-between font-bold text-xs text-gray-700 dark:text-gray-300 mb-1.5">
-                          <span>Right Team Active IDs</span>
-                          <span className="text-primary">{rightIDs} IDs ({totalRightPV} PV)</span>
-                        </div>
-                        <input 
-                          type="range" 
-                          min="0" 
-                          max="50" 
-                          value={rightIDs}
-                          onChange={(e) => setRightIDs(parseInt(e.target.value))}
-                          className="w-full h-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg appearance-none cursor-pointer accent-primary"
-                        />
-                      </div>
-
-                      <div className="bg-white dark:bg-black p-5 rounded-2xl border border-gray-150 dark:border-gray-800 space-y-3">
-                        <div className="flex justify-between text-xs text-gray-500 font-semibold">
-                          <span className="flex items-center gap-1.5"><Layers className="w-3.5 h-3.5" /> Matches Formed</span>
-                          <span className="text-gray-900 dark:text-white font-bold">{matchedPairs} Pairs</span>
-                        </div>
-                        
-                        {/* Carry forward display */}
-                        <div className="flex justify-between text-xs text-gray-500 font-semibold border-b dark:border-gray-800 pb-3">
-                          <span>Carry Forward PV</span>
-                          <span className="text-primary font-bold">
-                            {leftIDs > rightIDs ? `${(leftIDs - rightIDs) * 60} PV Left` : rightIDs > leftIDs ? `${(rightIDs - leftIDs) * 60} PV Right` : "Balanced"}
-                          </span>
-                        </div>
-
-                        <div className="pt-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider flex items-center gap-1">
-                              <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" /> Income
-                            </span>
-                            <div className="text-right">
-                              <div className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-400">
-                                ₹{minEarning.toLocaleString()} - ₹{maxEarning.toLocaleString()}
-                              </div>
-                              <span className="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Estimated weekly payout</span>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -686,11 +683,10 @@ export default function Products() {
                     <button
                       key={strat.id}
                       onClick={() => setActiveIdStrategy(strat.id)}
-                      className={`px-6 py-4 rounded-2xl transition-all border text-left flex flex-col justify-center min-w-[160px] ${
-                        activeIdStrategy === strat.id
-                          ? "bg-primary border-primary text-black shadow-xl shadow-primary/20 scale-105"
-                          : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:border-primary/30"
-                      }`}
+                      className={`px-6 py-4 rounded-2xl transition-all border text-left flex flex-col justify-center min-w-[160px] ${activeIdStrategy === strat.id
+                        ? "bg-primary border-primary text-black shadow-xl shadow-primary/20 scale-105"
+                        : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:border-primary/30"
+                        }`}
                     >
                       <span className="font-extrabold text-base leading-tight">{strat.name}</span>
                       <span className={`text-[10px] font-bold ${activeIdStrategy === strat.id ? 'text-black/70' : 'text-gray-400'}`}>{strat.desc}</span>
@@ -800,7 +796,7 @@ export default function Products() {
                     {activeIdStrategy === "1id" && (
                       <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-black/40 rounded-3xl border border-gray-100 dark:border-gray-800">
                         <h5 className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">1-ID Genealogy Visual</h5>
-                        
+
                         <div className="flex flex-col items-center mb-6 w-full max-w-sm">
                           {/* YOU */}
                           <div className="flex flex-col items-center mb-4">
@@ -810,11 +806,11 @@ export default function Products() {
                             </div>
                             <div className="w-0.5 h-6 bg-gray-300 dark:bg-gray-700"></div>
                           </div>
-                          
+
                           {/* Left/Right */}
                           <div className="flex justify-between w-full relative px-6">
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-0.5 bg-gray-300 dark:bg-gray-700"></div>
-                            
+
                             {/* Left Node */}
                             <div className="flex flex-col items-center w-1/2">
                               <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-700"></div>
@@ -840,7 +836,7 @@ export default function Products() {
                     {activeIdStrategy === "3id" && (
                       <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-black/40 rounded-3xl border border-gray-100 dark:border-gray-800">
                         <h5 className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">3-ID Genealogy Visual</h5>
-                        
+
                         <div className="flex flex-col items-center mb-6 w-full max-w-sm">
                           {/* U1 Node */}
                           <div className="flex flex-col items-center mb-4">
@@ -854,7 +850,7 @@ export default function Products() {
                           {/* U2 and U3 */}
                           <div className="flex justify-between w-full relative px-6">
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-0.5 bg-gray-300 dark:bg-gray-700"></div>
-                            
+
                             {/* U2 Node */}
                             <div className="flex flex-col items-center w-1/2">
                               <div className="w-0.5 h-3 bg-gray-300 dark:bg-gray-700"></div>
@@ -863,7 +859,7 @@ export default function Products() {
                                 <span className="absolute -bottom-2 bg-emerald-500 text-black px-1 py-0.5 rounded-full text-[7px] font-black uppercase">₹2.4k</span>
                               </div>
                               <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-700"></div>
-                              
+
                               <div className="flex justify-between w-full relative px-1">
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 h-0.5 bg-gray-300 dark:bg-gray-700"></div>
                                 <div className="flex flex-col items-center w-1/2">
@@ -885,7 +881,7 @@ export default function Products() {
                                 <span className="absolute -bottom-2 bg-emerald-500 text-black px-1 py-0.5 rounded-full text-[7px] font-black uppercase">₹2.4k</span>
                               </div>
                               <div className="w-0.5 h-4 bg-gray-300 dark:bg-gray-700"></div>
-                              
+
                               <div className="flex justify-between w-full relative px-1">
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 h-0.5 bg-gray-300 dark:bg-gray-700"></div>
                                 <div className="flex flex-col items-center w-1/2">
@@ -906,7 +902,7 @@ export default function Products() {
                     {activeIdStrategy === "7id" && (
                       <div className="flex flex-col items-center p-6 bg-gray-50 dark:bg-black/40 rounded-3xl border border-gray-100 dark:border-gray-800 overflow-hidden">
                         <h5 className="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-6">7-ID Genealogy Visual</h5>
-                        
+
                         <div className="flex flex-col items-center w-full max-w-sm overflow-x-auto pb-4">
                           <div className="min-w-[320px] flex flex-col items-center">
                             {/* U1 */}
@@ -921,7 +917,7 @@ export default function Products() {
                             {/* U2 and U3 */}
                             <div className="flex justify-between w-full relative px-14">
                               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/5 h-0.5 bg-gray-300 dark:bg-gray-700"></div>
-                              
+
                               {/* U2 */}
                               <div className="flex flex-col items-center w-1/2">
                                 <div className="w-0.5 h-2.5 bg-gray-300 dark:bg-gray-700"></div>
@@ -1024,7 +1020,7 @@ export default function Products() {
                   <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light">
                     Earn repeat matching commissions when your existing binary networks repurchase products, staple packages, and daily essentials.
                   </p>
-                  
+
                   <div className="space-y-4">
                     <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-xl flex justify-between items-center text-sm font-semibold">
                       <span className="text-gray-400">Basic Match Unit:</span>
@@ -1052,7 +1048,7 @@ export default function Products() {
                     <h4 className="text-lg font-black text-gray-955 dark:text-white mb-2">Monthly Limits & Caps</h4>
                     <p className="text-sm text-gray-400 font-medium mb-6">Standard repurchase ceilings for Eagles Team members.</p>
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-6 pb-6">
                     <div className="p-6 bg-white dark:bg-black rounded-2xl border border-gray-100 dark:border-gray-800 text-center shadow-sm">
                       <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Max Income / Month</span>
@@ -1134,7 +1130,7 @@ export default function Products() {
                   {/* Rank 2: President Diamond Director */}
                   <div className="bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-[2.5rem] p-8 space-y-6 hover:border-primary/30 transition-all shadow-lg flex flex-col justify-between relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-xl" />
-                    
+
                     <div>
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-yellow-500 text-black flex items-center justify-center font-black">
@@ -1180,69 +1176,69 @@ export default function Products() {
         </div>
       </section>
 
-  {/* Video Modal Player (triggers on Womens Kit click) */}
-  <AnimatePresence>
-    {activeVideo && (
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
-      >
-        <motion.div 
-          initial={{ scale: 0.95 }}
-          animate={{ scale: 1 }}
-          exit={{ scale: 0.95 }}
-          className="relative w-full max-w-4xl bg-gray-900 rounded-3xl overflow-hidden border border-white/10 shadow-2xl"
-        >
-          {/* Close Button */}
-          <button 
-            onClick={() => setActiveVideo(null)}
-            className="absolute top-4 right-4 z-10 p-2.5 bg-black/60 hover:bg-black/90 rounded-full text-white transition-colors border border-white/10"
+      {/* Video Modal Player (triggers on Womens Kit click) */}
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
           >
-            <X className="w-6 h-6" />
-          </button>
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              className="relative w-full max-w-4xl bg-gray-900 rounded-3xl overflow-hidden border border-white/10 shadow-2xl"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setActiveVideo(null)}
+                className="absolute top-4 right-4 z-10 p-2.5 bg-black/60 hover:bg-black/90 rounded-full text-white transition-colors border border-white/10"
+              >
+                <X className="w-6 h-6" />
+              </button>
 
-          {activeVideo.includes('youtube.com') || activeVideo.includes('youtu.be') ? (
-            <div className="aspect-video w-full bg-black">
-              <iframe
-                src={getYoutubeEmbedUrl(activeVideo)}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            </div>
-          ) : (
-            <div className="aspect-video w-full bg-black">
-              <video 
-                src={activeVideo} 
-                controls 
-                autoPlay 
-                className="w-full h-full object-contain"
-              />
-            </div>
-          )}
-        </motion.div>
-      </motion.div>
-    )}
-  </AnimatePresence>
+              {activeVideo.includes('youtube.com') || activeVideo.includes('youtu.be') ? (
+                <div className="aspect-video w-full bg-black">
+                  <iframe
+                    src={getYoutubeEmbedUrl(activeVideo)}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                </div>
+              ) : (
+                <div className="aspect-video w-full bg-black">
+                  <video
+                    src={activeVideo}
+                    controls
+                    autoPlay
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Details Inquiry Modal (Product Details want to Ask) */}
       <AnimatePresence>
         {inquireProduct && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4"
           >
-            <motion.div 
+            <motion.div
               initial={{ y: 20 }}
               animate={{ y: 0 }}
               exit={{ y: 20 }}
               className="w-full max-w-lg bg-white dark:bg-gray-900 rounded-[2.5rem] p-8 border border-gray-100 dark:border-gray-800 shadow-2xl relative"
             >
-              <button 
+              <button
                 onClick={() => setInquireProduct(null)}
                 className="absolute top-6 right-6 p-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:scale-105 transition-transform"
               >
@@ -1256,38 +1252,38 @@ export default function Products() {
                 <form onSubmit={handleInquirySubmit} className="space-y-6">
                   <div>
                     <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Your Name</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       required
                       value={inquiryForm.name}
-                      onChange={e => setInquiryForm({...inquiryForm, name: e.target.value})}
-                      placeholder="Enter your name" 
+                      onChange={e => setInquiryForm({ ...inquiryForm, name: e.target.value })}
+                      placeholder="Enter your name"
                       className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-2xl focus:ring-2 focus:ring-primary focus:outline-none dark:text-white text-base font-semibold"
                     />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">WhatsApp Number</label>
-                    <input 
-                      type="tel" 
+                    <input
+                      type="tel"
                       required
                       value={inquiryForm.phone}
-                      onChange={e => setInquiryForm({...inquiryForm, phone: e.target.value})}
-                      placeholder="e.g. +91 98765 43210" 
+                      onChange={e => setInquiryForm({ ...inquiryForm, phone: e.target.value })}
+                      placeholder="e.g. +91 98765 43210"
                       className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-2xl focus:ring-2 focus:ring-primary focus:outline-none dark:text-white text-base font-semibold"
                     />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Specific Questions</label>
-                    <textarea 
-                      rows={3} 
+                    <textarea
+                      rows={3}
                       value={inquiryForm.notes}
-                      onChange={e => setInquiryForm({...inquiryForm, notes: e.target.value})}
+                      onChange={e => setInquiryForm({ ...inquiryForm, notes: e.target.value })}
                       placeholder="What details would you like to know?"
                       className="w-full px-5 py-4 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-2xl focus:ring-2 focus:ring-primary focus:outline-none resize-none dark:text-white text-base font-semibold"
                     />
                   </div>
 
-                  <button 
+                  <button
                     type="submit"
                     className="w-full py-4.5 bg-gradient-to-r from-primary to-yellow-500 text-black font-extrabold text-base rounded-2xl hover:opacity-90 hover:-translate-y-0.5 transition-all shadow-lg flex items-center justify-center gap-2"
                   >
@@ -1301,8 +1297,8 @@ export default function Products() {
                   </div>
                   <h4 className="text-xl font-extrabold text-gray-900 dark:text-white">Query Submitted Successfully!</h4>
                   <p className="text-gray-500 text-sm max-w-sm mx-auto">Thank you, **{inquiryForm.name}**. Our senior eagles will review your query and connect with you shortly.</p>
-                  
-                  <button 
+
+                  <button
                     onClick={() => {
                       handleWhatsAppRedirect(inquireProduct);
                       setInquireProduct(null);
@@ -1321,20 +1317,20 @@ export default function Products() {
       {/* Package Items Modal */}
       <AnimatePresence>
         {activeItemsList && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
           >
-            <motion.div 
+            <motion.div
               initial={{ y: 50, scale: 0.95 }}
               animate={{ y: 0, scale: 1 }}
               exit={{ y: 50, scale: 0.95 }}
               className="w-full max-w-4xl bg-white dark:bg-gray-950 rounded-[2.5rem] p-8 border border-gray-100 dark:border-gray-800 shadow-2xl relative max-h-[85vh] flex flex-col"
             >
               {/* Close Button */}
-              <button 
+              <button
                 onClick={() => {
                   setActiveItemsList(null);
                   setSearchQuery("");
@@ -1356,7 +1352,7 @@ export default function Products() {
                     This premium package includes exactly <strong>{activeItemsList.length}</strong> items.
                   </p>
                 </div>
-                
+
                 {/* Search Bar inside Modal */}
                 <div className="relative w-full md:w-80">
                   <input
@@ -1367,7 +1363,7 @@ export default function Products() {
                     className="w-full pl-4 pr-10 py-2.5 bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none dark:text-white text-sm font-semibold"
                   />
                   {searchQuery && (
-                    <button 
+                    <button
                       onClick={() => setSearchQuery("")}
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                     >
@@ -1379,7 +1375,7 @@ export default function Products() {
 
               {/* Items Grid */}
               <div className="overflow-y-auto pr-2 flex-1 mb-6 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-800">
-                {activeItemsList.filter((item: any) => 
+                {activeItemsList.filter((item: any) =>
                   item.name.toLowerCase().includes(searchQuery.toLowerCase())
                 ).length === 0 ? (
                   <div className="text-center py-16 flex flex-col items-center justify-center">
@@ -1389,14 +1385,14 @@ export default function Products() {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {activeItemsList
-                      .filter((item: any) => 
+                      .filter((item: any) =>
                         item.name.toLowerCase().includes(searchQuery.toLowerCase())
                       )
                       .map((item: any, idx: number) => {
                         const originalIdx = activeItemsList.findIndex((i: any) => i.name === item.name);
                         return (
-                          <div 
-                            key={idx} 
+                          <div
+                            key={idx}
                             className="flex items-center justify-between p-4 bg-gray-50 dark:bg-black/40 border border-gray-100 dark:border-gray-800 rounded-2xl hover:border-amber-500/30 transition-all group"
                           >
                             <div className="flex items-center gap-3 min-w-0">
@@ -1423,7 +1419,7 @@ export default function Products() {
                   Ready to order? Connect with us on WhatsApp.
                 </span>
                 <div className="flex gap-3 w-full sm:w-auto">
-                  <button 
+                  <button
                     onClick={() => {
                       setActiveItemsList(null);
                       setSearchQuery("");
@@ -1432,7 +1428,7 @@ export default function Products() {
                   >
                     Close Catalog
                   </button>
-                  <button 
+                  <button
                     onClick={() => {
                       const prod = allProducts.find(p => p.name === activeItemsListName);
                       if (prod) handleWhatsAppRedirect(prod);
@@ -1453,20 +1449,20 @@ export default function Products() {
       {/* Package Specs Modal */}
       <AnimatePresence>
         {activeSpecs && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
           >
-            <motion.div 
+            <motion.div
               initial={{ y: 50, scale: 0.95 }}
               animate={{ y: 0, scale: 1 }}
               exit={{ y: 50, scale: 0.95 }}
               className="w-full max-w-4xl bg-white dark:bg-gray-950 rounded-[2.5rem] p-8 md:p-10 border border-gray-100 dark:border-gray-800 shadow-2xl relative max-h-[90vh] flex flex-col overflow-hidden"
             >
               {/* Close Button */}
-              <button 
+              <button
                 onClick={() => {
                   setActiveSpecs(null);
                 }}
@@ -1498,7 +1494,7 @@ export default function Products() {
                 <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Available Variants</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {activeSpecs.variants.map((v: any, vIdx: number) => (
-                    <div 
+                    <div
                       key={vIdx}
                       className="p-6 bg-gray-50 dark:bg-black/40 border border-gray-100 dark:border-gray-800 rounded-3xl hover:border-blue-500/20 transition-all flex flex-col justify-between"
                     >
@@ -1507,7 +1503,7 @@ export default function Products() {
                         <span className="inline-block px-3 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-bold rounded-full mb-5">
                           {v.material}
                         </span>
-                        
+
                         <ul className="space-y-3">
                           {v.features.map((f: string, fIdx: number) => (
                             <li key={fIdx} className="flex items-start gap-2.5 text-sm font-medium text-gray-600 dark:text-gray-300">
@@ -1531,7 +1527,7 @@ export default function Products() {
                   </div>
                   <div className="flex gap-2.5 flex-wrap">
                     {activeSpecs.sizes.map((sz: string) => (
-                      <span 
+                      <span
                         key={sz}
                         className="w-11 h-11 bg-white dark:bg-black border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white font-black text-sm rounded-xl flex items-center justify-center shadow-sm hover:border-primary transition-all"
                       >
@@ -1562,8 +1558,8 @@ export default function Products() {
                   >
                     <Download className="w-4 h-4" /> Download PDF brochure
                   </a>
-                  
-                  <button 
+
+                  <button
                     onClick={() => {
                       setActiveSpecs(null);
                     }}
@@ -1571,7 +1567,7 @@ export default function Products() {
                   >
                     Close Specs
                   </button>
-                  <button 
+                  <button
                     onClick={() => {
                       const prod = allProducts.find(p => p.name === activeSpecsName);
                       if (prod) handleWhatsAppRedirect(prod);
