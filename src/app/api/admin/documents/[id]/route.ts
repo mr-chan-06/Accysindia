@@ -6,7 +6,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -14,8 +14,10 @@ export async function DELETE(
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
+    const { id } = await context.params;
+
     await dbConnect();
-    const deletedDoc = await CompanyDocument.findByIdAndDelete(params.id);
+    const deletedDoc = await CompanyDocument.findByIdAndDelete(id);
 
     if (!deletedDoc) {
       return NextResponse.json({ message: "Document not found" }, { status: 404 });
