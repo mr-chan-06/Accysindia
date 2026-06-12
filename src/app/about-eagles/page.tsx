@@ -43,23 +43,23 @@ const FALLBACK_FOUNDERS = [
 const FALLBACK_MENTORS = [
   {
     _id: "m1",
-    name: "Eagles Mentor 1",
-    role: "Eagles Team Mentor",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    name: "Mr. Baskar",
+    role: "Founder & Director",
+    image: "/uploads/founders/Baskar FD.jpg.jpeg",
     description: "Expert in network growth and leadership transformation."
   },
   {
     _id: "m2",
-    name: "Eagles Mentor 2",
-    role: "Eagles Team Mentor",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+    name: "Mr. Vijaykumar",
+    role: "Founder & Director",
+    image: "/uploads/founders/Vijayakumar FD.jpg.jpeg",
     description: "Specializing in digital commerce and binary match strategies."
   },
   {
     _id: "m3",
-    name: "Eagles Mentor 3",
-    role: "Eagles Team Mentor",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
+    name: "Mr. GR Vijay",
+    role: "Board of Vice President",
+    image: "/uploads/founders/GR Vijay BOVP.jpg.jpeg",
     description: "Dedicated to personal branding and scaling regional business hubs."
   }
 ];
@@ -105,64 +105,51 @@ export default function AboutEagles() {
 
   return (
     <div className="bg-white dark:bg-black min-h-screen border-t dark:border-gray-800">
-      
-      {/* Header */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="text-primary font-bold tracking-wider uppercase mb-4 block">Who We Are</span>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-6">
-            About the <span className="text-primary">Eagles Team</span>
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
-            Leading direct-selling entrepreneurship across India. Founded with a vision to empower individuals to achieve absolute financial security.
-          </p>
-        </div>
-      </section>
 
-      {/* Founders Section */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="bg-primary/20 text-primary text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest inline-block mb-4">
-             The Foundation
-          </span>
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
-            Our Visionary Founders
-          </h2>
-        </div>
+      {/* Founders Hero Section */}
+      <section className="py-24 bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-800 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <span className="text-primary font-bold tracking-wider uppercase mb-4 block">Eagles Team Foundation</span>
+            <h1 className="text-5xl md:text-7xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
+              <span className="text-primary">Founder</span>
+            </h1>
+          </div>
 
-        <div className="space-y-16">
-          {displayFounders.map((founder, index) => (
-            <motion.div 
-              key={founder._id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className={`flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900/40 dark:to-black rounded-[3rem] p-10 md:p-16 border border-gray-100 dark:border-gray-800 shadow-2xl relative overflow-hidden group`}
-            >
-              <div className="absolute -top-32 -right-32 w-72 h-72 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
-              
-              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white dark:border-gray-800 shadow-2xl shrink-0">
-                <ImageWithFallback 
-                  src={founder.image?.startsWith('15') ? `https://images.unsplash.com/photo-${founder.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80` : (founder.image || "/founder.jpg")} 
-                  fallbackSrc="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                  alt={founder.name} 
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
-                />
-              </div>
+          <div className="space-y-16">
+            {displayFounders.map((founder, index) => (
+              <motion.div
+                key={founder._id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className={`flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900/40 dark:to-black rounded-[3rem] p-10 md:p-16 border border-gray-100 dark:border-gray-800 shadow-2xl relative overflow-hidden group`}
+              >
+                <div className="absolute -top-32 -right-32 w-72 h-72 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
 
-              <div className="space-y-6 flex-1 text-center lg:text-left">
-                <span className="bg-primary/20 text-primary text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest inline-block">
-                  {founder.role || "Team Founder"}
-                </span>
-                <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
-                  {founder.name}
-                </h2>
-                <div className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light whitespace-pre-line">
-                  {founder.description}
+                <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white dark:border-gray-800 shadow-2xl shrink-0">
+                  <ImageWithFallback
+                    src={founder.image?.startsWith('15') ? `https://images.unsplash.com/photo-${founder.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80` : (founder.image || "/founder.jpg")}
+                    fallbackSrc="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                    alt={founder.name}
+                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                  />
                 </div>
-              </div>
-            </motion.div>
-          ))}
+
+                <div className="space-y-6 flex-1 text-center lg:text-left">
+                  <span className="bg-primary/20 text-primary text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest inline-block">
+                    {founder.role || "Team Founder"}
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
+                    {founder.name}
+                  </h2>
+                  <div className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light whitespace-pre-line">
+                    {founder.description}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -183,18 +170,18 @@ export default function AboutEagles() {
 
           <div className="grid md:grid-cols-3 gap-10">
             {displayMentors.map((mentor) => (
-              <motion.div 
+              <motion.div
                 key={mentor._id}
                 whileHover={{ y: -10 }}
                 className="bg-white dark:bg-gray-800 rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700/50 flex flex-col group p-6"
               >
                 <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-gray-200 mb-8">
-                  <ImageWithFallback 
-                      src={mentor.image?.startsWith('15') ? `https://images.unsplash.com/photo-${mentor.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80` : (mentor.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80")} 
-                      fallbackSrc="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                      alt={mentor.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+                  <ImageWithFallback
+                    src={mentor.image?.startsWith('15') ? `https://images.unsplash.com/photo-${mentor.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80` : (mentor.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80")}
+                    fallbackSrc="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                    alt={mentor.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
                 </div>
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">{mentor.name}</h3>
@@ -251,17 +238,17 @@ export default function AboutEagles() {
           ) : (
             <div className="grid md:grid-cols-3 gap-10">
               {displayVPs.map((vp) => (
-                <div 
+                <div
                   key={vp._id}
                   className="bg-white dark:bg-gray-800 rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700/50 hover:border-primary/30 hover:-translate-y-2 transition-all duration-300 flex flex-col group"
                 >
                   <div className="relative aspect-square overflow-hidden bg-gray-200">
-                    <ImageWithFallback 
-                        src={vp.image?.startsWith('15') ? `https://images.unsplash.com/photo-${vp.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80` : (vp.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80")} 
-                        fallbackSrc="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                        alt={vp.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
+                    <ImageWithFallback
+                      src={vp.image?.startsWith('15') ? `https://images.unsplash.com/photo-${vp.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80` : (vp.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80")}
+                      fallbackSrc="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                      alt={vp.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
                   </div>
                   <div className="p-8">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-primary transition-colors">{vp.name}</h3>
@@ -278,7 +265,7 @@ export default function AboutEagles() {
       {/* Vision & Mission Section */}
       <section className="py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t dark:border-gray-800">
         <div className="grid md:grid-cols-2 gap-12">
-          
+
           {/* Vision Card */}
           <div className="bg-primary/5 p-10 md:p-14 rounded-[3rem] border border-primary/10 relative overflow-hidden group">
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
