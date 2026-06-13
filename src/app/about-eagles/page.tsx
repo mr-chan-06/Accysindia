@@ -58,7 +58,7 @@ const FALLBACK_MENTORS = [
   {
     _id: "m3",
     name: "Mr. GR Vijay",
-    role: "Founder & Director",
+    role: "Board of Vice Presidents",
     image: "/uploads/founders/GR Vijay BOVP.jpg.jpeg",
     description: "Dedicated to personal branding and scaling regional business hubs."
   }

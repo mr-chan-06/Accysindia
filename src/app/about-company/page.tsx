@@ -39,7 +39,7 @@ const COMPANY_VALUES = [
 ];
 
 const MILESTONES = [
-  { year: "2018", event: "Eagles Team Founded by Mr. V. Hariprakash" },
+  { year: "2018", event: "Eagles Team Founded by Mr. A.B Senthil Kumar" },
   { year: "2020", event: "Expanded to 10+ Regional Centers across India" },
   { year: "2022", event: "Introduced Digital Platform for Product Management" },
   { year: "2023", event: "Eagles Team Network Formation & Rebranding" },

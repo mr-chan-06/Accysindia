@@ -532,7 +532,7 @@ export default function Products() {
                   <div className="bg-amber-500/10 border border-amber-500/20 p-5 rounded-2xl">
                     <h4 className="text-sm font-bold text-primary uppercase tracking-wider mb-2">First Week Release Requirement</h4>
                     <p className="text-sm text-gray-700 dark:text-gray-300 font-semibold">
-                      *Your 1st week income will be released with a tail of min 60 PV. That is, a 1:2 or 2:1 active package matching count. Subsequent payouts process on a pure 1:1 balance.
+                      *Your 1st week income will be released with a tail of min 60 PV that is a 1:2.
                     </p>
                   </div>
 
@@ -542,6 +542,10 @@ export default function Products() {
                       <span className="text-primary">₹600*</span>
                       <span className="text-sm text-gray-400 font-normal uppercase">per matched 60PV Cycle</span>
                     </div>
+
+                    <div className="bg-amber-500/10 border border-amber-500/20 p-5 rounded-2xl">
+                    <p>Payment released only by bank Account with 2% TDS</p>
+                  </div>
                   </div>
                 </div>
               </motion.div>
@@ -576,12 +580,12 @@ export default function Products() {
                           <span className="text-primary">{leftIDs} IDs ({totalLeftPV} PV)</span>
                         </div>
                         <input
-                           type="range"
-                           min="0"
-                           max="100"
-                           value={leftIDs}
-                           onChange={(e) => setLeftIDs(parseInt(e.target.value))}
-                           className="w-full h-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg appearance-none cursor-pointer accent-primary"
+                          type="range"
+                          min="0"
+                          max="100"
+                          value={leftIDs}
+                          onChange={(e) => setLeftIDs(parseInt(e.target.value))}
+                          className="w-full h-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg appearance-none cursor-pointer accent-primary"
                         />
                       </div>
 
@@ -591,12 +595,12 @@ export default function Products() {
                           <span className="text-primary">{rightIDs} IDs ({totalRightPV} PV)</span>
                         </div>
                         <input
-                           type="range"
-                           min="0"
-                           max="100"
-                           value={rightIDs}
-                           onChange={(e) => setRightIDs(parseInt(e.target.value))}
-                           className="w-full h-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg appearance-none cursor-pointer accent-primary"
+                          type="range"
+                          min="0"
+                          max="100"
+                          value={rightIDs}
+                          onChange={(e) => setRightIDs(parseInt(e.target.value))}
+                          className="w-full h-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg appearance-none cursor-pointer accent-primary"
                         />
                       </div>
 
