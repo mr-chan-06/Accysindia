@@ -71,7 +71,7 @@ export const DEFAULT_KITS = [
     category: "Premium Kits",
     image: "/uploads/products/Spiruli.png",
     description: "Premium health package powered by highly pure organic Spirulina tablets, extracts, and herbal vitality formulations. Only 60PV for all!",
-    price: 3999,
+    price: 5000,
     pv: 60,
   },
   {
