@@ -131,7 +131,6 @@ export default function AboutCompany() {
   ];
   const displayFounders = founders.length > 0 ? founders : FALLBACK_FOUNDERS;
 
-
   useEffect(() => {
     // Try to fetch founder data from API
     fetch("/api/leaders")
@@ -150,22 +149,63 @@ export default function AboutCompany() {
   return (
     <div className="bg-white dark:bg-black min-h-screen">
       
-      {/* Header */}
+      {/* Hero Section containing Page Header and Founders & Directors */}
       <section className="py-24 bg-gradient-to-br from-primary/10 via-transparent to-yellow-500/5 border-b dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-primary font-bold tracking-wider uppercase mb-4 block">Our Story</span>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-6">
-              About ACCSYSINDIA
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
-              Building a legacy of ethical direct commerce, sustainable growth, and genuine opportunities for every member of our Eagles Team community.
-            </p>
-          </motion.div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-primary font-bold tracking-wider uppercase mb-4 block">Our Story</span>
+              <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-6">
+                About ACCSYSINDIA
+              </h1>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
+                Building a legacy of ethical direct commerce, sustainable growth, and genuine opportunities for every member of our Eagles Team community.
+              </p>
+            </motion.div>
+          </div>
+
+          {loading ? (
+            <div className="flex justify-center py-10"><Loader2 className="w-10 h-10 text-primary animate-spin" /></div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <div className="text-center mb-10">
+                <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-3">
+                  Corporate Board
+                </span>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+                  Accsys Founders & Directors
+                </h2>
+              </div>
+              <div className="flex flex-wrap justify-center gap-8">
+                {displayFounders.map((f) => (
+                  <div
+                    key={f._id}
+                    className="w-full md:w-[300px] bg-white/60 dark:bg-gray-900/60 backdrop-blur-md rounded-[2rem] p-6 border border-gray-150 dark:border-gray-800 shadow-xl flex flex-col items-center text-center group hover:border-primary/30 hover:-translate-y-2 transition-all duration-300"
+                  >
+                    <div className="w-24 h-24 rounded-2xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-md mb-4 shrink-0 bg-gray-100">
+                      <ImageWithFallback
+                        src={f.image?.startsWith('/') || f.image?.startsWith('http') || f.image?.startsWith('data:') ? f.image : ""}
+                        fallbackSrc="/founder.jpg"
+                        alt={f.name}
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <h3 className="text-lg font-black text-gray-900 dark:text-white mb-1 group-hover:text-primary transition-colors">{f.name}</h3>
+                    <span className="text-primary font-bold text-[10px] uppercase tracking-widest mb-3 bg-primary/10 px-3 py-1 rounded-full">{f.role || "Director"}</span>
+                    <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed font-semibold">{f.description || "Driving corporate values, ethical trade parameters, and strict national direct selling guidelines compliance."}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -315,46 +355,6 @@ export default function AboutCompany() {
             </a>
           </div>
         </div>
-      </section>
-
-      {/* Parent Company: Accsys India Founders & Directors */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4">
-            Corporate Board
-          </span>
-          <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight">
-            Accsys Founders & Directors
-          </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed font-light">
-            The visionary corporate officers and compliance directors behind Accsys India's trading registration and logistical supply operations.
-          </p>
-        </div>
-
-        {loading ? (
-          <div className="flex justify-center py-10"><Loader2 className="w-10 h-10 text-primary animate-spin" /></div>
-        ) : (
-          <div className="flex flex-wrap justify-center gap-10">
-            {displayFounders.map((f) => (
-              <div
-                key={f._id}
-                className="w-full md:w-[280px] bg-gray-50 dark:bg-gray-900 rounded-[2rem] p-6 border border-gray-100 dark:border-gray-800 shadow-xl flex flex-col items-center text-center group"
-              >
-                <div className="w-28 h-28 rounded-2xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-md mb-4 shrink-0 bg-gray-100">
-                  <ImageWithFallback
-                    src={f.image?.startsWith('/') || f.image?.startsWith('http') || f.image?.startsWith('data:') ? f.image : ""}
-                    fallbackSrc="/founder.jpg"
-                    alt={f.name}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <h3 className="text-xl font-black text-gray-900 dark:text-white mb-1 group-hover:text-primary transition-colors">{f.name}</h3>
-                <span className="text-primary font-bold text-xs uppercase tracking-widest mb-3 bg-primary/10 px-3 py-1 rounded-full">{f.role || "Director"}</span>
-                <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed font-semibold">{f.description || "Driving corporate values, ethical trade parameters, and strict national direct selling guidelines compliance."}</p>
-              </div>
-            ))}
-          </div>
-        )}
       </section>
 
     </div>
