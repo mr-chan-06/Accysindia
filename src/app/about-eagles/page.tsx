@@ -157,12 +157,12 @@ export default function AboutEagles() {
                 whileHover={{ y: -10 }}
                 className="bg-white dark:bg-gray-800 rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700/50 flex flex-col group p-6"
               >
-                <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-gray-200 mb-8">
+                <div className="relative rounded-[2rem] overflow-hidden bg-gray-100 dark:bg-gray-900 mb-8 flex items-center justify-center">
                   <ImageWithFallback
                     src={mentor.image?.startsWith('15') ? `https://images.unsplash.com/photo-${mentor.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80` : (mentor.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80")}
                     fallbackSrc="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                     alt={mentor.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
                 <div className="text-center">
@@ -204,12 +204,12 @@ export default function AboutEagles() {
                   key={vp._id}
                   className="bg-white dark:bg-gray-800 rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700/50 hover:border-primary/30 hover:-translate-y-2 transition-all duration-300 flex flex-col group"
                 >
-                  <div className="relative aspect-square overflow-hidden bg-gray-200">
+                  <div className="relative rounded-[2rem] overflow-hidden bg-gray-100 dark:bg-gray-900 mb-8 flex items-center justify-center">
                     <ImageWithFallback
                       src={vp.image?.startsWith('15') ? `https://images.unsplash.com/photo-${vp.image}?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80` : (vp.image || "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80")}
                       fallbackSrc="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
                       alt={vp.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                   <div className="p-8">
