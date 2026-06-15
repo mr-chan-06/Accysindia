@@ -544,8 +544,8 @@ export default function Products() {
                     </div>
 
                     <div className="bg-amber-500/10 border border-amber-500/20 p-5 rounded-2xl">
-                    <p>Payment released only by bank Account with 2% TDS</p>
-                  </div>
+                      <p>Payment released only by bank Account with 2% TDS</p>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -614,7 +614,7 @@ export default function Products() {
                         <div className="flex justify-between text-xs text-gray-500 font-semibold border-b dark:border-gray-800 pb-3">
                           <span>Carry Forward PV</span>
                           <span className="text-primary font-bold">
-                            {leftIDs > rightIDs ? `${(leftIDs - rightIDs) * 600} PV Left` : rightIDs > leftIDs ? `${(rightIDs - leftIDs) * 600} PV Right` : "Balanced"}
+                            {leftIDs > rightIDs ? `${(leftIDs - rightIDs) * 60} PV Left` : rightIDs > leftIDs ? `${(rightIDs - leftIDs) * 600} PV Right` : "Balanced"}
                           </span>
                         </div>
 
