@@ -614,7 +614,7 @@ export default function Products() {
                         <div className="flex justify-between text-xs text-gray-500 font-semibold border-b dark:border-gray-800 pb-3">
                           <span>Carry Forward PV</span>
                           <span className="text-primary font-bold">
-                            {leftIDs > rightIDs ? `${(leftIDs - rightIDs) * 60} PV Left` : rightIDs > leftIDs ? `${(rightIDs - leftIDs) * 600} PV Right` : "Balanced"}
+                            {leftIDs > rightIDs ? `${(leftIDs - rightIDs) * 60} PV Left` : rightIDs > leftIDs ? `${(rightIDs - leftIDs) * 60} PV Right` : "Balanced"}
                           </span>
                         </div>
 
