@@ -91,6 +91,50 @@ export default function AboutEagles() {
   return (
     <div className="bg-white dark:bg-black min-h-screen border-t dark:border-gray-800">
 
+      {/* Founders Hero Section */}
+      <section className="py-24 bg-gray-50 dark:bg-gray-900 border-b dark:border-gray-800 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <span className="text-primary font-bold tracking-wider uppercase mb-4 block">Eagles Team Foundation</span>
+            <h1 className="text-5xl md:text-7xl font-black text-gray-900 dark:text-white mb-6 tracking-tight">
+              <span className="text-primary">Founder</span>
+            </h1>
+          </div>
+
+          <div className="space-y-16">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col lg:flex-row items-center gap-16 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900/40 dark:to-black rounded-[3rem] p-10 md:p-16 border border-gray-100 dark:border-gray-800 shadow-2xl relative overflow-hidden group"
+            >
+              <div className="absolute -top-32 -right-32 w-72 h-72 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
+
+              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white dark:border-gray-800 shadow-2xl shrink-0">
+                <ImageWithFallback
+                  src="/founder.jpg"
+                  fallbackSrc="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                  alt="Mr. V. Hariprakash"
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+
+              <div className="space-y-6 flex-1 text-center lg:text-left">
+                <span className="bg-primary/20 text-primary text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest inline-block">
+                  Chief Mentor & Founder
+                </span>
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
+                  Mr. V. Hariprakash
+                </h2>
+                <div className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed font-light whitespace-pre-line">
+                  Under the visionary mentorship of Mr. V. Hariprakash, the Eagles Team has established a professional education framework that teaches modern direct-marketing, personal development, and passive business structuring models. His core philosophy revolves around establishing absolute transparency, empowering household earners, and mentoring a highly compliant and motivated community that guarantees growth for every team member.
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Eagles Mentors Section */}
       <section className="py-24 bg-gray-50 dark:bg-gray-900/40 border-t border-b border-gray-100 dark:border-gray-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
