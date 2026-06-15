@@ -5,6 +5,7 @@ export interface ILeader extends Document {
   role: string;
   image: string;
   description: string;
+  page: "eagles" | "company";
 }
 
 const LeaderSchema = new Schema(
@@ -13,6 +14,11 @@ const LeaderSchema = new Schema(
     role: { type: String, required: true },
     image: { type: String, required: true },
     description: { type: String, default: "" },
+    page: {
+      type: String,
+      enum: ["eagles", "company"],
+      default: "eagles",
+    },
   },
   { timestamps: true }
 );

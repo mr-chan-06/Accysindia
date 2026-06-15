@@ -113,33 +113,37 @@ function DocumentsList() {
 export default function AboutCompany() {
   const [loading, setLoading] = useState(true);
   const [founders, setFounders] = useState<any[]>([]);
+  const [vps, setVPs] = useState<any[]>([]);
   const FALLBACK_FOUNDERS = [
     {
       _id: "founder1",
       name: "Mr. V. Hariprakash",
-      role: "Founding Director",
+      role: "Founder Director",
       image: "/founder.jpg",
       description: "Original founder of Accsys India. Leading the organizational transformation into the Eagles Team network."
     },
     {
       _id: "founder2",
       name: "Dr. S. K. Subramanian",
-      role: "Corporate Managing Director",
+      role: "MD&CEO",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80",
       description: "Corporate management and compliance expert. Overseeing logistics integrations and Ministry compliance."
     }
   ];
   const displayFounders = founders.length > 0 ? founders : FALLBACK_FOUNDERS;
+  const displayVPs = vps;
 
   useEffect(() => {
     // Try to fetch founder data from API
-    fetch("/api/leaders")
+    fetch("/api/leaders?page=company")
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
-          // Set founders list (exclude directors if needed)
-          const filteredFounders = data.filter((l: any) => !l.role?.toLowerCase().includes("vice"));
+          // Set founders list (MD&CEO and Founder Director)
+          const filteredFounders = data.filter((l: any) => l.role?.toLowerCase() === "md&ceo" || l.role?.toLowerCase() === "founder director");
+          const filteredVPs = data.filter((l: any) => l.role?.toLowerCase() === "vice president");
           setFounders(filteredFounders);
+          setVPs(filteredVPs);
         }
         setLoading(false);
       })
@@ -204,6 +208,39 @@ export default function AboutCompany() {
                   </div>
                 ))}
               </div>
+
+              {displayVPs.length > 0 && (
+                <div className="mt-20">
+                  <div className="text-center mb-10">
+                    <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-3">
+                      Executive Management
+                    </span>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+                      Accsys Vice Presidents
+                    </h2>
+                  </div>
+                  <div className="flex flex-wrap justify-center gap-8">
+                    {displayVPs.map((vp) => (
+                      <div
+                        key={vp._id}
+                        className="w-full md:w-[300px] bg-white/60 dark:bg-gray-900/60 backdrop-blur-md rounded-[2rem] p-6 border border-gray-150 dark:border-gray-800 shadow-xl flex flex-col items-center text-center group hover:border-primary/30 hover:-translate-y-2 transition-all duration-300"
+                      >
+                        <div className="w-24 h-24 rounded-2xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-md mb-4 shrink-0 bg-gray-100">
+                          <ImageWithFallback
+                            src={vp.image?.startsWith('/') || vp.image?.startsWith('http') || vp.image?.startsWith('data:') ? vp.image : ""}
+                            fallbackSrc="/founder.jpg"
+                            alt={vp.name}
+                            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                        <h3 className="text-lg font-black text-gray-900 dark:text-white mb-1 group-hover:text-primary transition-colors">{vp.name}</h3>
+                        <span className="text-primary font-bold text-[10px] uppercase tracking-widest mb-3 bg-primary/10 px-3 py-1 rounded-full">{vp.role || "Vice President"}</span>
+                        <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed font-semibold">{vp.description || "Spearheading regional business operations, logistical management, and compliance enforcement."}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </motion.div>
           )}
         </div>

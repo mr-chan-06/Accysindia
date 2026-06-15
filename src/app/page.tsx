@@ -53,15 +53,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  let leaders: any[] = [];
-  
   let settings: any = null;
   
   try {
     await dbConnect();
-    const dbLeaders = await Leader.find({}).sort({ createdAt: 1 }).lean();
-    leaders = JSON.parse(JSON.stringify(dbLeaders));
-
     const dbSettings = await Setting.findOne().lean();
     if (dbSettings) {
       settings = JSON.parse(JSON.stringify(dbSettings));
@@ -80,49 +75,7 @@ export default async function Home() {
 
       
 
-      {/* Founder Card Section - Mr. V. Hariprakash */}
-      <section className="py-28 bg-white dark:bg-black relative z-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="text-primary font-black text-xs uppercase tracking-widest bg-primary/10 px-4 py-2 rounded-full inline-block mb-4">
-              Our Visionary Leader
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight">Eagles Team Founder</h2>
-          </div>
 
-          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900/40 dark:to-black rounded-[3rem] p-8 md:p-14 shadow-2xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-800 relative overflow-hidden group">
-            {/* Decorative blob */}
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
-            
-            <div className="w-56 h-56 md:w-72 md:h-72 shrink-0 rounded-full overflow-hidden border-8 border-white dark:border-gray-800 shadow-2xl relative z-10">
-              <img 
-                src="/founder.jpg" 
-                alt="Mr. V. Hariprakash Eagles Team Founder" 
-                className="w-full h-full object-cover object-top hover:scale-110 transition-transform duration-700"
-              />
-            </div>
-            
-            <div className="text-center md:text-left flex-1 relative z-10">
-              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm tracking-widest uppercase mb-6 shadow-sm">
-                <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-primary/20 bg-black flex items-center justify-center shrink-0">
-                  <img src="/eagles-logo.png" alt="Eagles Logo" className="w-full h-full object-contain" />
-                </div>
-                <span>Eagles Team</span>
-              </div>
-              <h2 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-3 tracking-tight">
-                Mr. V. Hariprakash
-              </h2>
-              <div className="w-16 h-1.5 bg-gradient-to-r from-primary to-yellow-400 rounded-full mx-auto md:mx-0 mb-6" />
-              <h3 className="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300 mb-6 drop-shadow-sm">
-                Visionary Leader & Chief Mentor
-              </h3>
-              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed font-light">
-                As the main pioneer behind the **EAGLES TEAM** rebranding and direct selling system, Mr. V. Hariprakash has spent years empowering ordinary citizens to establish robust financial independent channels. Through structure, values, and strict ethical direct commerce protocols, his system makes matching pair payouts achievable for thousands.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Welcomes to Eagles Team & Rebranding Detail Section */}
       <section className="py-28 bg-white dark:bg-black relative z-20 -mt-16 rounded-t-[3rem] shadow-[0_-20px_40px_rgba(0,0,0,0.15)] border-b border-gray-100 dark:border-gray-900">
