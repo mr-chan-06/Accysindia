@@ -188,7 +188,7 @@ export default function AboutEagles() {
               Executive Committee
             </span>
             <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">
-              Eagles Board of Vice Presidents
+              Accsysindia Vice Presidents
             </h2>
             <p className="text-gray-600 dark:text-gray-400 text-xl leading-relaxed">
               Leading the operational strategies and mentoring direct sellers to ensure perfect network balances.
