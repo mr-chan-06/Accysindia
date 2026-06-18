@@ -80,7 +80,7 @@ export const DEFAULT_KITS = [
     category: "Premium Kits",
     image: "/uploads/products/Inners.png",
     description: "Ultimate luxury and everyday comfort. Styled with organic, ultra-breathable combed cotton threads. Only 60PV for all! Click to view details.",
-    price: 6000,
+    price: 5000,
     pv: 60,
     specs: {
       brand: "ACCSYS TRENDIQ Gents Trunk",
