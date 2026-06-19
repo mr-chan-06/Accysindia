@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 type PageTarget = "eagles" | "company";
 
 const EAGLES_ROLES = [
-  "Board of Vice President",
+  "Vice president",
   "Mentor",
 ];
 

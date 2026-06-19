@@ -39,12 +39,14 @@ const COMPANY_VALUES = [
 ];
 
 const MILESTONES = [
-  { year: "2018", event: "Eagles Team Founded by Mr. A.B Senthil Kumar" },
-  { year: "2020", event: "Expanded to 10+ Regional Centers across India" },
-  { year: "2022", event: "Introduced Digital Platform for Product Management" },
-  { year: "2023", event: "Eagles Team Network Formation & Rebranding" },
-  { year: "2024", event: "Crossed 500+ Active Members Milestone" },
-  { year: "2026", event: "₹10Cr+ Collective Earnings Achievement" }
+  { year: "2018", event: "AccsysIndia was founded by Mr. A.B Senthil Kumar & Mr.C Babu" },
+  { year: "2019", event: "We done the 1st  foriegn trip to Malaysia" },
+  { year: "2020", event: "Expanded Madurai office and Trichy office" },
+  { year: "2022", event: "We innaugrate the new offline store and Warehouse" },
+  { year: "2023", event: "We innaugrated new offline store and office at Trichy and second foriegn trip to Thailand" },
+  { year: "2024", event: "In India's 1st company done the biggest event in Nehru Stadium with 10,000 peoples" },
+  { year: "2025", event: "We Launch own Yaakai Brand Napkins and Innovated products" },
+  { year: "2026", event: "We Looking forward to Achieve Many More Successes" }
 ];
 
 function DocumentsList() {
@@ -447,30 +449,7 @@ export default function AboutCompany() {
         </div>
       </section>
 
-      {/* Impact Section */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-8"
-        >
-          <div className="bg-gradient-to-br from-primary/10 to-transparent rounded-3xl p-10 border border-primary/20">
-            <div className="text-5xl font-black text-primary mb-3">500+</div>
-            <p className="text-gray-600 dark:text-gray-400 font-semibold text-lg">Active Members Building Wealth</p>
-          </div>
-          <div className="bg-gradient-to-br from-primary/10 to-transparent rounded-3xl p-10 border border-primary/20">
-            <div className="text-5xl font-black text-primary mb-3">48+</div>
-            <p className="text-gray-600 dark:text-gray-400 font-semibold text-lg">Regional Centers Nationwide</p>
-          </div>
-          <div className="bg-gradient-to-br from-primary/10 to-transparent rounded-3xl p-10 border border-primary/20">
-            <div className="text-5xl font-black text-primary mb-3">₹10Cr+</div>
-            <p className="text-gray-600 dark:text-gray-400 font-semibold text-lg">Collective Earnings Generated</p>
-          </div>
-        </motion.div>
-      </section>
-
+      
       {/* Corporate Documents Section */}
       <section className="py-24 bg-gray-50 dark:bg-gray-900/40 border-t border-b dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -538,7 +517,7 @@ export default function AboutCompany() {
 
             {/* Facebook */}
             <a
-              href="https://www.facebook.com/accsysindia"
+              href="https://www.facebook.com/AccsysOfficial"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-3"
@@ -554,7 +533,7 @@ export default function AboutCompany() {
 
             {/* Instagram */}
             <a
-              href="https://www.instagram.com/accsysindia"
+              href="https://www.instagram.com/accsysofficial/"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-3"
@@ -570,7 +549,7 @@ export default function AboutCompany() {
 
             {/* YouTube */}
             <a
-              href="https://www.youtube.com/@accsysindia"
+              href="https://www.youtube.com/@accsysofficial"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-3"
@@ -584,25 +563,9 @@ export default function AboutCompany() {
               <span className="text-xs font-bold text-gray-500 dark:text-gray-400 group-hover:text-red-500 transition-colors uppercase tracking-wider">YouTube</span>
             </a>
 
-            {/* WhatsApp */}
-            <a
-              href="https://wa.me/919999999999"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-3"
-              aria-label="WhatsApp"
-            >
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-green-500/20 to-green-500/5 border border-green-400/20 flex items-center justify-center text-green-600 dark:text-green-400 group-hover:bg-[#25D366] group-hover:text-white group-hover:border-[#25D366] group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-green-500/30 transition-all duration-300">
-                <svg className="w-7 h-7 md:w-9 md:h-9" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-                </svg>
-              </div>
-              <span className="text-xs font-bold text-gray-500 dark:text-gray-400 group-hover:text-green-500 transition-colors uppercase tracking-wider">WhatsApp</span>
-            </a>
-
             {/* Twitter / X */}
             <a
-              href="https://twitter.com/accsysindia"
+              href="https://twitter.com/accsysofficial"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-3"

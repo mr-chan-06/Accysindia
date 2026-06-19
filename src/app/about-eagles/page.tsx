@@ -10,21 +10,21 @@ const FALLBACK_VPS = [
   {
     _id: "vp1",
     name: "Mr. K. Raghavan",
-    role: "Board of Vice President",
+    role: "Vice president",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     description: "Lead strategies manager. Developing direct selling protocols and educational seminars for scaling regional hubs."
   },
   {
     _id: "vp2",
     name: "Mrs. Anjali Sharma",
-    role: "Board of Vice President",
+    role: "Vice president",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     description: "Director of training systems. Championing national training frameworks and digital commerce awareness events."
   },
   {
     _id: "vp3",
     name: "Mr. Ramesh Kumar",
-    role: "Board of Vice President",
+    role: "Vice president",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
     description: "Logistics and operation coordinator. Spearheading seamless integration of warehouse inventories and active delivery centers."
   }
@@ -48,7 +48,7 @@ const FALLBACK_MENTORS = [
   {
     _id: "m3",
     name: "Mr. GR Vijay",
-    role: "Board of Vice President",
+    role: "Vice president",
     image: "/uploads/founders/GR Vijay BOVP.jpg.jpeg",
     description: "Dedicated to personal branding and scaling regional business hubs."
   }
@@ -68,7 +68,7 @@ export default function AboutEagles() {
       .then(([leadersData, settingsData]) => {
         if (Array.isArray(leadersData)) {
           // Filter Leaders by Role
-          const vpList = leadersData.filter((l: any) => l.role?.toLowerCase() === "board of vice president");
+          const vpList = leadersData.filter((l: any) => l.role?.toLowerCase() === "vice president");
           const mentorList = leadersData.filter((l: any) => l.role?.toLowerCase() === "mentor");
 
           setVPs(vpList);

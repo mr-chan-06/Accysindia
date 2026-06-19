@@ -69,7 +69,7 @@ export const DEFAULT_KITS = [
     _id: "kit3",
     name: "Spirulina Kit",
     category: "Premium Kits",
-    image: "/uploads/products/Spiruli.png",
+    image: "/uploads/products/spirulina.png",
     description: "Premium health package powered by highly pure organic Spirulina tablets, extracts, and herbal vitality formulations. Only 60PV for all!",
     price: 5000,
     pv: 60,
