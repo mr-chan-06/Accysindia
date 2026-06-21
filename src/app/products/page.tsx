@@ -11,7 +11,25 @@ export const DEFAULT_KITS = [
     name: "Womens Kit",
     category: "Premium Kits",
     image: "/uploads/products/Napkin.png",
-    description: "A tailored collection of organic beauty care, personal hygiene, and wellness products designed specifically for modern women. Click to play video guide!",
+    description: `
+Improved New Jus Leap Sanitary Napkin
+
+Jus Leap Sanitary Napkin is an advanced, eco-friendly, ultra-thin sanitary pad designed for superior comfort, protection, and absorption. It features an ultra-soft cottony top sheet, super absorption technology, leakage protection, breathable design, and antibacterial protection for all-day freshness and confidence.
+
+Key Features:
+• Ultra-soft cottony top sheet for maximum comfort
+• High absorption capacity up to 150ml
+• Advanced leakage protection technology
+• Ultra-thin and breathable design
+• Antibacterial protection for improved hygiene
+• Anion+ Technology for enhanced freshness
+• Far-IR, Magnetic, Nano, and Chitin function chips
+• 7-layer safety structure for superior protection
+• Skin-friendly and irritation-free experience
+• Eco-friendly and comfortable for daily use
+
+A premium women's hygiene product that combines advanced protection, superior absorption, and all-day comfort to support a hygienic and confident lifestyle.
+`,
     price: 4700,
     pv: 60,
     videoUrl: "https://youtube.com/watch?v=CrElJ8a0bjs&feature=shared",
@@ -21,7 +39,7 @@ export const DEFAULT_KITS = [
     name: "Provision Kit",
     category: "Premium Kits",
     image: "/uploads/products/Provision kit.png",
-    description: "Your ultimate household bundle. Contains premium grocery staples, pulses, oils, spices, and daily essentials for your home. Only 60PV for all! Click to view details.",
+    description: "This package is a value-packed grocery and wellness combo designed for families. It includes essential grocery items, 4 packs of sanitary napkins, 1 bottle of Spirulina health supplement, and 1 foot patch pack. Members also receive a discount coupon worth ₹2,000. The kit offers a combination of daily household necessities and health-care products, making it a convenient and cost-effective membership package.",
     price: 6700,
     pv: 60,
     items: [
@@ -70,7 +88,26 @@ export const DEFAULT_KITS = [
     name: "Spirulina Kit",
     category: "Premium Kits",
     image: "/uploads/products/spirulina.png",
-    description: "Premium health package powered by highly pure organic Spirulina tablets, extracts, and herbal vitality formulations. Only 60PV for all!",
+    description:  `
+Spirulina Pack – ₹5,000 (60 PV)
+
+The Spirulina Pack is a health and wellness supplement package featuring 6 containers of Spirulina tablets, with each container containing 120 tablets. Spirulina is a nutrient-rich superfood known for its high protein, vitamin, and mineral content, helping support overall health and vitality.
+
+Key Features:
+• 6 containers of Spirulina tablets (120 tablets each)
+• 100% natural nutritional supplement
+• Rich in protein, vitamins, and minerals
+• Supports immunity, energy, and overall wellness
+• Helps with detoxification and cleansing
+• Includes a discount bonus of 2,000 points
+
+Package Details:
+• Price: ₹5,000
+• PV: 60 PV
+• Delivery Charges: ₹100 extra
+
+A convenient wellness package designed to promote daily nutrition, immunity support, and an active lifestyle through the benefits of natural Spirulina supplementation.
+`,
     price: 5000,
     pv: 60,
   },
@@ -79,7 +116,24 @@ export const DEFAULT_KITS = [
     name: "Gents Trunk Kit",
     category: "Premium Kits",
     image: "/uploads/products/Inners.png",
-    description: "Ultimate luxury and everyday comfort. Styled with organic, ultra-breathable combed cotton threads. Only 60PV for all! Click to view details.",
+    description: `
+ACCSYS TRENDIQ Bamboo & Modal Gents Trunks
+
+ACCSYS TRENDIQ Bamboo & Modal Trunks are premium men's underwear designed for maximum comfort, breathability, and freshness. Made from natural bamboo or super micro modal fibers, they provide a soft, stretchable, odor-resistant, and moisture-wicking experience for everyday wear.
+
+Key Features:
+• Available in Natural Bamboo and Super Micro Modal fabric variants
+• Ultra-soft, breathable, and lightweight design
+• Moisture-wicking technology for all-day freshness
+• Odor-resistant and antibacterial properties (Bamboo variant)
+• Silky-soft texture with luxurious comfort (Modal variant)
+• Stretchable fabric for a superior fit and flexibility
+• Internal mesh ventilation for enhanced airflow
+• Suitable for everyday wear and active lifestyles
+• Available in sizes S, M, L, XL, and XXL
+
+A premium innerwear collection that combines comfort, performance, and modern fabric technology for superior everyday support.
+`,
     price: 5000,
     pv: 60,
     specs: {
@@ -119,7 +173,30 @@ export const DEFAULT_KITS = [
     name: "Garments Kit",
     category: "Premium Kits",
     image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    description: "A premium collection of high-quality formal shirts, casual attire, and elegant design garments from Eagles apparel hubs. Only 60PV for all!",
+    description: `
+Privilege Member Garments Kit – 60 PV
+
+This membership package combines fashion essentials and women’s hygiene products, offering garments, sanitary napkins, and discount benefits in a single bundle. Two package options are available to suit different needs.
+
+Package 1 – ₹4,850
+• Garments worth ₹2,000
+• 5 packs of sanitary napkins worth ₹1,250
+• Discount coupon worth ₹4,200
+
+Package 2 – ₹5,500
+• Garments worth ₹2,000
+• 13 packs of sanitary napkins worth ₹3,250
+• Discount coupon worth ₹2,000
+
+Key Highlights:
+• Includes a variety of garments such as shirts, sarees, leggings, and clothing essentials.
+• Features Jus Leap sanitary napkins for women’s hygiene and comfort.
+• Comes with valuable discount coupons for additional savings.
+• Designed as a member-exclusive package offering both lifestyle and personal care products.
+
+Suitable for:
+Individuals and families looking for a combination of apparel, hygiene products, and member benefits at an affordable price.
+`,
     price: 5500,
     pv: 60,
   },
@@ -128,7 +205,26 @@ export const DEFAULT_KITS = [
     name: "Mixie Kit",
     category: "Premium Kits",
     image: "/uploads/products/mixie.png",
-    description: "A high-performance premium mixer grinder (Mixie) kit. Featuring a powerful heavy-duty motor, multiple stainless steel jars, and elegant design for your modern kitchen. Only 60PV for all!",
+    description: `
+Mixie Starter Kit – ₹6,200 (60 PV)
+
+The Mixie Starter Kit is a home utility package that combines a multi-purpose mixer grinder with jar set, wellness products, and savings benefits. It is designed for everyday kitchen use, offering convenience for grinding, blending, and food preparation.
+
+Package Includes:
+• Mixer Grinder with Jar Set worth ₹3,800
+• Foot Patches worth ₹1,200
+• Discount Coupon worth ₹3,000
+
+Key Features:
+• Multi-jar mixer grinder suitable for various kitchen tasks
+• Includes wellness foot patches for personal care
+• Comes with a valuable discount coupon for additional savings
+• Ideal for households, new families, and everyday kitchen needs
+
+Price: ₹6,200 (60 PV)
+
+A practical starter package that combines essential kitchen appliances with personal wellness products and member-exclusive benefits.
+`,
     price: 6200,
     pv: 60,
   },
